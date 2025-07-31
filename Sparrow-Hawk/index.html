@@ -1,0 +1,641 @@
+---
+layout: default
+title: Sparrow Hawk | R-Car Community Board
+breadcrumb_parent: Sparrow Hawk
+breadcrumb_parent_url: Sparrow-Hawk/index.html
+---
+{% include nav_sh.html %}
+
+<main class="with-sidemenu">
+<h2 id=intro>Introduction</h2>
+<hr size="5" color="#cbcacc">
+This is the page for Sparrow Hawk board with R-Car V4H provided Retronix Technology Inc.
+
+<h2 id=hw>Hardware</h2>
+<hr size="5" color="#cbcacc">
+<h3 id=hw_info>Sparrow Hawk Information</h3>
+<table class="info-table">
+  <tr>
+    <th>R-Car V4H SoC Version</th>
+    <th>Board Information</th>
+    <th>Where to buy</th>
+  </tr>
+  <tr>
+    <td>v3.0</td>
+    <td>Click <a href="https://www.retronix.com.tw/en/product_sbc.html">here</a></td>
+    <td>Click <a href="http://www.shimafuji.co.jp/en/products/2207">here</a></td>
+  </tr>
+</table>
+
+<h3 id=hw_pic>Sparrow Hawk Picture</h3>
+left: top view, right: bottom view<br>
+<img src="{{ '/images/Sparrow Hawk_assignment.webp' | relative_url }}" alt="Sparrow Hawk assignment" style="max-width: 100%;">
+
+<h3 id=hw_sw>Switches Assignment</h3>
+<h4 id=hw_sw_boot>Boot mode</h4>
+<table class="info-table">
+  <tr>
+    <th>SW2-1</th>
+    <th>SW2-2</th>
+    <th>SW2-3</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>ON</td>
+    <td>ON</td>
+    <td>ON</td>
+    <td>Serial Flash boot at single read 40MHz using DMA</td>
+  </tr>
+  <tr>
+    <td>OFF</td>
+    <td>OFF</td>
+    <td>OFF</td>
+    <td>SCIF/HSCIF download mode</td>
+  </tr>
+</table>
+
+<h4 id=hw_sw_other>Other switch</h4>
+<table class="info-table">
+  <tr>
+    <th>SW2-4</th>
+    <th>SW2-5</th>
+    <th>SW2-6</th>
+    <th>SW2-7</th>
+    <th>SW2-8</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>OFF</td>
+    <td>ON</td>
+    <td>ON</td>
+    <td>ON</td>
+    <td>ON</td>
+    <td>Initial setting</td>
+  </tr>
+</table>
+
+<p>Note: For more detail, please refer to board User's Manual.</p>
+
+<h3 id=hw_debug>Debug Serial</h3>
+<p>This board has two serial devices and ChA(HSCIF0) is used for mainly.</p>
+<table class="info-table">
+  <tr>
+    <th>Channel</th>
+    <th>Baudrate</th>
+    <th>Format</th>
+    <th>Flow Control</th>
+  </tr>
+  <tr>
+    <td>ChA(HSCIF0)<br>ex) COM&lt;lower num&gt;, /dev/ttyUSB&lt;lower num&gt;</td>
+    <td>921600 bps</td>
+    <td>8N1</td>
+    <td>none</td>
+  </tr>
+  <tr>
+    <td>ChB(HSCIF1)<br>ex) COM&lt;higher num&gt;, /dev/ttyUSB&lt;higher num&gt;</td>
+    <td>115200 bps</td>
+    <td>8N1</td>
+    <td>none</td>
+  </tr>
+</table>
+
+<h3 id=hw_caution>Caution</h3>
+<span style="font-size:24px; color:red; font-weight:bold;">FAN must be installed. Do not remove FAN for cooling the R-Car V4H from the board, as doing so will lead to the R-Car V4H being overheated to destruction. It is recommended to use a heat sink and FAN together.</span>
+
+<h2 id=sw_ver> Software Version List</h2>
+<hr size="5" color="#cbcacc">
+<table class="info-table">
+  <tr>
+    <th>Software</th>
+    <th>Version</th>
+  </tr>
+  <tr>
+    <td>Yocto Project</td>
+    <td>5.0.10</td>
+  </tr>
+  <tr>
+    <td>Aarch64-poky-linux-gcc(GCC)</td>
+    <td>13.3.0</td>
+  </tr>
+  <tr>
+    <td>Linux kernel</td>
+    <td>6.12.34</td>
+  </tr>
+  <tr>
+    <td>Userland 64/32bit</td>
+    <td>64</td>
+  </tr>
+  <tr>
+    <td>U-Boot</td>
+    <td>2025.07-rc5</td>
+  </tr>
+</table>
+
+<h2 id=quick_start>Quick Start How To</h2>
+<hr size="5" color="#cbcacc">
+<h3 id=quick_start_build>How to build</h3>
+<table class="info-table">
+  <tr>
+    <th>Software</th>
+    <th>Environment</th>
+    <th>Required Packages</th>
+    <th>Build</th>
+    <th>Binary</th>
+  </tr>
+  <tr>
+    <td>Yocto</td>
+    <td>Ubuntu 22.04 or later<br>100GB or more storage<br>8GB or more RAM</td>
+    <td>refer to <a href="https://docs.yoctoproject.org/5.0.9/brief-yoctoprojectqs/index.html#compatible-linux-distribution">https://docs.yoctoproject.org/5.0.9/brief-yoctoprojectqs/index.html#compatible-linux-distribution</a></td>
+    <td>bash -c "$(wget -O- https://raw.github.com/rcar-community/meta-sparrow-hawk/scarthgap/build.sh)"<br>* Image file is generated on following path<br>&lt;current directory&gt;build/build-sparrow-hawk/tmp/deploy/images/sparrow-hawk/</td>
+    <td><a href="https://github.com/rcar-community/meta-sparrow-hawk/releases">https://github.com/rcar-community/meta-sparrow-hawk/releases</a></td>
+  </tr>
+  <tr>
+    <td>Debian</td>
+    <td>Ubuntu 22.04 or later</td>
+    <td>docker</td>
+    <td>Please see <a href="https://github.com/rcar-community/kernel-apt-repository">https://github.com/rcar-community/kernel-apt-repository</a></td>
+    <td><a href="https://github.com/rcar-community/kernel-apt-repository/releases">https://github.com/rcar-community/kernel-apt-repository/releases</a></td>
+  </tr>
+</table>
+
+<h3 id=quick_start_flash>How to flash</h3>
+<h4 id=quick_start_flash_loader>Flashing loader</h4>
+Using script(Python3 and pip is required on your host PC)
+<div style="padding-left: 3ex;">
+  Run script in ipl-burning directory(Linux: run.sh, Windows: run.bat)
+</div>
+<div style="padding-left: 5ex;">
+  Ipl-burning is downloaded deploy_sparrow-hawk.zip from <a href="https://github.com/rcar-community/meta-sparrow-hawk/releases">https://github.com/rcar-community/meta-sparrow-hawk/releases</a><br>
+  Please close other console which uses serial port of the board before executing the script.
+</div>
+
+<h4 id=quick_start_flash_image>Flashing OS image into SD card</h4>
+Yocto BSP case(CLI)
+<div class="code-bg">
+gzip -cd core-image-minimal-sparrow-hawk.rootfs.wic.gz | sudo dd of=&lt;device file&gt; bs=1M status=progress
+</div>
+Debian based BSP case
+<div class="code-bg">
+gzip -cd sparrow-hawk-debian-based-bsp.img.gz | sudo dd of=&lt;device file&gt; bs=1M status=progress
+</div>
+
+<h4 id=quick_start_boot>How to boot</h4>
+<ol>
+  <li>Insert the SD card into CN1 which is bottom of the board.</li>
+  <li>Open terminal application and open serial device.</li>
+  <li>Press SW1 to power on the board.</li>
+  <li>After booting U-Boot, please press any key while showing "Hit any key to stop autoboot:" to enter U-Boot shell.</li>
+  <li>Input following command into U-Boot shell and press enter key.</li>
+  <div class="code-bg">
+    setenv bootargs 'rw root=/dev/mmcblk0p1 rootwait'<br>
+    load mmc 0:1 0x58000000 /boot/fitImage &amp&amp bootm 0x58000000
+  </div>
+  <li>If command and environment is correct, Linux kernel log will output.</li>
+</ol>
+If you want to boot OS image automatically when power on the board, please run following to setup autoboot.
+Run following command:
+<div class="code-bg">
+  setenv bootargs 'rw root=/dev/mmcblk0p1 rootwait'<br>
+  setenv bootcmd 'load mmc 0:1 0x58000000 /boot/fitImage &amp&amp bootm 0x58000000'<br>
+  setenv bootdelay 3<br>
+  saveenv
+</div>
+After that, OS image boots automatically when power on the board.
+
+<h4 id=quick_start_run>How to run applications</h4>
+<h5 id=quick_start_run_support>Software support list</h5>
+<table class="info-table">
+  <tr>
+    <th>Feature</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td><a href="{{ '/Sparrow-Hawk/index.html#quick_start_run_can' | relative_url }}">CAN</a></td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td>Ethernet</td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td>MIC Input</td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td><a href="{{ '/Sparrow-Hawk/index.html#quick_start_run_audio' | relative_url }}">Audio</a></td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td>Display Port</td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td><a href="{{ '/Sparrow-Hawk/index.html#quick_start_run_gpio' | relative_url }}">GPIO</a></td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td><a href="{{ '/Sparrow-Hawk/index.html#quick_start_run_i2c' | relative_url }}">I2C</a></td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td>JTAG</td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td><a href="{{ '/Sparrow-Hawk/index.html#quick_start_run_usb3.0' | relative_url }}">USB3.0</a></td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td><a href="{{ '/Sparrow-Hawk/index.html#quick_start_run_uart' | relative_url }}">UART</a></td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td><a href="{{ '/Sparrow-Hawk/index.html#quick_start_run_thermal' | relative_url }}">Thermal</a></td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td><a href="{{ '/Sparrow-Hawk/index.html#quick_start_run_m.2' | relative_url }}">M.2</a></td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td><a href="{{ '/Sparrow-Hawk/index.html#quick_start_run_camera' | relative_url }}">Pi Camera</a></td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td><a href="{{ '/Sparrow-Hawk/index.html#quick_start_run_display' | relative_url }}">Pi Display</a></td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td>PCIe Endpoint</td>
+    <td>Not tested</td>
+  </tr>
+  <tr>
+    <td><a href="{{ '/Sparrow-Hawk/index.html#quick_start_run_cooler' | relative_url }}">Pi Active Cooler</a></td>
+    <td>OK</td>
+  </tr>
+  <tr>
+    <td>GPU</td>
+    <td>Not supported</td>
+  </tr>
+  <tr>
+    <td>AI Accelerator</td>
+    <td>Not supported</td>
+  </tr>
+  <tr>
+    <td>Desktop(GUI)</td>
+    <td>Not supported</td>
+  </tr>
+</table>
+Note:
+<div style="padding-left: 3ex;">
+  "OK": Function scceeded in the simple test as below.
+</div>
+<div style="padding-left: 3ex;">
+  "Not tested": Function wasn't tested.
+</div>
+<div style="padding-left: 3ex;">
+  "Not supported": Function isn't supported.
+</div>
+
+<h5 id=quick_start_run_can>CAN</h5>
+Loop back
+<ol>
+  <li>Connect the following pins of CONN2:<br>Connect Pin1(CAN1L) - Pin2(CAN0L) and Pin5(CAN1H) - Pin6(CAN0H)</li>
+  <li>
+    Execute following commands on Linux:
+    <div class="code-bg">
+      ip link set can0 up type can restart-ms 100 bitrate 1000000 dbitrate 5000000 fd on<br>
+      ip link set can1 up type can restart-ms 100 bitrate 1000000 dbitrate 5000000 fd on<br>
+      candump can0 &amp<br>
+      cangen can1 -I i -L i -D i -f -n 16<br>
+      killall candump<br>
+      candump can1 &amp<br>
+      cangen can0 -I i -L i -D i -f -n 16<br>
+      killall candump<br>
+    </div>
+  </li>
+</ol>
+
+<h5 id=quick_start_run_audio>Audio</h5>
+<ol>
+  <li>
+    Connect headset/earphone/Speaker to CONN3.
+  </li>
+  <li>
+    (if possible) Connect audio output like a smartphone to CONN4.
+  </li>
+  <li>
+    Setup(Mix Aux in and Headset mic and setup audio output via CONN3)
+    <div class="code-bg">
+      amixer set "Headphone" 40%<br>
+      amixer set "Headphone" on<br>
+      amixer set "Mixout Left DAC Left" on<br>
+      amixer set "Mixout Right DAC Right" on<br>
+      amixer set "Aux" on<br>
+      amixer set "Aux" 80%<br>
+      amixer set "Mixin PGA" on<br>
+      amixer set "Mixin PGA" 50%<br>
+      amixer set "ADC" on<br>
+      amixer set "ADC" 80%<br>
+      amixer set "Mixin Left Aux Left" on<br>
+      amixer set "Mixin Right Aux Right" on<br>
+      amixer set "Mic 1" on<br>
+      amixer set "Mic 1" 80%<br>
+      amixer set "Mixin Left Mic 1" on<br>
+      amixer set "Mixin Right Mic 1" on<br>
+    </div>
+  </li>
+  <li>
+    Recording and Playback test(5sec)
+    <div class="code-bg">
+      arecord -D hw:0,0 -t wav -d 5 -c 2 -r 48000 -f S16_LE | aplay
+    </div>
+  </li>
+  <li>
+    Only Playback test
+    <div class="code-bg">
+      speaker-test -c2
+    </div>
+  </li>
+</ol>
+
+<h5 id=quick_start_run_gpio>GPIO</h5>
+Method1: Toggle GP2_12(Pin11 on Pin Header)
+<div style="padding-left: 3ex;">
+  <b>Note: Set SW2-6 ~ 8 to ON before starting this procedure.</b>
+  <div class="code-bg">
+    pip3 install gpiod<br>
+    wget https://github.com/brgl/libgpiod/raw/refs/heads/master/bindings/python/examples/toggle_line_value.py
+  </div>
+  Edit toggle_line_value.py to use GP2_12
+</div>
+<div style="padding-left: 5ex;">
+  Before: toggle_line_value("/dev/gpiochip0", 5)<br>
+  After: toggle_line_value("/dev/gpiochip2", 12)
+  <div class="code-bg">
+    python3 toggle_line_value.py
+  </div>
+</div>
+Method2: Other examples:
+<div style="padding-left: 3ex;">
+  Please see also <a href="https://github.com/brgl/libgpiod/raw/refs/heads/master/bindings/python/examples">https://github.com/brgl/libgpiod/raw/refs/heads/master/bindings/python/examples</a>
+</div>
+
+<h5 id=quick_start_run_i2c>I2C</h5>
+Method1: Detect I2C device
+<div class="code-bg">
+  i2cdetect -r <i2c device num(ex.3)>
+</div>
+<div style="padding-left: 3ex;">
+  i2c device num: 3 and 4 is located in Pin header.
+</div>
+Method2: Other commands: i2cdump, i2cget, i2cset, i2ctransfer. Please see also i2c-tools.
+
+<h5 id=quick_start_run_usb3.0>USB3.0</h5>
+<ol>
+  <li>
+    Setup
+    <div style="padding-left: 3ex;">
+      PCIe Controller requires correct firmware in rootfs. Please copy rcar_gen4_pcie.bin into rootfs://usr/lib/firmware/, then reboot the board.<br>
+      As same as PCIe, USB controller requires correct firmware in rootfs. Please download “μPD720201/μPD720202 Firmware”from following link, then copy K2026090.mem as /usr/lib/firmware/renesas_usb_fw.mem.<br>
+      <a href="https://www.renesas.com/en/products/upd720201#design_development">https://www.renesas.com/en/products/upd720201#design_development</a>
+    </div>
+  </li>
+  <li>
+    Check
+    <div class="code-bg">
+      root@sparrow-hawk:~# dmesg | grep usb<br>
+      [    0.027949] usbcore: registered new interface driver usbfs<br>
+      [    0.027962] usbcore: registered new interface driver hub<br>
+      [    0.027972] usbcore: registered new device driver usb<br>
+      [    0.348521] usbcore: registered new interface driver usb-storage<br>
+      [    0.377268] usbcore: registered new interface driver uvcvideo<br>
+      [    0.402550] usbcore: registered new interface driver usbhid<br>
+      [    0.403257] usbhid: USB HID core driver<br>
+      [    8.843408] pci 0000:01:00.0: quirk_usb_early_handoff+0x0/0x9e0 took 5500363 usecs<br>
+      [    9.209539] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.<br>
+      root@sparrow-hawk:~# lsusb<br>
+      Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub<br>
+      Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub<br>
+    </div>
+  </li>
+</ol>
+
+<h5 id=quick_start_run_uart>UART</h5>
+Loop back
+<ol>
+  <li>
+    Connect UART TX and RX(pin 8 and pin 10) on PinHeader.
+  </li>
+  <li>
+    Execute following commands:
+    <div class="code-bg">
+      stty -F /dev/ttySC2 -echo<br>
+      cat /dev/ttySC2 &amp<br>
+      echo Hello &gt; /dev/ttySC2<br>
+    </div>
+  </li>
+</ol>
+
+<h5 id=quick_start_run_thermal>Thermal</h5>
+Thermal throttling
+<div style="text-indent: 3ex;">
+  This board has thermal slotting feature to avoid overheating.
+</div>
+<div style="padding-left: 5ex;">
+  &gt; 68 °C : CPU clock is limited.<br>
+  &gt; 100 °C: System is shutdowned.
+</div>
+Check SoC temperature
+<div class="code-bg">
+  cat /sys/class/thermal/thermal_zoneX/temp # (X=0 ~ 3)
+</div>
+<div style="padding-left: 3ex;">
+  ex.) 55000 # (millicelsius => 55.000 °C)
+</div>
+Measurement point
+<div style="padding-left: 3ex;">
+  thermal_zone0: CR52<br>
+  thermal_zone1: CNN<br>
+  thermal_zone2: CA76<br>
+  thermal_zone3: DDR<br>
+</div>
+
+<h5 id=quick_start_run_m.2>M.2</h5>
+<ol>
+  <li>
+    Setup
+    <div style="padding-left: 3ex;">
+      PCIe Controller requires correct firmware in rootfs. Please copy rcar_gen4_pcie.bin into rootfs://usr/lib/firmware/, then reboot the board.
+    </div>
+  </li>
+  <li>
+    Check
+    <div class="code-bg">
+      root@sparrow-hawk:~# dmesg | grep nvme<br>
+      [    3.402319] nvme nvme0: pci function 0000:01:00.0<br>
+      [    3.403347] nvme 0000:01:00.0: enabling device (0000 -> 0002)<br>
+      [    3.429361] nvme nvme0: allocated 64 MiB host memory buffer.<br>
+      [    3.441335] nvme nvme0: 4/0/0 default/read/poll queues<br>
+      [    3.449319]  nvme0n1:<br>
+      root@sparrow-hawk:~# fdisk -l /dev/nvme0n1<br>
+      Disk /dev/nvme0n1: 954 GB, 1024209543168 bytes, 2000409264 sectors<br>
+      976762 cylinders, 64 heads, 32 sectors/track<br>
+      Units: sectors of 1 * 512 = 512 bytes<br>
+      Device       Boot StartCHS    EndCHS        StartLBA     EndLBA    Sectors  Size Id Type
+    </div>
+  </li>
+</ol>
+
+<h5 id=quick_start_run_camera>Pi Camera</h5>
+<b>Note: Currently, Raspberry Pi Camera V2 is only supported.</b>
+<ol>
+  <li>
+    Connect Raspberry Pi Camera V2 to J1 and/or J2 connector.
+  </li>
+  <li>
+    Setup for using camera
+    <div style="padding-left: 3ex;">
+      Change boot command as follows
+    </div>
+    <div style="padding-left: 5ex;">
+      Before: load mmc 0:1 0x58000000 /boot/fitImage &amp&amp bootm 0x58000000<br>
+      After: load mmc 0:1 0x58000000 /boot/fitImage &amp&amp bootm {CONFIG}
+    </div>
+    <div style="padding-left: 7ex;">
+      if you use j1 connector, use “0x58000000#default#j1-imx219” instead of “{CONFIG}”<br>
+      If you use j2 connector, use “0x58000000#default#j2-imx219” instead of “{CONFIG}”<br>
+      If you use both j1 and j2 connector, use 0x58000000#default#j1-imx219#j2-imx219” instead of “{CONFIG}”
+    </div>
+  </li>
+  <li>
+    Check camera device
+    <div class="code-bg">
+      cam –l
+    </div>
+    <div style="padding-left: 5ex;">
+      Ex.) Available cameras:<br>
+      1: 'imx219' (imx219 1-0010)<br>
+      2: 'imx219' (imx219 2-0010)<br>
+    </div>
+  </li>
+  <li>
+    Display Output( with camera on J1)
+    <div class="code-bg">
+      cam -c 'imx219 1-0010' -C -D
+    </div>
+  </li>
+  <li>
+    Using camshark
+    <div style="padding-left: 3ex;">
+      Host PC
+      <div class="code-bg">
+        sudo apt install pipx<br>
+        pipx install git+https://gitlab.freedesktop.org/camera/camshark.git<br>
+        camshark root@&lt;sparrow_hawk_ip_address&gt;
+      </div>
+    </div>
+  </li>
+</ol>
+
+<h5 id=quick_start_run_display>Pi Display</h5>
+<ol>
+  <li>
+    Connect Raspberry Pi Touch Display 2 cable to the J4 connector. And connect the Power (red wire) to pin 2 of CN7 and the Ground (black wire) to pin 6 of CN7.<br>
+    <img src="{{ '/images/PiDisplay.jpg' | relative_url }}" alt="PiDosplay" style="max-width: 100%;">
+  </li>
+  <li>
+    Change boot command as follows
+    <div style="padding-left: 3ex;">
+      Before: load mmc 0:1 0x58000000 /boot/fitImage &amp&amp bootm 0x58000000<br>
+      After: load mmc 0:1 0x58000000 /boot/fitImage &amp&amp bootm 0x58000000#default#rpi-display-2
+    </div>
+  </li>
+  <li>
+    Display will work correctly after changing above.
+  </li>
+</ol>
+
+<h5 id=quick_start_run_cooler>Pi Active Cooler</h5>
+Manual control of fan speed
+<div class="code-bg">
+  echo 2 > /sys/class/hwmon/hwmon4/pwm1_enable<br>
+  echo 150 > /sys/class/hwmon/hwmon4/pwm1
+</div>
+# 1 ~ 255 is acceptable but low speeds are not recommended from thermal perspective.
+
+<h2 id=tips>Tips</h2>
+<hr size="5" color="#cbcacc">
+<ol>
+  <li>
+    Linux kernel doesn’t boot multiple CA76 core. Only 1 core is available.
+    <div style="padding-left: 3ex;">
+      This is due to skip running arm-trusted-firmware before starting linux kernel. This board has U-Boot SPL and U-Boot( running EL3 ). This is different point from other R-Car evaluation board. If you use booti command as same as other R-Car board, this issue is occurred. The correct boot process is to use fitImage which contains arm-trusted-firmware and Linux kernel and devicetree. By using fitImage, arm-trusted-firmware runs before starting Linux kernel and Linux kernel can handle multiple cores correctly.
+    </div>
+  </li>
+  <li>
+    There is no output on serial console when power on the board.
+    <div style="padding-left: 3ex;">
+      You can check following list to confirm board is broken or not.
+    </div>
+    <div style="padding-left: 5ex;">
+      Do you write the loaders into the board?<br>
+      Do you change DIP-SW as correct settings?<br>
+      Do you use correct serial device? This board has two serial devices and lower number is used for mainly.<br>
+      Do you use correct USB-PD power supply? This board needs 20V3.25A(65W) output at least.
+    </div>
+  </li>
+  <li>
+    How to use HDMI display instead of DP display.
+    <div style="padding-left: 3ex;">
+      This board doesn’t support passive adaptor so that please use active adaptor.
+    </div>
+  </li>
+  <li>
+    How to flash sdcard without removing the card from the board.
+    <div style="padding-left: 3ex;">
+      Preparation: TFTP server on your host PC and network connection between board and your host PC. And copy the gzipped image file into tftp server root.
+    </div>
+    <div style="padding-left: 5ex;">
+      ex.) /tftp/core-image-minimal-sparrow-hawk.rootfs.wic.gz
+    </div>
+    <div style="padding-left: 3ex;">
+      Execute following command on u-boot shell:
+    </div>
+    <div style="padding-left: 5ex;">
+      Note: After this operation, all data is erased on the SD card which is inserted in the board.
+      <div class="code-bg">
+        setenv ethaddr <board mac address><br>
+        setenv serverip <server ip address><br>
+        setenv ipaddr <board ip address><br>
+        tftp ${loadaddr} <image file with gzipped> &amp&amp gzwrite mmc 0 ${loadaddr} ${filesize} 400000 0
+      </div>
+      ex.) tftp ${loadaddr} core-image-minimal-sparrow-hawk.rootfs.wic.gz && gzwrite mmc 0 ${loadaddr} ${filesize} 400000 0
+  </li>
+  <li>
+    Why my Headset Mic is not working?
+    <div style="padding-left: 3ex;">
+      There are two types of 4pin Headset. one is CIST which is default of sparrow-hawk. the other is MIST. The only deference is pin assign of MIC and GND. If you use MIST type of headset, please modify the board as follows:
+    </div>
+    <div style="padding-left: 5ex;">
+      Mount :R631 , R632<br>
+      Unmount :R630 , R633<br>
+    </div>
+  </li>
+  <li>
+    How to expand the rootfs
+    <div style="padding-left: 3ex;">
+      Please run “expand-roofs.sh” script on your board. Rootfs is expanded to use whole storage.
+    </div>
+  </li>
+</ol>
+
+<h2 id=issues>Known Issues & Restrictions</h2>
+<hr size="5" color="#cbcacc">
+<ol>
+  <li>USB Type-C port doesn’t support DP-alt mode so that Display output is not supported. Please use DisplayPort or Raspberry Pi touch Display 2 instead of type-c.</li>
+  <li>M.2 slot doesn’t support SATA version of SSD. Please use NVMe(PCIe) version of SSD. And, M.2 port has only two lanes.</li>
+  <li>Currently, USB boot and SSD boot is not supported. These devices are connected using PCIe but PCIe driver is not implemented on U-Boot. Thus, it cannot load kernel image via USB/M.2 SSD on U-Boot.</li>
+  <li>FAN/Heat sink less doesn’t work well due to high temperature in some case. Please attach the Heatsink and FAN to use the board.</li>
+</ol>
+</main>
