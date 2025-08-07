@@ -1,5 +1,145 @@
 ---
-layout: default
+
 title: R-Car Community 
+boards:
+  - title: Sparrow Hawk
+    image: /images/Sparrow Hawk.png
+    url: /Sparrow-Hawk/index.html
+    soc: R-Car V4H
+    purpose: For xxx
+  - title: BoardB
+    image: /images/Sparrow Hawk.png
+    url: /BoardB/index.html
+    soc: xxx
+    purpose: For xxx
+  - title: BoardC
+    image: /images/Sparrow Hawk.png
+    url: BoardC/index.html
+    soc: xxx
+    purpose: For xxx
+applications:
+  - title: ApplicationA
+    image: /images/Sparrow Hawk.png
+    url: /ApplicationA/index.html
+    soc: R-Car V4H
+    purpose: For xxx
+  - title: ApplicationB
+    image: /images/Sparrow Hawk.png
+    url: /ApplicationB/index.html
+    soc: xxx
+    purpose: For xxx
+  - title: ApplicationC
+    image: /images/Sparrow Hawk.png
+    url: /ApplicationC/index.html
+    soc: xxx
+    purpose: For xxx
 ---
+<link rel="stylesheet" href="{{ 'css/style.css' | relative_url }}" />
+
+<nav>
+  <a href="{{ '/index.html' | relative_url }}">TOP</a>
+  {% if page.breadcrumb_parent and page.breadcrumb_parent_url %}
+    &gt; <a href="{{ page.breadcrumb_parent_url | relative_url }}">{{ page.breadcrumb_parent }}</a>
+  {% endif %}
+</nav>
+
+<h2 id=intro>Introduction</h2>
+<hr size="5" color="#cbcacc">
+This is the TOP page of <a href="https://github.com/rcar-community">R-Car Community</a>.
+
+<h2 id=new>What's New</h2>
+<hr size="5" color="#cbcacc">
+<pre style="font-family: inherit;">
+2025.08.07    We open the Home Page for Sparrow Hawk.
+</pre>
+
+<h2 id=board>Board List</h2>
+<hr size="5" color="#cbcacc">
+<div style="display: flex; align-items: flex-start; gap: 2rem;">
+  <div>
+    <a href="{{ '/Sparrow-Hawk/index.html' | relative_url }}"><img src="{{ '/images/Sparrow Hawk.png' | relative_url }}" alt="Sparrow Hawk" style="max-width: 350px;"></a><br>
+    <b>Sparrow Hawk</b><br>
+    SoC: R-Car V4H<br>
+  </div>
+
+  <div>
+    <table class="info-table">
+      <tr>
+        <th>Contents</th>
+        <th>URL</th>
+      </tr>
+      <tr>
+        <td>Sparrow Hawk Board Page</td>
+        <td><a href="https://www.retronix.com.tw/en/product_sbc.html">https://www.retronix.com.tw/en/product_sbc.html</a></td>
+      </tr>
+      <tr>
+        <td>R-Car V4H SoC Page</td>
+        <td><a href="https://www.renesas.com/en/products/r-car-v4h">https://www.renesas.com/en/products/r-car-v4h</a></td>
+      </tr>
+      <tr>
+        <td>Getting Started for Yocto BSP</td>
+        <td><a href="{{ '/Sparrow-Hawk/index.html' | relative_url }}">Sparrow Hawk Contents Page</a></td>
+      </tr>
+      <tr>
+        <td>Getting Started for Debian based BSP</td>
+        <td><a href="{{ '/Sparrow-Hawk/index.html' | relative_url }}">Sparrow Hawk Contents Page</a></td>
+      </tr>
+      <tr>
+        <td>FAQ</td>
+        <td><a href="https://github.com/orgs/rcar-community/discussions/categories/faq">https://github.com/orgs/rcar-community/discussions/categories/faq</a></td>
+      </tr>
+      <tr>
+        <td>QA Forum</td>
+        <td><a href="https://github.com/orgs/rcar-community/discussions/categories/q-a">https://github.com/orgs/rcar-community/discussions/categories/q-a</a></td>
+      </tr>
+      <tr>
+        <td>Where to Buy</td>
+        <td><a href="http://www.shimafuji.co.jp/en/products/2207">http://www.shimafuji.co.jp/en/products/2207</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<p style="color:#2a289d">© 2025 Renesas Electronics Corporation. All rights reserved.</p>
+
+<!--
 <meta http-equiv="refresh" content="0; url={{ '/Sparrow-Hawk/index.html' | relative_url }}">
+
+<div class="grid-4">
+  {% assign total = page.boards | size %}
+  {% for board in page.boards %}
+    <a href="{{ board.url }}" class="card">
+      <p>{{ board.title }}</p>
+      <img src="{{ board.image }}" alt="{{ board.title }}">
+      <p>SoC: {{ board.soc }}<br/>{{ board.purpose }}</p>
+    </a>
+  {% endfor %}
+
+  {%- assign remainder = total | modulo: 4 -%}
+  {%- assign placeholders = 4 | minus: remainder -%}
+  {%- if remainder != 0 -%}
+    {% for i in (1..placeholders) %}
+      <div class="card placeholder"></div>
+    {% endfor %}
+  {%- endif -%}
+</div>
+
+<div class="grid-4">
+  {% assign total = page.applications | size %}
+  {% for application in page.applications %}
+    <a href="{{ application.url }}" class="card">
+      <p>{{ application.title }}</p>
+      <img src="{{ application.image }}" alt="{{ application.title }}">
+      <p>SoC: {{ application.soc }}<br/>{{ application.purpose }}</p>
+    </a>
+  {% endfor %}
+
+  {%- assign remainder = total | modulo: 4 -%}
+  {%- assign placeholders = 4 | minus: remainder -%}
+  {%- if remainder != 0 -%}
+    {% for i in (1..placeholders) %}
+      <div class="card placeholder"></div>
+    {% endfor %}
+  {%- endif -%}
+</div>
+-->

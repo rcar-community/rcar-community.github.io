@@ -111,15 +111,15 @@ left: top view, right: bottom view<br>
   </tr>
   <tr>
     <td>Yocto Project</td>
-    <td>5.0.10</td>
+    <td>5.0.11</td>
   </tr>
   <tr>
     <td>Aarch64-poky-linux-gcc(GCC)</td>
-    <td>13.3.0</td>
+    <td>13.4.0</td>
   </tr>
   <tr>
     <td>Linux kernel</td>
-    <td>6.12.34</td>
+    <td>6.12.41</td>
   </tr>
   <tr>
     <td>Userland 64/32bit</td>
@@ -127,7 +127,7 @@ left: top view, right: bottom view<br>
   </tr>
   <tr>
     <td>U-Boot</td>
-    <td>2025.07-rc5</td>
+    <td>2025.07</td>
   </tr>
 </table>
 
@@ -143,14 +143,14 @@ left: top view, right: bottom view<br>
     <th>Binary</th>
   </tr>
   <tr>
-    <td>Yocto</td>
+    <td>Yocto BSP</td>
     <td>Ubuntu 22.04 or later<br>100GB or more storage<br>8GB or more RAM</td>
-    <td>refer to <a href="https://docs.yoctoproject.org/5.0.10/brief-yoctoprojectqs/index.html#compatible-linux-distribution">https://docs.yoctoproject.org/5.0.10/brief-yoctoprojectqs/index.html#compatible-linux-distribution</a></td>
-    <td>bash -c "$(wget -O- https://raw.github.com/rcar-community/meta-sparrow-hawk/scarthgap/build.sh)"<br>* Image file is generated on following path<br>&lt;current directory&gt;build/build-sparrow-hawk/tmp/deploy/images/sparrow-hawk/</td>
+    <td>refer to <a href="https://docs.yoctoproject.org/5.0.11/brief-yoctoprojectqs/index.html#compatible-linux-distribution">https://docs.yoctoproject.org/5.0.11/brief-yoctoprojectqs/index.html#compatible-linux-distribution</a></td>
+    <td>Please see <a href="https://github.com/rcar-community/meta-sparrow-hawk">https://github.com/rcar-community/meta-sparrow-hawk</a></td>
     <td><a href="https://github.com/rcar-community/meta-sparrow-hawk/releases">https://github.com/rcar-community/meta-sparrow-hawk/releases</a></td>
   </tr>
   <tr>
-    <td>Debian</td>
+    <td>Debian based BSP</td>
     <td>Ubuntu 22.04 or later</td>
     <td>docker</td>
     <td>Please see <a href="https://github.com/rcar-community/kernel-apt-repository">https://github.com/rcar-community/kernel-apt-repository</a></td>
@@ -160,24 +160,36 @@ left: top view, right: bottom view<br>
 
 <h3 id=quick_start_flash>How to flash</h3>
 <h4 id=quick_start_flash_loader>Flashing loader</h4>
-Using script(Python3 and pip is required on your host PC)
+Run script in ipl-burning directory(Linux: run.sh, Windows: run.bat)<br>
+If using Linux host PC, please install python3 and pip command on your system before running the script.
 <div style="padding-left: 3ex;">
-  Run script in ipl-burning directory(Linux: run.sh, Windows: run.bat)
-</div>
-<div style="padding-left: 5ex;">
-  Ipl-burning is downloaded deploy_sparrow-hawk.zip from <a href="https://github.com/rcar-community/meta-sparrow-hawk/releases">https://github.com/rcar-community/meta-sparrow-hawk/releases</a><br>
+  ipl-burning.zip can be downloaded from <a href="https://github.com/rcar-community/meta-sparrow-hawk/releases">https://github.com/rcar-community/meta-sparrow-hawk/releases</a><br>
   Please close other console which uses serial port of the board before executing the script.
+</div>
+Note: 
+<div style="padding-left: 3ex;">
+  This script use serial device /dev/ttyUSB* in Linux.<br>
+  But, it cannot be accessed from user without previledged right by default settings.<br>
+  Please use sudo command or add current user into dialout group.
 </div>
 
 <h4 id=quick_start_flash_image>Flashing OS image into SD card</h4>
-Yocto BSP case(CLI)
-<div class="code-bg">
-gzip -cd core-image-minimal-sparrow-hawk.rootfs.wic.gz | sudo dd of=&lt;device file&gt; bs=1M status=progress
+<b>Linux case</b><br>
+<div style="padding-left: 3ex;">
+  Yocto BSP case
+  <div class="code-bg">
+    gzip -cd core-image-minimal-sparrow-hawk.rootfs.wic.gz | sudo dd of=&lt;device file&gt; bs=1M status=progress
+  </div>
+  Debian based BSP case
+  <div class="code-bg">
+    gzip -cd sparrow-hawk-debian-based-bsp.img.gz | sudo dd of=&lt;device file&gt; bs=1M status=progress
+  </div>
 </div>
-Debian based BSP case
-<div class="code-bg">
-gzip -cd sparrow-hawk-debian-based-bsp.img.gz | sudo dd of=&lt;device file&gt; bs=1M status=progress
-</div>
+<b>Windows case</b><br>
+<ol>
+  <li>Extract gzip image using 7zip or similer software.</li>
+  <li>Flash extracted image into SD card using Etcher, win disk imager, and so on. </li>
+</ol>
 
 <h4 id=quick_start_boot>How to boot</h4>
 <ol>
@@ -203,6 +215,8 @@ Run following command:
 After that, OS image boots automatically when power on the board.
 
 <h4 id=quick_start_run>How to run applications</h4>
+This section is based on Yocto BSP.<br>
+If you use Debian based BSP, it may need to install additional packages.
 <h5 id=quick_start_run_support>Software support list</h5>
 <table class="info-table">
   <tr>
@@ -364,7 +378,6 @@ Method1: Toggle GP2_12(Pin11 on Pin Header)
 <div style="padding-left: 3ex;">
   <b>Note: Set SW2-6 ~ 8 to ON before starting this procedure.</b>
   <div class="code-bg">
-    pip3 install gpiod<br>
     wget https://github.com/brgl/libgpiod/raw/refs/heads/master/bindings/python/examples/toggle_line_value.py
   </div>
   Edit toggle_line_value.py to use GP2_12
@@ -384,7 +397,7 @@ Method2: Other examples:
 <h5 id=quick_start_run_i2c>I2C</h5>
 Method1: Detect I2C device
 <div class="code-bg">
-  i2cdetect -r <i2c device num(ex.3)>
+  i2cdetect -r &lt;i2c device num(ex.3)&gt;
 </div>
 <div style="padding-left: 3ex;">
   i2c device num: 3 and 4 is located in Pin header.
@@ -396,9 +409,7 @@ Method2: Other commands: i2cdump, i2cget, i2cset, i2ctransfer. Please see also i
   <li>
     Setup
     <div style="padding-left: 3ex;">
-      PCIe Controller requires correct firmware in rootfs. Please copy rcar_gen4_pcie.bin into rootfs://usr/lib/firmware/, then reboot the board.<br>
-      As same as PCIe, USB controller requires correct firmware in rootfs. Please download “μPD720201/μPD720202 Firmware”from following link, then copy K2026090.mem as /usr/lib/firmware/renesas_usb_fw.mem.<br>
-      <a href="https://www.renesas.com/en/products/upd720201#design_development">https://www.renesas.com/en/products/upd720201#design_development</a>
+      PCIe Controller requires correct firmware in rootfs. Please copy rcar_gen4_pcie.bin into rootfs://usr/lib/firmware/, then reboot the board.
     </div>
   </li>
   <li>
@@ -522,7 +533,13 @@ Measurement point
   <li>
     Display Output( with camera on J1)
     <div class="code-bg">
-      cam -c 'imx219 1-0010' -C -D
+      cam -c &lt;camera_index_num&gt; -C -D
+    </div>
+    camera_index_num: please see cam -l output:<br>
+    &lt;camera_index_num&gt;: '&lt;camera_sensor_name&gt;' (&lt;full_format&gt;)
+    <div style="padding-left: 20ex;">
+      full_format: (&lt;sensor_name&gt; &lt;i2c bus num&gt;-&lt;address&gt;)<br>
+      You can also input (full_format) instad of camera_index_num
     </div>
   </li>
   <li>
