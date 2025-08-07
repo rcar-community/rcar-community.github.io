@@ -10,10 +10,3 @@ cp -rf ${DEV_DIR}/* -t ${SCRIPT_DIR}
 rm -rf Gemfile* local_debug.sh setup_ruby_ubuntu.sh _site
 git restore README.md
 
-# WA: Cleanup redirect page
-if [[ "$(grep 'meta http-equiv="refresh"' ./index.html)" != "" ]]; then
-    mv ./index.html ./_index.html
-    grep -e "---" -e "layout" -e "^title" -e "meta" ./_index.html > ./index.html
-    rm -f ./_index.html
-fi
-
