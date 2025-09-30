@@ -1,0 +1,4 @@
+title: R-Car Community
+url: "https://rcar-community.github.io"   # サイトの絶対URL
+baseurl: ""
+exclude: ['README.md', '*.sh']

@@ -1,6 +1,9 @@
 h2 {
   font-size: 180%;
-  margin-bottom: 0;
+  /* separator instead of <hr> tag */
+  border-bottom: solid 5px #cbcacc;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 h3 {
@@ -18,136 +21,222 @@ h5 {
   margin-bottom: 0;
 }
 
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  padding: 1rem;
-  justify-items: center;
-  align-items: start;
+table {
+  border: 1px solid #aaa;
+  border-collapse:collapse;
 }
 
-.card {
-  width: 100%;
-  text-align: center;
-  text-decoration: none;
-  color: #333;
-  background: #fff;
-  padding: 0.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+table th {
+  background-color: #706f6f;
+  color: #cbcacc;
+  border: 1px solid #aaa;
+  padding:4px;
 }
 
-.card img {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
+table td {
+  border: 1px solid #aaa;
+  padding:4px;
 }
 
-.card.placeholder {
-  visibility: hidden;
-  box-shadow: none;
-  background: none;
-  padding: 0;
+:root {
+  --contents-width: 25em;
 }
 
-.info-table{
-	border: 1px solid #aaa;
-	border-collapse:collapse;
-}
-
-.info-table th{
-        background-color: #706f6f;
-	color: #cbcacc;
-	border: 1px solid #aaa;
-	padding:4px;
-}
-
-.info-table td{
-        border: 1px solid #aaa;
-        padding:4px;
-}
-
-.code-bg{
-        background-color: #cbcacc;
-	padding:5px;
-}
-
-.container {
-  position: relative;
-}
-
-nav.breadcrumbs {
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  color: #666;
+body[data-style="common"] {
+  margin-left: var(--contents-width);
   padding: 1em;
-  margin-left: 400px;
+  overflow-x: auto;
+  width: calc(100vw - 25em);
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-nav.breadcrumbs a {
-  color: #1a73e8;
-  text-decoration: none;
-}
-
-nav.breadcrumbs a:hover {
-  text-decoration: underline;
-}
-
-nav.toc {
-  position: fixed;       
-  top: 0;         
+p.contents {
+  flex: 0 0 25em;
+  position: fixed;
+  top: 0;
   left: 0;
-  overflow-y: auto;   
+  overflow-y: auto;
   background-color: #f5f5f5;
   border-right: 1px solid #ccc;
   box-sizing: border-box;
-  width: 400px;
+  width: var(--contents-width);
   background-color: #f0f0f0;
   height: 100vh;
   padding: 1em;
   font-family: sans-serif;
+  font-weight: bold;
   z-index: 1;
 }
 
-nav.toc h2 {
-  margin-top: 0;
-  font-size: 1.2em;
-}
-
-nav.toc ul {
-  list-style: none;
-  padding-left: 0;
-  margin-left: 0;
-}
-
-nav.toc ul li {
-  margin: 4px 0;
-}
-
-nav.toc ul ul {
-  padding-left: 1.5em;
-}
-
-nav.toc ul ul ul {
-  padding-left: 3em;
-}
-
-nav.toc a {
-  text-decoration: none;
-  color: #4ba3d3;
-}
-
-a {
-  display: inline;
-  margin: 10px 0;
-  text-decoration: none;
-  color: #4ba3d3;
-}
-
-main.with-sidemenu, footer.with-sidemenu {
-  margin-left: 400px;
+ol.contents {
+  flex: 0 0 25em;
+  position: fixed;
+  top: 2.5em;
+  left: 1.0em;
+  overflow-y: auto;
+  background-color: #f5f5f5;
+  border-right: 1px solid #ccc;
+  box-sizing: border-box;
+  width: 24em;
+  background-color: #f0f0f0;
+  height: calc(100vh - 2.5em);
   padding: 1em;
-  position: relative;
-  z-index: 0;
+  font-family: sans-serif;
+  z-index: 2;
 }
+
+main, footer {
+  flex: 1;
+  box-sizing: border-box;
+}
+
+hr {
+  border: none;
+  height: 5px;
+  background-color: #cbcacc;
+}
+
+/* Remove bullets in case that img is in list, */
+ul li:has(img) {
+  list-style-type: none;
+}
+
+.caution {
+  font-size: 150%;
+  color: red;
+}
+
+.board-list {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding-bottom: 1rem;
+}
+
+.img-list {
+  flex: 0 0 400px;
+  width: 400px;
+  text-align: center;
+}
+
+.img-list img {
+  width: 400px;
+  height: auto;
+}
+
+.table-list {
+  flex: 0 0 auto;
+  min-width: 500px;
+  white-space: nowrap;
+}
+
+p, ul, ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.highlight {
+  overflow: auto;
+  padding: 0.1em;
+  margin: 0.3em;
+  border-radius: 3px;
+}
+
+.indented-0 {
+  margin-left: 4.5ex;
+}
+
+.indented-1 {
+  margin-left: 3ex;
+}
+
+.indented-2 {
+  margin-left: 6ex;
+}
+
+.indented-3 {
+  margin-left: 9ex;
+}
+
+.indented-ex {
+  margin-left: 25ex;
+}
+
+
+@media screen and (max-width: 768px) {
+  .contents {
+    display: none;
+  }
+
+
+  body[data-style="common"] {
+    font-size: 14px;
+    padding: 10px;
+    margin: 0;
+    width: 100vw;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .language-plaintext {
+    background-color: #cbcacc;
+    padding: 0.1em;
+    overflow-x: auto;  
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* 
+ * Header section/subsection number
+ *
+ * Note: h1 is not used as of now
+ */
+/* Setup variables */
+html {
+    counter-reset: chapter section subsection subsubsection;
+}
+
+/* Add number from counter value */
+h2::before {
+    counter-set: section 0;
+    counter-increment: chapter;
+    content: counter(chapter) ". ";
+}
+h3::before {
+    counter-set: subsection 0;
+    counter-increment: section;
+    content: counter(chapter) "." counter(section) ". ";
+}
+h4::before {
+    counter-set: subsubsection 0;
+    counter-increment: subsection;
+    content: counter(chapter) "." counter(section) "." counter(subsection)  ". ";
+}
+h5::before {
+    counter-increment: subsubsection;
+    content: counter(chapter) "." counter(section) "." counter(subsection)  "." counter(subsubsection) ". ";
+}
+
+/*
+ * TOC section number
+ */
+#markdown-toc {
+  list-style-type: none;
+}
+#markdown-toc ol {
+  list-style-type: none;
+  counter-reset: index;
+}
+#markdown-toc li {
+  list-style-type: none;
+  counter-increment: index;
+}
+#markdown-toc li::before {
+  content: counters(index, ".") ". ";
+}
+

@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ page.title }}</title>
   <link rel="stylesheet" href="{{ 'css/style.css' | relative_url }}" />
+  <link rel="stylesheet" href="{{ 'css/syntax.css' | relative_url }}" />
 </head>
-<body>
-<!--
-    {% include header.html %}    
--->
+<body data-style="{{ page.style | default: 'common' }}">
   <main>
     {% include breadcrumbs.html %}  <!-- breadcrumbs -->
     {{ content }}              <!-- page content -->

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+</head>
+<body>
+  <main>
+    {% include breadcrumbs.html %}  <!-- breadcrumbs -->
+    {{ content }}              <!-- page content -->
+  </main>
+  {% include footer.html %}    <!-- footer -->
+</body>
+</html>
+
