@@ -126,6 +126,15 @@ Note:
 This script use serial device /dev/ttyUSB* in Linux. But, it cannot be accessed from user without previledged right by default settings. Please use sudo command or add current user into dialout group.
 {: .indented-1 }
 
+If you use Ubuntu 24.04 or later,  you get a "error: externally-managed-environment".  In this case, you should use python venv.
+
+```bash
+python -m venv iplwrite
+source iplwrite/bin/activate
+pip install pyserial colorama tqdm
+sudo python burn.py
+```
+
 #### Flashing OS image into SD card
 
 **Linux case**
