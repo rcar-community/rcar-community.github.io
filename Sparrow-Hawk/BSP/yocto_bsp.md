@@ -38,19 +38,12 @@ If you want to normally start, please start [3.1.2. Normal preparation: build so
 
 #### Quick preparation: download binary
 
-1. Download binary from GitHub
-   * Bootloader: [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-02-03/ipl-burning.zip)
-   * BSP(either of the following BSP)
-      * In case of BSP: [core-image-minimal-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-02-03/core-image-minimal-sparrow-hawk.rootfs.wic.gz)
-      * In case of BSP + 3D Graphics: [core-image-weston-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-02-03/core-image-weston-sparrow-hawk.rootfs.wic.gz)
-{:start="1"}
+Download binary from GitHub
+* BSP(either of the following BSP)
+   * In case of BSP: [core-image-minimal-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-02-03/core-image-minimal-sparrow-hawk.rootfs.wic.gz)
+   * In case of BSP + 3D Graphics: [core-image-weston-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-02-03/core-image-weston-sparrow-hawk.rootfs.wic.gz)
 
-2. Unzip download zip file
-```bash
-unzip ipl-burning.zip
-```
 Next, jump to [3.2. How to flash](#how-to-flash).
-{:start="2"}
 
 #### Normal preparation: build source code
 

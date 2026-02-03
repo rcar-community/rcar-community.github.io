@@ -38,16 +38,10 @@ If you want to normally start, please start [3.1.2. Normal preparation: build so
 
 #### Quick preparation: download binary
 
-1. Download binary from GitHub
-   * Bootloader: [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-02-03/ipl-burning.zip)
-   * BSP: [sparrow-hawk-debian-13-based-bsp.img.gz](https://github.com/rcar-community/kernel-apt-repository/releases/download/v2026-02-03/sparrow-hawk-debian-13-based-bsp.img.gz)
+Download binary from GitHub
+* BSP: [sparrow-hawk-debian-13-based-bsp.img.gz](https://github.com/rcar-community/kernel-apt-repository/releases/download/v2026-02-03/sparrow-hawk-debian-13-based-bsp.img.gz)
 
-2. Unzip download zip file
-```bash
-unzip ipl-burning.zip
-```
 Next, jump to [3.2. How to flash](#how-to-flash).
-{:start="2"}
 
 #### Normal preparation: build source code
 
@@ -427,8 +421,8 @@ ucts/camera-cable/)
 
 * Manual control of fan speed<br>
   ```bash
-  echo 2 > /sys/class/hwmon/hwmon4/pwm1_enable
-  echo 150 > /sys/class/hwmon/hwmon4/pwm1
+  sudo echo 2 > /sys/class/hwmon/hwmon4/pwm1_enable
+  sudo echo 150 > /sys/class/hwmon/hwmon4/pwm1
   ```
   \#1 ~ 255 is acceptable but low speeds are not recommended from thermal perspective.
 
