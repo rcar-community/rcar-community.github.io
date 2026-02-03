@@ -23,9 +23,9 @@ This is the Debian based BSP page for Sparrow Hawk.
 
 |Software                   |Version|
 |---------------------------|-------|
-|Debian                     |12     |
-|Linux kernel               |6.12.58|
-|U-Boot                     |2025.10|
+|Debian                     |13     |
+|Linux kernel               |6.12.66|
+|U-Boot                     |2026.01|
 |Arm Trusted Firmware       |2.14.0 |
 
 ## How to Startup
@@ -39,8 +39,8 @@ If you want to normally start, please start [3.1.2. Normal preparation: build so
 #### Quick preparation: download binary
 
 1. Download binary from GitHub
-   * Bootloader: [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2025-11-28/ipl-burning.zip)
-   * BSP: [sparrow-hawk-debian-12-based-bsp.img.gz](https://github.com/rcar-community/kernel-apt-repository/releases/download/v2025-11-28/sparrow-hawk-debian-12-based-bsp.img.gz)
+   * Bootloader: [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-02-03/ipl-burning.zip)
+   * BSP: [sparrow-hawk-debian-13-based-bsp.img.gz](https://github.com/rcar-community/kernel-apt-repository/releases/download/v2026-02-03/sparrow-hawk-debian-13-based-bsp.img.gz)
 
 2. Unzip download zip file
 ```bash
@@ -54,38 +54,41 @@ Next, jump to [3.2. How to flash](#how-to-flash).
 ```bash
 # You need to prepare docker envrionment on your Host PC
 ./build_image/build_with_docker_sparrow-hawk.sh <DEBIAN_VERSION>
-ex.) ./build_image/build_with_docker_sparrow-hawk.sh 12
+ex.) ./build_image/build_with_docker_sparrow-hawk.sh 13
 ```
 or
 ```bash
 # Note: Build requirements can be confirmed from build_image/Dockerfile.
-sudo ./build_image/build_debian_12_for_sparrow-hawk.sh <DEBIAN_VERSION>
-ex.) sudo ./build_image/build_debian_12_for_sparrow-hawk.sh 12
+sudo ./build_image/build_debian_13_for_sparrow-hawk.sh <DEBIAN_VERSION>
+ex.) sudo ./build_image/build_debian_13_for_sparrow-hawk.sh 13
 ```
 Next, jump to [3.2. How to flash](#how-to-flash).
 
 ### How to flash
 
-#### Flashing loader
-
-Run script in ipl-burning directory(Linux: run.sh, Windows: run.bat). If using Linux host PC, please install python3 and pip command on your system before running the script and close other console which uses serial port of the board before executing the script.
-
-Note:
-* This script use serial device /dev/ttyUSB* in Linux. But, it cannot be accessed from user without previledged right by default settings. Please use sudo command or add current user into dialout group.
-
-Note:
-* Please change the Mode Switch(=SW2) according to the ipl-burning(run.sh or run.bat).
-
-#### Flashing OS image into SD card
+#### Flashing OS image into microSD card
 
 **Linux case**
 ```bash
-gzip -cd sparrow-hawk-debian-12-based-bsp.img.gz | sudo dd of=<device file> bs=1M status=progress && sync
+gzip -cd sparrow-hawk-debian-13-based-bsp.img.gz | sudo dd of=<device file> bs=1M status=progress && sync
 ```
 
 **Windows case**
 1. Extract gzip image using 7zip or similer software.
-2. Flash extracted image into SD card using Etcher, win disk imager, and so on.
+2. Flash extracted image into microSD card using Etcher, win disk imager, and so on.
+
+#### Flashing loader
+
+Please update the loader (u-boot) using the loader file (flash.bin) included in the Debian OS image (rootfs).
+
+1. Insert microSD card prepared in Section 3.2.1 into microSD card slot (CN1), then power on the Sparrow Hawk board
+2. Update the QSPI memory from U-Boot as shown below, then reboot the system.
+```plaintext
+load mmc 0:1 ${loadaddr} flash.bin && sf probe && sf update ${loadaddr} 0 ${filesize} && reset
+```
+
+Note:
+* If flashing fails and U-Boot no longer boots, please try the recovery procedure. Please see 4 of [Tips](/Sparrow-Hawk/index.html#tips) in Sparrow Hawk page.
 
 ### How to boot
 
@@ -98,6 +101,7 @@ gzip -cd sparrow-hawk-debian-12-based-bsp.img.gz | sudo dd of=<device file> bs=1
 env default -a; boot
 ```
 6. If command and environment is correct, Linux kernel log will output.
+7. Log in to "sparrow-hawk login:" as rcar and at the "Password:" prompt, enter rcar.
 
 If you want to boot OS image automatically when power on the board, please run following to setup autoboot. Run following command:
 
@@ -120,10 +124,10 @@ After that, OS image boots automatically when power on the board.
 | [GPIO](#gpio)                         | Supported     |
 | [I2C](#i2c)                           | Supported     |
 | JTAG                                  | Supported     |
-| USB3.0                                | Not supported |
+| [USB3.0](#usb30)                      | Supported     |
 | [UART](#uart)                         | Supported     |
 | [Thermal](#thermal)                   | Supported     |
-| M.2                                   | Not supported |
+| [NVMe M.2 SSD](#nvme-m2-ssd)          | Supported     |
 | [Pi Camera](#pi-camera)               | Supported     |
 | [Pi Display](#pi-display)             | Supported     |
 | PCIe Endpoint                         | Not supported |
@@ -146,11 +150,6 @@ Loop back
 2. Execute following commands on Linux:
 {:start="2"}
 ```bash
-# Setup
-sudo apt update
-sudo apt install can-utils psmisc
-
-# Test
 sudo ip link set can0 up type can restart-ms 100 bitrate 1000000 dbitrate 5000000 fd on
 sudo ip link set can1 up type can restart-ms 100 bitrate 1000000 dbitrate 5000000 fd on
 sudo candump can0 &
@@ -163,50 +162,61 @@ sudo killall candump
 
 ### Audio
 
-1. Connect headset/earphone/Speaker to CONN3.
-2. (if possible) Connect audio output like a smartphone to CONN4.
-3. Setup(Mix Aux in and Headset mic and setup audio output via CONN3)
-```bash
-sudo amixer set "Headphone" 40%
-sudo amixer set "Headphone" on
-sudo amixer set "Mixout Left DAC Left" on
-sudo amixer set "Mixout Right DAC Right" on
-sudo amixer set "Aux" on
-sudo amixer set "Aux" 80%
-sudo amixer set "Mixin PGA" on
-sudo amixer set "Mixin PGA" 50%
-sudo amixer set "ADC" on
-sudo amixer set "ADC" 80%
-sudo amixer set "Mixin Left Aux Left" on
-sudo amixer set "Mixin Right Aux Right" on
-sudo amixer set "Mic 1" on
-sudo amixer set "Mic 1" 80%
-sudo amixer set "Mixin Left Mic 1" on
-sudo amixer set "Mixin Right Mic 1" on
-```
-4. Test function
-   1. Recording and Playback test(5sec)
+* Audio connector
+   * ![Audio connector]({{ '/images/audio_connector.webp' | relative_url }})
+   * Sparrow Hawk has two audio input ports. These signals are mixed on the IC and therefore handled as a single-channel input on the board.
+* Hardware setup
+   * Connect headset/earphone/Speaker to CONN3.
+   * (if possible) Connect audio output like a smartphone to CONN4.
+      * Even if you don't connect an audio output to CONN4, you can test.
+* Software setup
+   * Setup(Mix Aux in and Headset mic and setup audio output via CONN3)
+   ```bash
+   amixer set "Headphone" 40%
+   amixer set "Headphone" on
+   amixer set "Mixout Left DAC Left" on
+   amixer set "Mixout Right DAC Right" on
+   amixer set "Aux" on
+   amixer set "Aux" 80%
+   amixer set "Mixin PGA" on
+   amixer set "Mixin PGA" 50%
+   amixer set "ADC" on
+   amixer set "ADC" 80%
+   amixer set "Mixin Left Aux Left" on
+   amixer set "Mixin Right Aux Right" on
+   amixer set "Mic 1" on
+   amixer set "Mic 1" 80%
+   amixer set "Mixin Left Mic 1" on
+   amixer set "Mixin Right Mic 1" on
+   ```
+* Test function
+   1. Only Playback test (3 times) [CONN3]
       ```bash
-      sudo arecord -D hw:0,0 -t wav -d 5 -c 2 -r 48000 -f S16_LE | sudo aplay
+      speaker-test -c 2 -l 3 -t wav -W /usr/share/sounds/alsa/
       ```
-   2. Only Playback test
+   * ![Playback]({{ '/images/playback.webp' | relative_url }})
+   2. Only Recording test (5sec) [CONN3 or CONN4 or ‘CONN3 and CONN4’]
       ```bash
-      sudo speaker-test -c2
+      arecord -D hw:0,0 -t wav -d 5 -c 2 -r 48000 -f S16_LE > audio.wav
       ```
+   * ![Recording]({{ '/images/recording.webp' | relative_url }})
+   3. Recording and Playback test (5sec) [CONN3 or ‘CONN3+CONN4’]
+      ```bash
+      arecord -D hw:0,0 -t wav -d 5 -c 2 -r 48000 -f S16_LE | aplay
+      ```
+   * ![Recording and Playback]({{ '/images/recording_playback.webp' | relative_url }})
 
 ### GPIO
 
 Toggle GP2\_12(Pin11 on Pin Header)
 1. Connect LED or Oscilloscope to the board
+   * ex) LED
+   * ![LED]({{ '/images/LED.webp' | relative_url }})
+      * Please install a resistor to prevent damage to the LED. In the Connection image, it i
+s used a 1kΩ resistor.
 2. Execute following command
    ```bash
-   sudo apt update
-   sudo apt install python3 python3-pip python3-venv
-   python3 -m venv .venv
-   source .venv/bin/activate
-   pip3 install gpiod
-   wget https://raw.githubusercontent.com/rcar-community/meta-sparrow-hawk/refs/heads/scarthgap/recipes-examples/example-apps/files/toggle_gpio_GP2_12.py
-   sudo .venv/bin/python3 toggle_gpio_GP2_12.py
+   python3 /usr/bin/example-apps/toggle_gpio_GP2_12.py
    ```
 
 For more examples, please see also [https://github.com/brgl/libgpiod/raw/refs/heads/master/bindings/python/examples](https://github.com/brgl/libgpiod/raw/refs/heads/master/bindings/python/examples)
@@ -215,13 +225,72 @@ For more examples, please see also [https://github.com/brgl/libgpiod/raw/refs/he
 
 * Detect I2C device
   ```bash
-  sudo apt update
-  sudo apt install i2c-tools
-  sudo i2c-detect -r 3
-  sudo i2c-detect -r 4
+  i2cdetect -y -r 3
+  i2cdetect -y -r 4
   ```
+  Since I2C bus numbers 3 and 4 are assigned to the External IO, execute the above command.
 
-Please search i2c-tools to use other commands(i2cdump, i2cget, i2cset, i2ctransfer).
+   * I2C pin assignment
+   * ![I2C pin]({{ '/images/I2C_pin.webp' | relative_url }})
+
+* As an example, output result using Argon FAN HAT
+  ```bash
+  rcar@sparrow-hawk:~# i2cdetect -y -r 3
+       0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+  00:                         -- -- -- -- -- -- -- --
+  10: -- -- -- -- -- -- -- -- -- -- 1a -- -- -- -- --
+  20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  70: -- -- -- -- -- -- -- --
+  rcar@sparrow-hawk:~# i2cdetect -y -r 4
+       0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+  00:                         -- -- -- -- -- -- -- --
+  10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  50: 50 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  70: -- -- -- -- -- -- -- --
+  ```
+   * Argon FAN HAT: [https://argon40.com/en-jp/products/argon-fan-hat](https://argon40.com/en
+-jp/products/argon-fan-hat)
+
+* Please search i2c-tools to use other commands(i2cdump, i2cget, i2cset, i2ctransfer).
+
+### USB3.0
+
+* With the power turned on, connect it to any available USB6 port. If “SuperSpeed” is disp
+layed, the test is successful.
+
+   * Output example(the upper USB6 port)
+     ```plaintext
+     [   74.051911] usb 2-3: new SuperSpeed USB device number 2 using xhci-pci-renesas
+     [   74.078718] usb-storage 2-3:1.0: USB Mass Storage device detected
+     [   74.080680] scsi host0: usb-storage 2-3:1.0
+     [   75.104448] scsi 0:0:0:0: Direct-Access     SanDisk  Ultra Fit        1.00 PQ: 0 ANSI: 6
+     [   75.117190] sd 0:0:0:0: [sda] 60088320 512-byte logical blocks: (30.8 GB/28.7 GiB)
+     [   75.120450] sd 0:0:0:0: [sda] Write Protect is off
+     [   75.122794] sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+     [   75.176866]  sda: sda1
+     [   75.177754] sd 0:0:0:0: [sda] Attached SCSI removable disk
+     ```
+
+   * Output example(the lower USB6 port)
+     ```plaintext
+     [  167.907865] usb 2-4: new SuperSpeed USB device number 3 using xhci-pci-renesas
+     [  167.939390] usb-storage 2-4:1.0: USB Mass Storage device detected
+     [  167.940850] scsi host0: usb-storage 2-4:1.0
+     [  168.960666] scsi 0:0:0:0: Direct-Access     SanDisk  Ultra Fit        1.00 PQ: 0 ANSI: 6
+     [  168.967661] sd 0:0:0:0: [sda] 60088320 512-byte logical blocks: (30.8 GB/28.7 GiB)
+     [  168.971146] sd 0:0:0:0: [sda] Write Protect is off
+     [  168.973359] sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+     [  169.026988]  sda: sda1
+     [  169.027913] sd 0:0:0:0: [sda] Attached SCSI removable disk
+     ```
 
 ### UART
 
@@ -232,9 +301,10 @@ Loop back
 
 2. Execute following commands:
 ```bash
-sudo stty -F /dev/ttySC2 -echo
-sudo cat /dev/ttySC2 &
-echo Hello | sudo tee /dev/ttySC2
+stty -F /dev/ttySC2 -echo
+cat /dev/ttySC2 &
+echo Hello > /dev/ttySC2 && sleep 1
+killall cat
 ```
 {:start="2"}
 
@@ -242,7 +312,7 @@ echo Hello | sudo tee /dev/ttySC2
 
 * Check SoC temperature
   ```bash
-  sudo cat /sys/class/thermal/thermal_zone*/temp
+  cat /sys/class/thermal/thermal_zone*/temp
   # ex.) 55000 # (Unit is millicelsius => 55.000 °C)
   ```
 * Thermal throttling
@@ -262,92 +332,58 @@ echo Hello | sudo tee /dev/ttySC2
   | thermal_zone2 | CA76              |
   | thermal_zone3 | DDR               |
 
+### NVMe M.2 SSD
+
+**Note:**
+* **SATA M.2 SSD is not supported.**
+
+&nbsp;
+
+* Insert the NVMe into CN5 before powering on.
+* The NVMe used for this test is the Samsung 970 EVO Plus.
+  ```bash
+  dmesg | grep nvme
+  ```
+
+   * Output example
+     ```plaintext
+     rcar@sparrow-hawk:~# dmesg | grep nvme
+     [    4.738931] nvme nvme0: pci function 0000:01:00.0
+     [    4.741086] nvme 0000:01:00.0: enabling device (0000 -> 0002)
+     [    4.745462] nvme nvme0: missing or invalid SUBNQN field.
+     [    4.747759] nvme nvme0: D3 entry latency set to 8 seconds
+     [    4.769123] nvme nvme0: 4/0/0 default/read/poll queues
+     [    4.783049]  nvme0n1: p1
+     ```
+
 ### Pi Camera
 
 **Note:**
 * **Currently, Raspberry Pi Camera V2 and Raspberry Pi Camera V3 is only supported.**
 
 Note:
-* The Raspberry Pi Camera v3 is currently under development on mainline Linux and libcamera, so at this stage the image may appear dark and features such as auto-focus are not yet supported. In addition, recognition may occasionally fail.
+* The Raspberry Pi Camera v3 is currently under development on mainline Linux and libcamera,
+so at this stage the image may appear dark and features such as auto-focus are not yet suppor
+ted. In addition, recognition may occasionally fail.
 
 &nbsp;
 
-1. Connect Raspberry Pi Camera V2 to J1 and/or J2 connector.
+1. Connect Raspberry Pi Camera V2 and/or Raspberry Pi Camera V3 to J1 and/or J2 connector.
    * The board connector has 22 pin so that you need to prepare pitch convert cable.
-   * ex.) Raspberry Pi Official Accesary [https://www.raspberrypi.com/products/camera-cable/](https://www.raspberrypi.com/products/camera-cable/)
+   * When using the Raspberry Pi Camera V2, the following cable is required.
+      * [https://www.raspberrypi.com/products/camera-cable/](https://www.raspberrypi.com/prod
+ucts/camera-cable/)
+   * ![Camera cable]({{ '/images/camera_cable.webp' | relative_url }})
 2. Setup for using camera
    * Change bootcmd variable on U-Boot shell as follows:
-   ```plaintext
-   setenv bootcmd "load mmc 0:1 0x58000000 /boot/fitImage && bootm {CONFIG}"
-   ```
-   * Cobination of connected cameras
 
-     | J1 | J2 | CONFIG                                 |
-     |----|----|----------------------------------------|
-     | V2 | -  | 0x58000000#default#j1-imx219           |
-     | -  | V2 | 0x58000000#default#j2-imx219           |
-     | V2 | V2 | 0x58000000#default#j1-imx219#j2-imx219 |
-     | V3 | -  | 0x58000000#default#j1-imx708           |
-     | -  | V3 | 0x58000000#default#j2-imx708           |
-     | V3 | V3 | 0x58000000#default#j1-imx708#j2-imx708 |
-     | V2 | V3 | 0x58000000#default#j1-imx219#j2-imx708 |
-     | V3 | V2 | 0x58000000#default#j1-imx708#j2-imx219 |
+{% include selector.html config="camera_bootcmd" data-mode="normal" %}
 
-     This table shows the results when connecting the Raspberry Pi Camera V2 and Raspberry Pi Camera V3 to either J1 or J2, and to both J1 and J2.
+3. Test camera
+   * On-board test(Need to connect Display)
+{:start="3"}
 
-3. Execute following commands for using libcamera command
-   ```bash
-   git clone https://git.libcamera.org/libcamera/libcamera.git
-   cd libcamera
-   git checkout -B work b9fa6e0e61d3ea605fe4b1201ede5745cd5800e5
-   wget https://github.com/rcar-community/meta-sparrow-hawk/raw/refs/heads/scarthgap/recipes-multimedia/libcamera/files/0001-libcamera-ipa_manager-Create-IPA-by-name.patch
-   wget https://github.com/rcar-community/meta-sparrow-hawk/raw/refs/heads/scarthgap/recipes-multimedia/libcamera/files/0002-ipa-ipa_module-Remove-pipelineName.patch
-   wget https://github.com/rcar-community/meta-sparrow-hawk/raw/refs/heads/scarthgap/recipes-multimedia/libcamera/files/0003-ipa-meson.build-Remove-duplicated-variable.patch
-   wget https://github.com/rcar-community/meta-sparrow-hawk/raw/refs/heads/scarthgap/recipes-multimedia/libcamera/files/0004-ipa-Allow-pipelines-to-have-differently-named-IPA.patch
-   wget https://github.com/rcar-community/meta-sparrow-hawk/raw/refs/heads/scarthgap/recipes-multimedia/libcamera/files/0005-ipa-rkisp1-Add-settings-for-DreamChip-RPPX1-ISP.patch
-   wget https://github.com/rcar-community/meta-sparrow-hawk/raw/refs/heads/scarthgap/recipes-multimedia/libcamera/files/0006-libcamera-pipeline-Add-R-Car-Gen4-ISP-pipeline.patch
-   wget https://github.com/rcar-community/meta-sparrow-hawk/raw/refs/heads/scarthgap/recipes-multimedia/libcamera/files/0007-ipa-rkisp1-Add-basic-CCM-calibration-for-imx219.patch
-   wget https://github.com/rcar-community/meta-sparrow-hawk/raw/refs/heads/scarthgap/recipes-multimedia/libcamera/files/0008-ipa-CameraSensorHelper-Add-CameraSensorHelperImx708.patch
-   git config --global user.email "you@example.com"
-   git config --global user.name "Your Name"
-   git am *.patch
-   sudo apt update
-   sudo apt install meson build-essential ninja-build cmake libyaml-dev python3-yaml python3-ply python3-jinja2 libevent-dev pkg-config python3-dev python3-pybind11 libdrm-dev
-   meson setup  --prefix=/usr/ -Dpipelines=rcar-gen4,rkisp1 -Dipas=rkisp1 -Dcam=enabled -Dpycamera=enabled -Dtest=false -Ddocumentation=disabled build
-   sudo ninja -C build install
-   ```
-
-4. Check camera device is recognized
-
-   **Raspberry Pi Camera V2**
-   ```bash
-   root@sparrow-hawk:~# sudo cam -l
-   (snip)
-   Available cameras:
-   1: External camera 'imx219' (/base/soc/i2c@e6508000/cam@10)   // J1
-   2: External camera 'imx219' (/base/soc/i2c@e6510000/cam@10)   // J2
-   ```
-
-   **Raspberry Pi Camera V3**
-   ```bash
-   root@sparrow-hawk:~# sudo cam -l
-   (snip)
-   Available cameras:
-   1: External camera 'imx708' (/base/soc/i2c@e6508000/sensor@1a)   // J1
-   2: External camera 'imx708' (/base/soc/i2c@e6510000/sensor@1a)   // J2
-   ```
-
-5. Test camera
-   * Display Output(Need to connect Display)
-      * using one camera
-      ```bash
-      sudo cam -c 1 -C -D
-      ```
-      * using two cameras
-      ```bash
-      sudo cam -c 1 -C -D
-      sudo cam -c 2 -C -D
-      ```
+{% include selector.html config="camera_debian" data-mode="debian" %}
 
 ### Pi Display
 
@@ -377,32 +413,33 @@ Note:
 
 ### Pi Active Cooler
 
-Manual control of fan speed
-```bash
-echo 2 | sudo tee /sys/class/hwmon/hwmon4/pwm1_enable
-echo 150 | sudo tee /sys/class/hwmon/hwmon4/pwm1
-```
-\#1 ~ 255 is acceptable but low speeds are not recommended from thermal perspective.
+* Connect Raspberry Pi Active Cooler to the J3 connector.
+
+* ![Pi Active Cooler]({{ '/images/PiActiveCooler.webp' | relative_url }})
+
+   * Raspberry Pi Active Cooler: [https://www.raspberrypi.com/products/active-cooler/](https://www.raspberrypi.com/products/active-cooler/)
+
+* The thermal pad is not aligned with the R-Car V4H Chip. Please reposition the thermal pad to match the location of the R-Car V4H Chip.
+
+* ![thermal pad]({{ '/images/thermal_pad.webp' | relative_url }})
+
+   * The thermal pad application method is one example, ensure it is applied to adhere to at least the R-Car V4H chip and DRAM.
+
+* Manual control of fan speed<br>
+  ```bash
+  echo 2 > /sys/class/hwmon/hwmon4/pwm1_enable
+  echo 150 > /sys/class/hwmon/hwmon4/pwm1
+  ```
+  \#1 ~ 255 is acceptable but low speeds are not recommended from thermal perspective.
 
 ## Tips
 
 1. How to expand the rootfs
-   * Please run the following command on your board. Rootfs is expanded to use whole stor
-age.
+   * Please run the following command on your board. Rootfs is expanded to use whole storage.
      ```bash
-     sudo apt update
-     sudo apt install e2fsprogs parted
-     wget https://raw.githubusercontent.com/rcar-community/meta-sparrow-hawk/refs/heads/scarthgap/recipes-utils/expand-rootfs/files/expand-rootfs.sh
-     sudo bash ./expand-rootfs.sh
+     sudo expand-rootfs.sh
      sudo reboot
      ```
-
-## Known Issues & Restrictions
-
-1. PCIe module outputs error log that firmware is not found in boot process. We are preparing the PCIe firmware, then please ignore it and please wait a moment.
-   ```plaintext
-   [    2.629357] pcie-rcar-gen4 e65d0000.pcie: Failed to load firmware (rcar_gen4_pcie.bin): -22
-   ```
 
 ## Support
 

@@ -1,0 +1,16 @@
+<div class="ui-block">
+  {% if include.title %}
+  <strong>{{ include.title }}</strong>
+  {% endif %}
+
+  <div class="selector"
+       data-config="{{ include.config }}"
+       {% if include.data-mode %}data-mode="{{ include.data-mode }}"{% endif %}>
+  </div>
+</div>
+
+<script>
+  window.SELECTOR_DATA = window.SELECTOR_DATA || {};
+  window.SELECTOR_DATA["{{ include.config }}"] =
+    {{ site.data.selectors[include.config] | jsonify }};
+</script>

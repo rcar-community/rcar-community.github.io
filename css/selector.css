@@ -1,0 +1,51 @@
+.selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.selector-block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.selector button.selected {
+  background-color: #2A289D;
+  color: white;
+}
+
+.selector button {
+  padding: 4px 8px;
+}
+
+.selector .result {
+  margin-left: 16px;
+  font-weight: bold;
+}
+
+.ui-block {
+  margin-left: 80px;
+}
+
+.result {
+  white-space: pre-wrap;
+}
+
+.result pre {
+  background: #272822;
+  color: #e6edf3;
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.result code {
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.result pre:has(code:empty) {
+  display: none;
+}
+

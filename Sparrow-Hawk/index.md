@@ -93,10 +93,10 @@ FAN must be installed. Do not remove FAN for cooling the R-Car V4H from the boar
 
 |Software                   |Version|
 |---------------------------|-------|
-|Yocto Project              |5.0.14 |
-|Debian                     |12     |
-|Linux kernel               |6.12.58|
-|U-Boot                     |2025.10|
+|Yocto Project              |5.0.15 |
+|Debian                     |13     |
+|Linux kernel               |6.12.66|
+|U-Boot                     |2026.01|
 |Arm Trusted Firmware       |2.14.0 |
 
 ## How to Startup
@@ -125,6 +125,23 @@ FAN must be installed. Do not remove FAN for cooling the R-Car V4H from the boar
    * There are two types of 4pin Headset. one is CIST which is default of sparrow-hawk. the other is MIST. The only deference is pin assign of MIC and GND. If you use MIST type of headset, please modify the board as follows:
       * Mount :R631 , R632
       * Unmount :R630 , R633
+
+4. Loader recovery procedure
+   * If flashing fails and U-Boot no longer boots, please try the recovery procedure.
+   * Download [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releas
+es/download/v2026-02-03/ipl-burning.zip) and unzip ipl-burning.zip. Then, run script in ipl-burning directory(Linux: run.sh, Windows: run.bat). If using Linux host PC, please install python3 and pip command on your system before running the script and close other console which uses serial port of the board before executing the script.
+   1. Turn off the power and change SW2 according to the console instructions.
+   2. Press Enter to continue.
+   3. Turn on the power.
+   4. Wait for the writing process to complete.
+   5. Turn off the power and change SW2 again according to the console instructions.
+   6. Press Enter to close the program.
+
+   * Note:
+      * This script use serial device /dev/ttyUSB* in Linux. But, it cannot be accessed from user without previledged right by default settings. Please use sudo command or add current user into dialout group.
+
+   * Note:
+      * Please change the Mode Switch(=SW2) according to the instructions displayed by the ipl-burning(run.sh or run.bat).
 
 ## Known Issues & Restrictions
 
