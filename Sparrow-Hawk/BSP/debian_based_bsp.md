@@ -421,8 +421,8 @@ ucts/camera-cable/)
 
 * Manual control of fan speed<br>
   ```bash
-  sudo echo 2 > /sys/class/hwmon/hwmon4/pwm1_enable
-  sudo echo 150 > /sys/class/hwmon/hwmon4/pwm1
+  sudo bash -c 'echo 2 > /sys/class/hwmon/hwmon4/pwm1_enable'
+  sudo bash -c 'echo 150 > /sys/class/hwmon/hwmon4/pwm1'
   ```
   \#1 ~ 255 is acceptable but low speeds are not recommended from thermal perspective.
 
