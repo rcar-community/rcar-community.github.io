@@ -109,6 +109,14 @@ FAN must be installed. Do not remove FAN for cooling the R-Car V4H from the boar
 [Yocto]: <BSP/yocto_bsp.html>
 [Debian]: <BSP/debian_based_bsp.html>
 
+## Event Information
+
+Please see [here](BSP/event_information.html) for information on Sparrow Hawk's past and upcoming events.
+
+## Leaflet
+
+* [Sparrow Hawk Leaflet](../../files/V4H_SH_Leaflet.pdf)
+
 ## Tips
 
 1. There is no output on serial console when power on the board.

@@ -90,12 +90,13 @@ Note:
 2. Open terminal application and open serial device.
 3. Press SW1 to power on the board.
 4. After booting U-Boot, please press any key while showing "Hit any key to stop autoboot:" to enter U-Boot shell.
-5. Input following command into U-Boot shell and press enter key.
-```bash
-env default -a; boot
-```
+5. Input the following command into U-Boot shell and press enter key. If you connect camera a
+nd/or display, please choice the following button and input command.
+{% include selector.html config="camera_bootcmd" data-mode="normal" %}
 6. If command and environment is correct, Linux kernel log will output.
+{:start="6"}
 7. Log in to "sparrow-hawk login:" as rcar and at the "Password:" prompt, enter rcar.
+{:start="7"}
 
 If you want to boot OS image automatically when power on the board, please run following to setup autoboot. Run following command:
 
@@ -368,14 +369,9 @@ ted. In addition, recognition may occasionally fail.
       * [https://www.raspberrypi.com/products/camera-cable/](https://www.raspberrypi.com/prod
 ucts/camera-cable/)
    * ![Camera cable]({{ '/images/camera_cable.webp' | relative_url }})
-2. Setup for using camera
-   * Change bootcmd variable on U-Boot shell as follows:
-
-{% include selector.html config="camera_bootcmd" data-mode="normal" %}
-
+2. Change bootcmd variable on U-Boot shell referring 5 of [3.3. How to boot](#how-to-boot).
 3. Test camera
    * On-board test(Need to connect Display)
-{:start="3"}
 
 {% include selector.html config="camera_debian" data-mode="debian" %}
 
@@ -393,16 +389,7 @@ ucts/camera-cable/)
    * Connect Raspberry Pi Touch Display 2 cable to the J4 connector.
    * Connect the Power (red wire) to pin 2 of CN7 and the Ground (black wire) to pin 6 of CN7.
    * ![Pi Display]({{ '/images/PiDisplay.jpg' | relative_url }})
-2. Change bootcmd variable on U-Boot shell as follows:
-
-   **5 inch**
-   ```plaintext
-   setenv bootcmd "load mmc 0:1 0x58000000 /boot/fitImage && bootm 0x58000000#default#rpi-display-2-5in"
-   ```
-   **7 inch**
-   ```plaintext
-   setenv bootcmd "load mmc 0:1 0x58000000 /boot/fitImage && bootm 0x58000000#default#rpi-display-2-7in"
-   ```
+2. Change bootcmd variable on U-Boot shell referring 5 of [3.3. How to boot](#how-to-boot).
 3. Display will work correctly after changing above.
 
 ### Pi Active Cooler

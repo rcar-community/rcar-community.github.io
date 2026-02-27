@@ -127,15 +127,12 @@
     } else {
       updateResult = function () {
 
-        const hasCamera =
-          state.j1 !== "none" || state.j2 !== "none";
-
         resultText.textContent = "command:";
         code.textContent = "";
 
-        if (!hasCamera) {
-          return;
-        }
+        const hasAnyOption = Object.keys(state).some(
+          key => state[key] !== "none"
+        );
 
         let output = base;
 
@@ -146,8 +143,13 @@
           }
         }
 
+        if (!hasAnyOption) {
+          code.textContent = output + "\"\nboot";
+          return;
+        }
+
         resultText.textContent = "command:";
-	code.textContent = output + "\"";
+	code.textContent = output + "\"\nboot";
       }
     }
 

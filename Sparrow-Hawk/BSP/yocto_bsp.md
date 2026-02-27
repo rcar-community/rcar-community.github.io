@@ -101,12 +101,12 @@ Note:
 2. Open terminal application and open serial device.
 3. Press SW1 to power on the board.
 4. After booting U-Boot, please press any key while showing "Hit any key to stop autoboot:" to enter U-Boot shell.
-5. Input following command into U-Boot shell and press enter key.
-```bash
-env default -a; boot
-```
+5. Input the following command into U-Boot shell and press enter key. If you connect camera and/or display, please choice the following button and input command.
+{% include selector.html config="camera_bootcmd" data-mode="normal" %}
 6. If command and environment is correct, Linux kernel log will output.
+{:start="6"}
 7. Log in to "sparrow-hawk login:" as root.
+{:start="7"}
 
 If you want to boot OS image automatically when power on the board, please run following to setup autoboot. Run following command:
 
@@ -375,11 +375,7 @@ ted. In addition, recognition may occasionally fail.
    * When using the Raspberry Pi Camera V2, the following cable is required.
       * [https://www.raspberrypi.com/products/camera-cable/](https://www.raspberrypi.com/products/camera-cable/)
    * ![Camera cable]({{ '/images/camera_cable.webp' | relative_url }})
-2. Setup for using camera
-   * Change bootcmd variable on U-Boot shell as follows:
-
-{% include selector.html config="camera_bootcmd" data-mode="normal" %}
-
+2. Change bootcmd variable on U-Boot shell referring 5 of [3.3. How to boot](#how-to-boot).
 3. Test camera
    * [Camshark](https://gitlab.freedesktop.org/camera/camshark) test(Need to connect Network and Linux PC)
       * Camshark is a gui tool to work remotely with libcamera based cameras.
@@ -404,7 +400,6 @@ ted. In addition, recognition may occasionally fail.
       * To switch the camera device when two cameras are connected, follow these steps.
       * ![Camshark]({{ '/images/Camshark.webp' | relative_url }})
    * On-board test(Need to connect Display)
-{:start="3"}
 
 {% include selector.html title="Command for minimal" config="camera_minimal" data-mode="minimal" %}
 
@@ -424,16 +419,7 @@ ted. In addition, recognition may occasionally fail.
    * Connect Raspberry Pi Touch Display 2 cable to the J4 connector.
    * Connect the Power (red wire) to pin 2 of CN7 and the Ground (black wire) to pin 6 of CN7.
    * ![Pi Display]({{ '/images/PiDisplay.jpg' | relative_url }})
-2. Change bootcmd variable on U-Boot shell as follows:
-
-   **5 inch**
-   ```plaintext
-   setenv bootcmd "load mmc 0:1 0x58000000 /boot/fitImage && bootm 0x58000000#default#rpi-display-2-5in"
-   ```
-   **7 inch**
-   ```plaintext
-   setenv bootcmd "load mmc 0:1 0x58000000 /boot/fitImage && bootm 0x58000000#default#rpi-display-2-7in"
-   ```
+2. Change bootcmd variable on U-Boot shell referring 5 of [3.3. How to boot](#how-to-boot).
 3. Display will work correctly after changing above.
 
 ### Pi Active Cooler
