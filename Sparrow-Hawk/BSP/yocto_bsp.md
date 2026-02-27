@@ -108,13 +108,14 @@ Note:
 7. Log in to "sparrow-hawk login:" as root.
 {:start="7"}
 
-If you want to boot OS image automatically when power on the board, please run following to setup autoboot. Run following command:
+&nbsp;
 
+To make the `bootcmd` set in 5 of [3.3. How to Boot](#how-to-boot) persistent across reboots, run `saveenv` as shown below.
+After saving the environment, reboot the system once. From the next boot onward, this `bootcmd` will be used automatically, and you can skip 4 and 5 in [3.3. How to Boot](#how-to-boot).
 ```bash
-env default -a
 saveenv
+reset  # Execute this only the first time
 ```
-After that, OS image boots automatically when power on the board.
 
 ## How to Check Functions
 

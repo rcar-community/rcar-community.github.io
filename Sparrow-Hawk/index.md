@@ -115,7 +115,12 @@ Please see [here](BSP/event_information.html) for information on Sparrow Hawk's 
 
 ## Leaflet
 
-* [Sparrow Hawk Leaflet](../../files/V4H_SH_Leaflet.pdf)
+* [Sparrow Hawk Leaflet](../../files/V4H_SH_Leaflet.pdf) (2026/02/27)
+   * Benefits for Sparrow Hawk
+   * Hardware spec
+   * Support software version
+   * Board variants
+   * Website links(Sparrow Hawk Official website, Retronix website, Where to buy(Shimafuji))
 
 ## Tips
 
