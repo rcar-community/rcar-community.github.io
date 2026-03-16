@@ -113,26 +113,26 @@ reset  # Execute this only the first time
 
 ### Software support list
 
-| Function                              | Status        |
-|---------------------------------------|---------------|
-| [CAN](#can)                           | Supported     |
-| Ethernet                              | Supported     |
-| [Audio(Output/Input)](#audio)         | Supported     |
-| Display Port                          | Supported     |
-| [GPIO](#gpio)                         | Supported     |
-| [I2C](#i2c)                           | Supported     |
-| JTAG                                  | Supported     |
-| [USB3.0](#usb30)                      | Supported     |
-| [UART](#uart)                         | Supported     |
-| [Thermal](#thermal)                   | Supported     |
-| [NVMe M.2 SSD](#nvme-m2-ssd)          | Supported     |
-| [Pi Camera](#pi-camera)               | Supported     |
-| [Pi Display](#pi-display)             | Supported     |
-| PCIe Endpoint                         | Not supported |
-| [Pi Active Cooler](#pi-active-cooler) | Supported     |
-| GPU                                   | Not supported |
-| AI Accelerator                        | Not supported |
-| Desktop(GUI)                          | Not supported |
+| Function                              | Status            |
+|---------------------------------------|-------------------|
+| [CAN](#can)                           | Supported         |
+| Ethernet                              | Supported         |
+| [Audio(Output/Input)](#audio)         | Supported         |
+| Display Port                          | Supported         |
+| [GPIO](#gpio)                         | Supported         |
+| [I2C](#i2c)                           | Supported         |
+| JTAG                                  | Supported         |
+| [USB3.0](#usb30)                      | Supported         |
+| [UART](#uart)                         | Supported         |
+| [Thermal](#thermal)                   | Supported         |
+| [NVMe M.2 SSD](#nvme-m2-ssd)          | Supported         |
+| [Pi Camera](#pi-camera)               | Supported         |
+| [Pi Display](#pi-display)             | Supported         |
+| PCIe Endpoint                         | Not supported     |
+| [Pi Active Cooler](#pi-active-cooler) | Supported         |
+| GPU                                   | Not supported     |
+| AI Accelerator                        | Not yet supported |
+| Desktop(GUI)                          | Not supported     |
 
 Note:
 * "Supported": Function scceeded in the simple test as below.<br>

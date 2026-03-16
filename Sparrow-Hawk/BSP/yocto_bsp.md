@@ -121,26 +121,26 @@ reset  # Execute this only the first time
 
 ### Software support list
 
-| Function                              | Status(minamal) | Status(weston) |
-|---------------------------------------|-----------------|----------------|
-| [CAN](#can)                           | Supported       | Supported      |
-| Ethernet                              | Supported       | Supported      |
-| [Audio(Output/Input)](#audio)         | Supported       | Supported      |
-| Display Port                          | Supported       | Supported      |
-| [GPIO](#gpio)                         | Supported       | Supported      |
-| [I2C](#i2c)                           | Supported       | Supported      |
-| JTAG                                  | Supported       | Supported      |
-| [USB3.0](#usb30)                      | Supported       | Supported      |
-| [UART](#uart)                         | Supported       | Supported      |
-| [Thermal](#thermal)                   | Supported       | Supported      |
-| [NVMe M.2 SSD](#nvme-m2-ssd)          | Supported       | Supported      |
-| [Pi Camera](#pi-camera)               | Supported       | Supported      |
-| [Pi Display](#pi-display)             | Supported       | Supported      |
-| PCIe Endpoint                         | Not supported   | Not supported  |
-| [Pi Active Cooler](#pi-active-cooler) | Supported       | Supported      |
-| GPU                                   | Not supported   | Supported      |
-| AI Accelerator                        | Not supported   | Not supported  |
-| Desktop(GUI)                          | Not supported   | Supported      |
+| Function                              | Status(minamal)   | Status(weston)    |
+|---------------------------------------|-------------------|-------------------|
+| [CAN](#can)                           | Supported         | Supported         |
+| Ethernet                              | Supported         | Supported         |
+| [Audio(Output/Input)](#audio)         | Supported         | Supported         |
+| Display Port                          | Supported         | Supported         |
+| [GPIO](#gpio)                         | Supported         | Supported         |
+| [I2C](#i2c)                           | Supported         | Supported         |
+| JTAG                                  | Supported         | Supported         |
+| [USB3.0](#usb30)                      | Supported         | Supported         |
+| [UART](#uart)                         | Supported         | Supported         |
+| [Thermal](#thermal)                   | Supported         | Supported         |
+| [NVMe M.2 SSD](#nvme-m2-ssd)          | Supported         | Supported         |
+| [Pi Camera](#pi-camera)               | Supported         | Supported         |
+| [Pi Display](#pi-display)             | Supported         | Supported         |
+| PCIe Endpoint                         | Not supported     | Not supported     |
+| [Pi Active Cooler](#pi-active-cooler) | Supported         | Supported         |
+| GPU                                   | Not supported     | Supported         |
+| AI Accelerator                        | Not yet supported | Not yet supported |
+| Desktop(GUI)                          | Not supported     | Supported         |
 
 Note:
 * "Supported": Function scceeded in the simple test as below.
