@@ -85,7 +85,7 @@ Next, jump to [3.2. How to flash](#how-to-flash).
 
 Please update the loader (u-boot) using the loader file (flash.bin) included in the Yocto OS image (rootfs).
 
-1. Insert microSD card prepared in Section 3.2.1 into microSD card slot (CN1), then power on the Sparrow Hawk board.
+1. Insert microSD card prepared in Section 3.2.1 into microSD card slot ({% include hover-image.html text="CN1" img="/images/CN1.webp" %}), then power on the Sparrow Hawk board.
 2. Update the QSPI memory from U-Boot as shown below, then reboot the system.
 ```plaintext
 load mmc 0:1 ${loadaddr} flash.bin && sf probe && sf update ${loadaddr} 0 ${filesize} && reset
@@ -97,9 +97,9 @@ Note:
 
 ### How to boot
 
-1. Insert the SD card into CN1 which is bottom of the board.
+1. Insert the SD card into {% include hover-image.html text="CN1" img="/images/CN1.webp" %} which is bottom of the board.
 2. Open terminal application and open serial device.
-3. Press SW1 to power on the board.
+3. Press {% include hover-image.html text="SW1" img="/images/SW1.webp" %} to power on the board.
 4. After booting U-Boot, please press any key while showing "Hit any key to stop autoboot:" to enter U-Boot shell.
 5. Input the following command into U-Boot shell and press enter key. If you connect camera and/or display, please choice the following button and input command.
 {% include selector.html config="camera_bootcmd" data-mode="normal" %}
@@ -149,7 +149,7 @@ Note:
 ### CAN
 
 Loop back
-1. Connect the following pins of CONN2: Connect Pin1(CAN1L) - Pin2(CAN0L) and Pin5(CAN1H) - Pin6(CAN0H)
+1. Connect the following pins of {% include hover-image.html text="CONN2" img="/images/CONN2.webp" %}: Connect Pin1(CAN1L) - Pin2(CAN0L) and Pin5(CAN1H) - Pin6(CAN0H)
 
 * ![CAN]({{ '/images/CAN.webp' | relative_url }})
 
@@ -172,11 +172,11 @@ killall candump
    * ![Audio connector]({{ '/images/audio_connector.webp' | relative_url }})
    * Sparrow Hawk has two audio input ports. These signals are mixed on the IC and therefore handled as a single-channel input on the board.
 * Hardware setup
-   * Connect headset/earphone/Speaker to CONN3.
-   * (if possible) Connect audio output like a smartphone to CONN4.
-      * Even if you don't connect an audio output to CONN4, you can test.
+   * Connect headset/earphone/Speaker to {% include hover-image.html text="CONN3" img="/images/CONN3.webp" %}.
+   * (if possible) Connect audio output like a smartphone to {% include hover-image.html text="CONN4" img="/images/CONN4.webp" %}.
+      * Even if you don't connect an audio output to {% include hover-image.html text="CONN4" img="/images/CONN4.webp" %}, you can test.
 * Software setup
-   * Setup(Mix Aux in and Headset mic and setup audio output via CONN3)
+   * Setup(Mix Aux in and Headset mic and setup audio output via {% include hover-image.html text="CONN3" img="/images/CONN3.webp" %})
    ```bash
    amixer set "Headphone" 40%
    amixer set "Headphone" on
@@ -196,17 +196,17 @@ killall candump
    amixer set "Mixin Right Mic 1" on
    ```
 * Test function
-   1. Only Playback test (3 times) [CONN3]
+   1. Only Playback test (3 times) [{% include hover-image.html text="CONN3" img="/images/CONN3.webp" %}]
       ```bash
       speaker-test -c 2 -l 3 -t wav -W /usr/share/sounds/alsa/
       ```
    * ![Playback]({{ '/images/playback.webp' | relative_url }})
-   2. Only Recording test (5sec) [CONN3 or CONN4 or ‘CONN3 and CONN4’]
+   2. Only Recording test (5sec) [{% include hover-image.html text="CONN3" img="/images/CONN3.webp" %} or {% include hover-image.html text="CONN4" img="/images/CONN4.webp" %} or ‘{% include hover-image.html text="CONN3" img="/images/CONN3.webp" %} and {% include hover-image.html text="CONN4" img="/images/CONN4.webp" %}’]
       ```bash
       arecord -D hw:0,0 -t wav -d 5 -c 2 -r 48000 -f S16_LE > audio.wav
       ```
    * ![Recording]({{ '/images/recording.webp' | relative_url }})
-   3. Recording and Playback test (5sec) [CONN3 or ‘CONN3+CONN4’]
+   3. Recording and Playback test (5sec) [{% include hover-image.html text="CONN3" img="/images/CONN3.webp" %} or ‘{% include hover-image.html text="CONN3" img="/images/CONN3.webp" %}+{% include hover-image.html text="CONN4" img="/images/CONN4.webp" %}’]
       ```bash
       arecord -D hw:0,0 -t wav -d 5 -c 2 -r 48000 -f S16_LE | aplay
       ```
@@ -267,9 +267,9 @@ For more examples, please see also [https://github.com/brgl/libgpiod/raw/refs/he
 
 ### USB3.0
 
-* With the power turned on, connect it to any available USB6 port. If “SuperSpeed” is displayed, the test is successful.
+* With the power turned on, connect it to any available {% include hover-image.html text="USB6" img="/images/USB6.webp" %} port. If “SuperSpeed” is displayed, the test is successful.
 
-   * Output example(the upper USB6 port)
+   * Output example(the upper {% include hover-image.html text="USB6" img="/images/USB6.webp" %} port)
      ```plaintext
      [   74.051911] usb 2-3: new SuperSpeed USB device number 2 using xhci-pci-renesas
      [   74.078718] usb-storage 2-3:1.0: USB Mass Storage device detected
@@ -282,7 +282,7 @@ For more examples, please see also [https://github.com/brgl/libgpiod/raw/refs/he
      [   75.177754] sd 0:0:0:0: [sda] Attached SCSI removable disk
      ```
 
-   * Output example(the lower USB6 port)
+   * Output example(the lower {% include hover-image.html text="USB6" img="/images/USB6.webp" %} port)
      ```plaintext
      [  167.907865] usb 2-4: new SuperSpeed USB device number 3 using xhci-pci-renesas
      [  167.939390] usb-storage 2-4:1.0: USB Mass Storage device detected
@@ -342,7 +342,7 @@ killall cat
 
 &nbsp;
 
-* Insert the NVMe into CN5 before powering on.
+* Insert the NVMe into {% include hover-image.html text="CN5" img="/images/CN5.webp" %} before powering on.
 * The NVMe used for this test is the Samsung 970 EVO Plus.
   ```bash
   dmesg | grep nvme
@@ -371,7 +371,7 @@ ted. In addition, recognition may occasionally fail.
 
 &nbsp;
 
-1. Connect Raspberry Pi Camera V2 and/or Raspberry Pi Camera V3 to J1 and/or J2 connector.
+1. Connect Raspberry Pi Camera V2 and/or Raspberry Pi Camera V3 to {% include hover-image.html text="J1" img="/images/J1.webp" %} and/or {% include hover-image.html text="J2" img="/images/J2.webp" %} connector.
    * The board connector has 22 pin so that you need to prepare pitch convert cable.
    * When using the Raspberry Pi Camera V2, the following cable is required.
       * [https://www.raspberrypi.com/products/camera-cable/](https://www.raspberrypi.com/products/camera-cable/)
@@ -409,7 +409,7 @@ ted. In addition, recognition may occasionally fail.
 ### Pi Display
 
 **Note:**
-* **Please perform the following "1. Setup" without connecting the AC adapter to the board (USB1).**
+* **Please perform the following "1. Setup" without connecting the AC adapter to the board ({% include hover-image.html text="USB1" img="/images/USB1.webp" %}).**
 
 **Note:**
 * **There is a risk of damaging the board or the display, so please connect them with great care.**
@@ -417,15 +417,15 @@ ted. In addition, recognition may occasionally fail.
 &nbsp;
 
 1. Setup
-   * Connect Raspberry Pi Touch Display 2 cable to the J4 connector.
-   * Connect the Power (red wire) to pin 2 of CN7 and the Ground (black wire) to pin 6 of CN7.
+   * Connect Raspberry Pi Touch Display 2 cable to the {% include hover-image.html text="J4" img="/images/J4.webp" %} connector.
+   * Connect the Power (red wire) to pin 2 of {% include hover-image.html text="CN7" img="/images/CN7.webp" %} and the Ground (black wire) to pin 6 of {% include hover-image.html text="CN7" img="/images/CN7.webp" %}.
    * ![Pi Display]({{ '/images/PiDisplay.jpg' | relative_url }})
 2. Change bootcmd variable on U-Boot shell referring 5 of [3.3. How to boot](#how-to-boot).
 3. Display will work correctly after changing above.
 
 ### Pi Active Cooler
 
-* Connect Raspberry Pi Active Cooler to the J3 connector.
+* Connect Raspberry Pi Active Cooler to the {% include hover-image.html text="J3" img="/images/J3.webp" %}connector.
 
 * ![Pi Active Cooler]({{ '/images/PiActiveCooler.webp' | relative_url }})
 

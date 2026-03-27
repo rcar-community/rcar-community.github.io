@@ -1,0 +1,17 @@
+.hover-img {
+  color: #0066cc;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.hover-popup {
+  position: absolute;
+  display: none;
+  width: 500px;
+  max-width: calc(100vw - 40px);
+  height: auto;
+  border: 1px solid #ccc;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+}

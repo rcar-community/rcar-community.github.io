@@ -37,8 +37,8 @@ camera_minimal:
     connector:
       label: "Connector(Display)"
       choices:
-        J4(Pi Disp) or CN4(DP):
-        J4(Pi Disp) and CN4(DP):
+        J4(Pi Disp) or CN6(DP):
+        J4(Pi Disp) and CN6(DP):
 
 camera_weston:
   base: ""
@@ -58,7 +58,7 @@ camera_weston:
     connector:
       label: "Connector(Display)"
       choices:
-        J4(Pi Disp) or CN4(DP) or 'J4(Pi Disp) and CN4(DP)':
+        J4(Pi Disp) or CN6(DP) or 'J4(Pi Disp) and CN6(DP)':
 
 camera_debian:
   options:
@@ -77,5 +77,5 @@ camera_debian:
     connector:
       label: "Connector(Display)"
       choices:
-        J4(Pi Disp) or CN4(DP):
-        J4(Pi Disp) and CN4(DP):
+        J4(Pi Disp) or CN6(DP):
+        J4(Pi Disp) and CN6(DP):
