@@ -95,7 +95,9 @@ nd/or display, please choice the following button and input command.
 {% include selector.html config="camera_bootcmd" data-mode="normal" %}
 6. If command and environment is correct, Linux kernel log will output.
 {:start="6"}
-7. Log in to "sparrow-hawk login:" as rcar and at the "Password:" prompt, enter rcar.
+7. Log in using the following login ID and password.
+   * sparrow-hawk login: rcar
+   * Password: rcar
 {:start="7"}
 
 &nbsp;
@@ -261,8 +263,7 @@ For more examples, please see also [https://github.com/brgl/libgpiod/raw/refs/he
 
 ### USB3.0
 
-* With the power turned on, connect it to any available {% include hover-image.html text="USB6" img="/images/USB6.webp" %} port. If “SuperSpeed” is disp
-layed, the test is successful.
+* With the power turned on, connect it to any available {% include hover-image.html text="USB6" img="/images/USB6.webp" %} port. If “SuperSpeed” is displayed, the test is successful.
 
    * Output example(the upper {% include hover-image.html text="USB6" img="/images/USB6.webp" %} port)
      ```plaintext

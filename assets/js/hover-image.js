@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const isTouchDevice = 'ontouchstart' in window;
 
   let currentTarget = null;
+  let lastEvent = null;
 
   function updatePosition(e = null) {
     const popupWidth = popup.offsetWidth || 300;
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   popup.onload = () => {
-    updatePosition();
+    updatePosition(lastEvent);
   };
 
   document.querySelectorAll(".hover-img").forEach(item => {
@@ -55,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     item.addEventListener("mousemove", e => {
       if (isTouchDevice) return;
+      lastEvent = e;
       updatePosition(e);
     });
 

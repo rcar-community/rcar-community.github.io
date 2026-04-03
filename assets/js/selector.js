@@ -12,9 +12,9 @@
     const base = data.base;
 
     const DEFAULTS = {
-      minimal: { j1: "none", j2: "none", connector: "J4(Pi Disp) or CN4(DP)" },
-      weston:  { j1: "none", j2: "none", connector: "J4(Pi Disp) or CN4(DP) or 'J4(Pi Disp) and CN4(DP)'" },
-      debian:  { j1: "none", j2: "none", connector: "J4(Pi Disp) or CN4(DP)" }
+      minimal: { j1: "none", j2: "none", connector: "J4(Pi Disp) or CN6(DP)" },
+      weston:  { j1: "none", j2: "none", connector: "J4(Pi Disp) or CN6(DP) or 'J4(Pi Disp) and CN6(DP)'" },
+      debian:  { j1: "none", j2: "none", connector: "J4(Pi Disp) or CN6(DP)" }
     };
 
     for (const key in data.options) {
@@ -88,20 +88,20 @@
           return;
         }
 
-        if (state.connector === "J4(Pi Disp) or CN4(DP)") {
+        if (state.connector === "J4(Pi Disp) or CN6(DP)") {
           cameras.forEach((cam, index) => {
             const camIndex = index + 1;
             outputLines.push(`Connect camera to ${cam.port}: cam -c ${camIndex} -C -D`);
           });
-        } else if (state.connector === "J4(Pi Disp) and CN4(DP)") {
+        } else if (state.connector === "J4(Pi Disp) and CN6(DP)") {
 
-          outputLines.push("(You want to display J4(Pi Disp))");
+          outputLines.push("(You want to display J6(Pi Disp))");
           cameras.forEach((cam, index) => {
             const camIndex = index + 1;
             outputLines.push(`Connect camera to ${cam.port}: cam -c ${camIndex} -C -D`);
           });
 
-          outputLines.push("(You want to display CN4(DP))");
+          outputLines.push("(You want to display CN6(DP))");
           cameras.forEach((cam, index) => {
             const camIndex = index + 1;
             outputLines.push(`Connect camera to ${cam.port}: cam -c ${camIndex} -C -DDP-1`);

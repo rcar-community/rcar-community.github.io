@@ -38,10 +38,10 @@ This is the page for Sparrow Hawk board with R-Car V4H provided Retronix Technol
 | Function      | Interface        | Specification                            |
 |---------------|------------------|------------------------------------------|
 | CPU           | -                | 4x Arm® Cortex®-A76, 3x Arm® Cortex®-R52 |
-| GPU           | -                | AXM-8-256                                |
+| GPU           | -                | IMG A-Series AXM-8-256                   |
 | DRAM          | -                | 8GB/16GB LPDDR5                          |
 | Flash Memory  | -                | 64MB QSPI                                |
-| Camera I/F    | J1, J2           | 2x Raspberry Pi Camera                   |
+| Camera I/F    | J1, J2           | 2x MIPI CSI Camera                       |
 | Display       | CN6, J4          | 1x DP, 1x DSI                            |
 | Ethernet AVB  | CN2              | 1 Port (1Gbps)                           |
 | Debug Serial  | CN4              | 2 Port                                   |
@@ -52,7 +52,7 @@ This is the page for Sparrow Hawk board with R-Car V4H provided Retronix Technol
 | PWM           | J3               | 1 Port                                   |
 | JTAG          | CN3              | 1 Port                                   |
 | Removal Media | CN1              | 1x MicroSD                               |
-| Extensions    | CN7              | Raspberry Pi 40-Pin CN                   |
+| Extensions    | CN7              | Raspberry Pi® 40-Pin GPIO header          |
 | Mode Switches | SW2              | Dip SW                                   |
 | Power         | USB1(Input)      | USB PD 20V                               |
 | Power Control | SW1, SW3, CONN1  | 2x SW, 1x Jumper                         |
@@ -90,7 +90,8 @@ Link : [https://ftdichip.com/drivers/](https://ftdichip.com/drivers/)
 
 ### Caution
 
-FAN must be installed. Do not remove FAN for cooling the R-Car V4H from the board, as doing so will lead to the R-Car V4H being overheated to destruction. It is recommended to use a heat sink and FAN together.
+1. FAN must be installed. Do not remove FAN for cooling the R-Car V4H from the board, as doing so will lead to the R-Car V4H being overheated to destruction. It is recommended to use a heat sink and FAN together.
+2. Please use only a power supply and cable that comply with the USB Power Delivery (USB PD) standard. Using a non-USB PD power supply may cause damage to the Sparrow Hawk.
 {: .caution}
 
 ## Software Version List

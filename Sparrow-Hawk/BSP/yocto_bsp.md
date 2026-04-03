@@ -105,7 +105,8 @@ Note:
 {% include selector.html config="camera_bootcmd" data-mode="normal" %}
 6. If command and environment is correct, Linux kernel log will output.
 {:start="6"}
-7. Log in to "sparrow-hawk login:" as root.
+7. Log in using the following login ID.
+   * sparrow-hawk login: root
 {:start="7"}
 
 &nbsp;
@@ -466,8 +467,8 @@ ted. In addition, recognition may occasionally fail.
 2. How to expand the rootfs
    * Please run the following command on your board. Rootfs is expanded to use whole storage.
      ```bash
-     sudo expand-rootfs.sh
-     sudo reboot
+     expand-rootfs.sh
+     reboot
      ```
 {:start="2"}
 
