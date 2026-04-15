@@ -23,9 +23,9 @@ This is the Yocto BSP page for Sparrow Hawk.
 
 |Software                   |Version|
 |---------------------------|-------|
-|Yocto Project              |5.0.15 |
-|Linux kernel               |6.12.66|
-|U-Boot                     |2026.01|
+|Yocto Project              |5.0.16 |
+|Linux kernel               |6.18.20|
+|U-Boot                     |2026.04|
 |Arm Trusted Firmware       |2.14.0 |
 
 ## How to Startup
@@ -40,8 +40,8 @@ If you want to normally start, please start [3.1.2. Normal preparation: build so
 
 Download binary from GitHub
 * BSP(either of the following BSP)
-   * In case of BSP: [core-image-minimal-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-02-03/core-image-minimal-sparrow-hawk.rootfs.wic.gz)
-   * In case of BSP + 3D Graphics: [core-image-weston-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-02-03/core-image-weston-sparrow-hawk.rootfs.wic.gz)
+   * In case of BSP: [core-image-minimal-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-04-13/core-image-minimal-sparrow-hawk.rootfs.wic.gz)
+   * In case of BSP + 3D Graphics: [core-image-weston-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-04-13/core-image-weston-sparrow-hawk.rootfs.wic.gz)
 
 Next, jump to [3.2. How to flash](#how-to-flash).
 
@@ -471,6 +471,10 @@ ted. In addition, recognition may occasionally fail.
      reboot
      ```
 {:start="2"}
+
+## Known Issues & Restrictions
+
+Please see [here]({{ '/Sparrow-Hawk/index.html#yocto-bsp' | relative_url }}).
 
 ## Support
 

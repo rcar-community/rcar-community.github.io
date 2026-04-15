@@ -16,6 +16,14 @@ Contents
 
 This is the page for Sparrow Hawk board with R-Car V4H provided Retronix Technology Inc.
 
+## What's New
+
+2026-04-15 The Yocto BSP and the Debian based BSP were updated to Linux kernel v6.18 and U-Boot v2026.04.
+
+2025-12-04 We open the dedicated pages for Yocto BSP and Debian based BSP of Sparrow Hawk.
+
+2025-08-07 We open the Home Page for Sparrow Hawk.
+
 ## Hardware
 
 ### Information
@@ -98,10 +106,10 @@ Link : [https://ftdichip.com/drivers/](https://ftdichip.com/drivers/)
 
 |Software                   |Version|
 |---------------------------|-------|
-|Yocto Project              |5.0.15 |
+|Yocto Project              |5.0.16 |
 |Debian                     |13     |
-|Linux kernel               |6.12.66|
-|U-Boot                     |2026.01|
+|Linux kernel               |6.18.20|
+|U-Boot                     |2026.04|
 |Arm Trusted Firmware       |2.14.0 |
 
 ## How to Startup
@@ -114,13 +122,23 @@ Link : [https://ftdichip.com/drivers/](https://ftdichip.com/drivers/)
 [Yocto]: <BSP/yocto_bsp.html>
 [Debian]: <BSP/debian_based_bsp.html>
 
+## Documentation
+
+### Board documentation
+
+* [Sparrow Hawk User Manual](https://drive.google.com/file/d/1lqiRE7t8C6GWOmuj0PKMItuj-R3VaYD1/view?usp=sharing)
+* [Sparrow Hawk Reference Schematic (incl. Disclaimer)](https://drive.google.com/file/d/1OzI_YYMbFYORcGitnolBVX4tchs7aExl/view?usp=sharing)
+* [Sparrow Hawk Reference Layout (incl. Disclaimer)](https://drive.google.com/file/d/1ibnc5i8p9aNQMsp3-bW_LGb2acKI_HZc/view?usp=sharing?usp=sharing)
+* [Sparrow Hawk Reference Component Position (incl. Disclaimer)](https://drive.google.com/file/d/1cHHBGMqAhHamrVqxjL0-B5xJi5fUkgMB/view?usp=sharing?usp=sharing)
+* [Sparrow Hawk Reference 3D Model CAD (incl. Disclaimer)](https://drive.google.com/file/d/1fTosN8wgIxM2Z-pyUIgn9LCyzCahfGcC/view?usp=sharing?usp=sharing)
+
 ## Event Information
 
 Please see [here](BSP/event_information.html) for information on Sparrow Hawk's past and upcoming events.
 
 ## Leaflet
 
-* [Sparrow Hawk Leaflet](../../files/V4H_SH_Leaflet.pdf) (2026/02/27)
+* [Sparrow Hawk Leaflet](../../files/V4H_SH_Leaflet.pdf) (2026/04/15)
    * Benefits for Sparrow Hawk
    * Hardware spec
    * Support software version
@@ -146,8 +164,7 @@ Please see [here](BSP/event_information.html) for information on Sparrow Hawk's 
 
 4. Loader recovery procedure
    * If flashing fails and U-Boot no longer boots, please try the recovery procedure.
-   * Download [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releas
-es/download/v2026-02-03/ipl-burning.zip) and unzip ipl-burning.zip. Then, run script in ipl-burning directory(Linux: run.sh, Windows: run.bat). If using Linux host PC, please install python3 and pip command on your system before running the script and close other console which uses serial port of the board before executing the script.
+   * Download [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-04-13/ipl-burning.zip) and unzip ipl-burning.zip. Then, run script in ipl-burning directory(Linux: run.sh, Windows: run.bat). If using Linux host PC, please install python3 and pip command on your system before running the script and close other console which uses serial port of the board before executing the script.
    1. Turn off the power and change SW2 according to the console instructions.
    2. Press Enter to continue.
    3. Turn on the power.
@@ -163,8 +180,19 @@ es/download/v2026-02-03/ipl-burning.zip) and unzip ipl-burning.zip. Then, run sc
 
 ## Known Issues & Restrictions
 
+### Common
+
 1. USB Type-C port doesn’t support DP-alt mode so that Display output is not supported. Please use DisplayPort or Raspberry Pi touch Display 2 instead of type-c.
 2. FAN/Heat sink less doesn’t work well due to high temperature in some case. Please attach the Heatsink and FAN to use the board.
+3. Unstable operation has been observed with some M.2 SSD, and the root cause is currently under investigation. For reference: Stable operation has been confirmed with the Raspberry Pi SSD 256GB (RPI-SC1439).
+
+### Debian based BSP
+
+None.
+
+### Yocto BSP
+
+1. As a current limitation, OpenCL and Vulkan are present in the GFX package but are not supported. They are planned to be officially supported in a future release.
 
 ## Support
 

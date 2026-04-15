@@ -24,8 +24,8 @@ This is the Debian based BSP page for Sparrow Hawk.
 |Software                   |Version|
 |---------------------------|-------|
 |Debian                     |13     |
-|Linux kernel               |6.12.66|
-|U-Boot                     |2026.01|
+|Linux kernel               |6.18.20|
+|U-Boot                     |2026.04|
 |Arm Trusted Firmware       |2.14.0 |
 
 ## How to Startup
@@ -39,7 +39,7 @@ If you want to normally start, please start [3.1.2. Normal preparation: build so
 #### Quick preparation: download binary
 
 Download binary from GitHub
-* BSP: [sparrow-hawk-debian-13-based-bsp.img.gz](https://github.com/rcar-community/kernel-apt-repository/releases/download/v2026-02-03/sparrow-hawk-debian-13-based-bsp.img.gz)
+* BSP: [sparrow-hawk-debian-13-based-bsp.img.gz](https://github.com/rcar-community/kernel-apt-repository/releases/download/v2026-04-13/sparrow-hawk-debian-13-based-bsp.img.gz)
 
 Next, jump to [3.2. How to flash](#how-to-flash).
 
@@ -425,6 +425,10 @@ ucts/camera-cable/)
      sudo expand-rootfs.sh
      sudo reboot
      ```
+
+## Known Issues & Restrictions
+
+Please see [here]({{ '/Sparrow-Hawk/index.html#debian-based-bsp' | relative_url }}).
 
 ## Support
 
