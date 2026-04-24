@@ -95,7 +95,7 @@
           });
         } else if (state.connector === "J4(Pi Disp) and CN6(DP)") {
 
-          outputLines.push("(You want to display J6(Pi Disp))");
+          outputLines.push("(You want to display J4(Pi Disp))");
           cameras.forEach((cam, index) => {
             const camIndex = index + 1;
             outputLines.push(`Connect camera to ${cam.port}: cam -c ${camIndex} -C -D`);

@@ -92,14 +92,14 @@ This board has two serial devices and ChA(HSCIF0) is used for mainly.
 |ChA(HSCIF0)<br>ex) COM\<lower num\>, /dev/ttyUSB\<lower num\>  |921600 bps|8N1   |none        |
 |ChB(HSCIF1)<br>ex) COM\<higher num\>, /dev/ttyUSB\<higher num\>|115200 bps|8N1   |none        |
 
-It’s mainly saying the board uses USB to Serial for terminal. The chipset driver is installed by default in most linux distros, if you have Windows then you will need to install the FTDI VCP driver.
+For Windows users, if the console does not connect, please install the appropriate driver from the link below.
 
 Link : [https://ftdichip.com/drivers/](https://ftdichip.com/drivers/)
 
 ### Caution
 
 1. FAN must be installed. Do not remove FAN for cooling the R-Car V4H from the board, as doing so will lead to the R-Car V4H being overheated to destruction. It is recommended to use a heat sink and FAN together.
-2. Please use only a power supply and cable that comply with the USB Power Delivery (USB PD) standard. Using a non-USB PD power supply may cause damage to the Sparrow Hawk.
+2. Please use only a power supply and cable that comply with the USB Power Delivery (USB PD) standard. Using a non-USB PD power supply cause damage to the Sparrow Hawk.
 {: .caution}
 
 ## Software Version List

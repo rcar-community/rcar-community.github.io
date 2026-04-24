@@ -115,30 +115,30 @@ reset  # Execute this only the first time
 
 ### Software support list
 
-| Function                              | Status            |
-|---------------------------------------|-------------------|
-| [CAN](#can)                           | Supported         |
-| Ethernet                              | Supported         |
-| [Audio(Output/Input)](#audio)         | Supported         |
-| Display Port                          | Supported         |
-| [GPIO](#gpio)                         | Supported         |
-| [I2C](#i2c)                           | Supported         |
-| JTAG                                  | Supported         |
-| [USB3.0](#usb30)                      | Supported         |
-| [UART](#uart)                         | Supported         |
-| [Thermal](#thermal)                   | Supported         |
-| [NVMe M.2 SSD](#nvme-m2-ssd)          | Supported         |
-| [Pi Camera](#pi-camera)               | Supported         |
-| [Pi Display](#pi-display)             | Supported         |
-| PCIe Endpoint                         | Not supported     |
-| [Pi Active Cooler](#pi-active-cooler) | Supported         |
-| GPU                                   | Not supported     |
-| AI Accelerator                        | Not yet supported |
-| Desktop(GUI)                          | Not supported     |
+| Function                              | Status                     |
+|---------------------------------------|----------------------------|
+| [CAN](#can)                           | Supported                  |
+| Ethernet                              | Supported                  |
+| [Audio(Output/Input)](#audio)         | Supported                  |
+| Display Port                          | Supported                  |
+| [GPIO](#gpio)                         | Supported                  |
+| [I2C](#i2c)                           | Supported                  |
+| JTAG                                  | Supported                  |
+| [USB3.0](#usb30)                      | Supported                  |
+| [UART](#uart)                         | Supported                  |
+| [Thermal](#thermal)                   | Supported                  |
+| [NVMe M.2 SSD](#nvme-m2-ssd)          | Supported                  |
+| [Pi Camera](#pi-camera)               | Supported                  |
+| [Pi Display](#pi-display)             | Supported                  |
+| PCIe Endpoint                         | Support planned (2026)     |
+| [Pi Active Cooler](#pi-active-cooler) | Supported                  |
+| GPU                                   | Support planned (Jul 2026) |
+| AI Accelerator                        | Support planned (2026)     |
+| Desktop(GUI)                          | Support planned (Jul 2026) |
 
 Note:
-* "Supported": Function scceeded in the simple test as below.<br>
-* "Not supported": Function isn't supported.<br>
+* "Supported": Function succeeded in the simple test as below.<br>
+* "Not supported": No support plan.<br>
 
 ### CAN
 
@@ -152,12 +152,10 @@ Loop back
 ```bash
 sudo ip link set can0 up type can restart-ms 100 bitrate 1000000 dbitrate 5000000 fd on
 sudo ip link set can1 up type can restart-ms 100 bitrate 1000000 dbitrate 5000000 fd on
-sudo candump can0 &
-sudo cangen can1 -I i -L i -D i -f -n 16
-sudo killall candump
-sudo candump can1 &
-sudo cangen can0 -I i -L i -D i -f -n 16
-sudo killall candump
+candump can0 -n 16 &
+cangen can1 -I i -L i -D i -f -n 16
+candump can1 -n 16 &
+cangen can0 -I i -L i -D i -f -n 16
 ```
 
 ### Audio
@@ -200,6 +198,10 @@ sudo killall candump
       arecord -D hw:0,0 -t wav -d 5 -c 2 -r 48000 -f S16_LE > audio.wav
       ```
    * ![Recording]({{ '/images/recording.webp' | relative_url }})
+   * If you want to check audio.wav, execute following command.
+     ```
+     aplay audio.wav
+     ```
    3. Recording and Playback test (5sec) [{% include hover-image.html text="CONN3" img="/images/CONN3.webp" %} or ‘{% include hover-image.html text="CONN3" img="/images/CONN3.webp" %}+{% include hover-image.html text="CONN4" img="/images/CONN4.webp" %}’]
       ```bash
       arecord -D hw:0,0 -t wav -d 5 -c 2 -r 48000 -f S16_LE | aplay
@@ -263,7 +265,8 @@ For more examples, please see also [https://github.com/brgl/libgpiod/raw/refs/he
 
 ### USB3.0
 
-* With the power turned on, connect it to any available {% include hover-image.html text="USB6" img="/images/USB6.webp" %} port. If “SuperSpeed” is displayed, the test is successful.
+* With the power on, connect a USB flash drive to the {% include hover-image.html text="USB6"
+ img="/images/USB6.webp" %} port on the board. If “SuperSpeed” is displayed, the test is successful.
 
    * Output example(the upper {% include hover-image.html text="USB6" img="/images/USB6.webp" %} port)
      ```plaintext
@@ -326,10 +329,10 @@ killall cat
 
   | zone          | Measurement point |
   |---------------|-------------------|
-  | thermal_zone0 | CR52              |
-  | thermal_zone1 | CNN               |
-  | thermal_zone2 | CA76              |
-  | thermal_zone3 | DDR               |
+  | thermal_zone0 | around Cortex-R52 |
+  | thermal_zone1 | around CNN        |
+  | thermal_zone2 | around Cortex-A76 |
+  | thermal_zone3 | around DDR-PHY    |
 
 ### NVMe M.2 SSD
 
@@ -362,8 +365,7 @@ killall cat
 
 Note:
 * The Raspberry Pi Camera v3 is currently under development on mainline Linux and libcamera,
-so at this stage the image may appear dark and features such as auto-focus are not yet suppor
-ted. In addition, recognition may occasionally fail.
+so at this stage the image may appear dark and features such as auto-focus are not yet supported. In addition, recognition may occasionally fail.
 
 &nbsp;
 
