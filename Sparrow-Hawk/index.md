@@ -132,11 +132,7 @@ Link : [https://ftdichip.com/drivers/](https://ftdichip.com/drivers/)
 * [Sparrow Hawk Reference Component Position (incl. Disclaimer)](https://drive.google.com/file/d/1cHHBGMqAhHamrVqxjL0-B5xJi5fUkgMB/view?usp=sharing?usp=sharing)
 * [Sparrow Hawk Reference 3D Model CAD (incl. Disclaimer)](https://drive.google.com/file/d/1fTosN8wgIxM2Z-pyUIgn9LCyzCahfGcC/view?usp=sharing?usp=sharing)
 
-## Event Information
-
-Please see [here](BSP/event_information.html) for information on Sparrow Hawk's past and upcoming events.
-
-## Leaflet
+### Leaflet
 
 * [Sparrow Hawk Leaflet](../../files/V4H_SH_Leaflet.pdf) (2026/04/15)
    * Benefits for Sparrow Hawk
@@ -144,6 +140,19 @@ Please see [here](BSP/event_information.html) for information on Sparrow Hawk's 
    * Support software version
    * Board variants
    * Website links(Sparrow Hawk Official website, Retronix website, Where to buy(Shimafuji))
+
+### Outline
+
+* [Sparrow Hawk Golden Material](../../files/V4H_SH_GoldenMaterial.pdf) (2026/05/12)
+   * Key items include:
+      * Concept
+      * Target
+      * Hardware spec
+      * Software spec
+
+## Event Information
+
+Please see [here](BSP/event_information.html) for information on Sparrow Hawk's past and upcoming events.
 
 ## Tips
 
