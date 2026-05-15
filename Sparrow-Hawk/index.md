@@ -18,7 +18,7 @@ This is the page for Sparrow Hawk board with R-Car V4H provided Retronix Technol
 
 ## What's New
 
-2026-04-15 The Yocto BSP and the Debian based BSP were updated to Linux kernel v6.18 and U-Boot v2026.04.
+2026-04-15 The Yocto BSP and the Debian based BSP are updated to Linux kernel v6.18 and U-Boot v2026.04.
 
 2025-12-04 We open the dedicated pages for Yocto BSP and Debian based BSP of Sparrow Hawk.
 
