@@ -72,8 +72,8 @@ This is the page for Sparrow Hawk board with R-Car V4H provided Retronix Technol
 
 |SW2-1|SW2-2|SW2-3|Description                                     |
 |-----|-----|-----|------------------------------------------------|
-|ON   |ON   |ON   |Serial Flash boot at single read 40MHz using DMA|
-|OFF  |OFF  |OFF  |SCIF/HSCIF download mode                        |
+|ON   |ON   |ON   |Normal boot                                     |
+|OFF  |OFF  |OFF  |Recovery mode boot                              |
 
 #### Other switch
 

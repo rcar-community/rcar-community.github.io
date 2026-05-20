@@ -133,7 +133,7 @@ reset  # Execute this only the first time
 | PCIe Endpoint                         | Support planned (2026)     |
 | [Pi Active Cooler](#pi-active-cooler) | Supported                  |
 | GPU                                   | Support planned (Jul 2026) |
-| AI Accelerator                        | Support planned (2026)     |
+| AI Accelerator(CNN-IP)                | Support planned (2026)     |
 | Desktop(GUI)                          | Support planned (Jul 2026) |
 
 Note:
