@@ -1,0 +1,86 @@
+{% comment %}
+Usage:
+{%- capture contents_md -%}
+<!-- variant 0 -->
+...Markdown for A...
+---
+<!-- variant 1 -->
+...Markdown for B...
+---
+<!-- variant 2 -->
+...Markdown for C...
+{%- endcapture -%}
+{% include multi-tabs.html id="unique-id"
+                           labels="A|B|C"
+                           contents=contents_md %}
+{% endcomment %}
+
+{%- assign default_index = include.default | default: 0 | plus: 0 -%}
+{%- assign labels = include.labels | split: '|' -%}
+{%- assign contents = include.contents | split: "---" -%}
+{%- assign count = contents | size | minus: 1 -%}
+
+<span></span>
+
+<style>
+    input[type=radio] {
+        display: none;
+    }
+    input[type="radio"]:checked + label {
+        background: #3333aa;
+        color: #ffffff;
+    }
+    .panel {
+        padding: 5px;
+        display: none;
+    }
+    .label {
+        padding: 2px;
+        margin: 4px;
+        border: 1px solid;
+        border-radius: 10px
+    }
+</style>
+
+<div id="{{ include.id | escape }}">
+    <form class="container" id="{{include.id | escape}}">
+        {%- for i in (0..count) -%}
+            <input type="radio" id="{{ include.id | escape }}-{{i}}" name="{{include.id | escape}}" value=""
+            {% if i == default_index %}
+            checked
+            {% endif %}
+            >
+            <label for="{{ include.id | escape }}-{{i}}" class="label">{{labels[i]}}</label>
+            <span></span> <!-- For layout issue by autotranslate -->
+        {%- endfor -%}
+
+        {%- for i in (0..count) -%}
+        <div class="panel" id="{{ include.id }}-panel-{{ i }}" aria-labelledby="{{ include.id }}-{{ i }}">
+            {{ contents[i] | markdownify}}
+        </div>
+        {%- endfor -%}
+    </form>
+</div>
+<script>
+    function updatePanel_{{include.id | replace: "-", "_"}}() {
+        forms = document.getElementsByName("{{include.id | escape}}");
+        forms.forEach(function(form) {
+            {%- for i in (0..count) -%}
+            btn = document.getElementById("{{ include.id }}-{{ i }}");
+            content = document.getElementById("{{ include.id }}-panel-{{ i }}");
+            if(btn.checked) {
+                content.style.display="block";
+            } else {
+                content.style.display="none";
+            }
+            {%- endfor -%}
+        });
+    }
+
+    forms = document.getElementsByName("{{include.id | escape}}");
+    forms.forEach(function(form) {
+        form.addEventListener('click', updatePanel_{{include.id | replace: "-", "_"}});
+    });
+    updatePanel_{{include.id | replace: "-", "_"}}();
+</script>
+

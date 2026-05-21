@@ -1,0 +1,136 @@
+<style>
+    model-viewer {
+        background-color: black;
+        width: 60vw;
+        height: 50vh;
+    }
+    /* For layout without navigation menu */
+    @media screen and (max-width: 768px) {
+        model-viewer {
+            width: 90vw;
+            height: 75vh;
+        }
+    }
+
+    #controls {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        max-width: unset;
+        transform: unset;
+        pointer-events: auto;
+        z-index: 100;
+    }
+
+    .glass {
+        background: rgba(255, 255, 255, 0.37);
+        backdrop-filter: blur(8px) contrast(0.89) saturate(1.27);
+        -webkit-backdrop-filter: blur(8px) contrast(0.89) saturate(1.27);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+    }
+
+    .dim {
+        border-radius: 4px;
+        border: none;
+        box-sizing: border-box;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+        color: rgba(0, 0, 0, 0.8);
+        display: block;
+        font-family: Futura, Helvetica Neue, sans-serif;
+        font-size: 1em;
+        font-weight: 700;
+        max-width: 128px;
+        overflow-wrap: break-word;
+        padding: 0.5em 1em;
+        position: absolute;
+        width: max-content;
+        height: max-content;
+        transform: translate3d(-50%, -50%, 0);
+        pointer-events: none;
+        --min-hotspot-opacity: 0;
+    }
+
+    .hide-hotspot-labels [slot^="hotspot"].Hotspot {
+        display: none !important;
+    }
+
+    .Hotspot {
+        pointer-events: none;
+    }
+</style>
+
+<div class="notranslate">
+    <!-- <model-viewer> HTML element -->
+    <model-viewer id="SH-model" class="hide-hotspot-labels" src="{{'/models/sh.glb' | relative_url}}" camera-controls tone-mapping="neutral" poster="{{'/models/SHposter.webp' | relative_url}}" shadow-intensity="2" exposure="0.4" shadow-softness="0" camera-orbit="-228.6deg 15.1deg 120.1m" field-of-view="30deg">
+        <button class="Hotspot" slot="hotspot-1" data-position="39.43292349805164m 1.5864647626876835m -17.832152408786158m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">R-Car V4H</div>
+        </button><button class="Hotspot" slot="hotspot-3" data-position="33.4360988647951m 2.668690642577644m -2.3123807432673225m" data-normal="-0.000017072511887567824m 0.9999999998542546m 1.4285927312781294e-7m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">CN6: Display Port</div>
+        </button><button class="Hotspot" slot="hotspot-4" data-position="28.485970878394106m 2.0248029745302882m -1.1702077433610434m" data-normal="-0.00001655669206988339m 0.9999999998629209m -1.84718773151504e-7m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">SW3: Reset Button</div>
+        </button><button class="Hotspot" slot="hotspot-5" data-position="24.380878140226745m 1.4015116691589355m -0.17790275847393322m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">CN4: Debug Serial</div>
+        </button><button class="Hotspot" slot="hotspot-6" data-position="18.705248957448998m 5.088869094848633m -3.413833928613557m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">CN2: Ethernet</div>
+        </button><button class="Hotspot" slot="hotspot-7" data-position="6.371418703567311m 3.6807401579193026m -1.541145324707045m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">SW1: Power Button</div>
+        </button><button class="Hotspot" slot="hotspot-8" data-position="3.5866701661446028m 3.9169363975524902m -1.472748241224309m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">USB1: USB PD input</div>
+        </button><button class="Hotspot" slot="hotspot-9" data-position="1.3446627285173314m 1.3350729942321777m -11.94145786076582m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">CONN2: CAN</div>
+        </button><button class="Hotspot" slot="hotspot-10" data-position="15.175534980386262m 1.9152131080627584m -17.308659680055438m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">CN5: M.2 TypeM</div>
+        </button><button class="Hotspot" slot="hotspot-11" data-position="3.5739321861444022m 3.916936397552476m -27.74425702083817m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">USB4,5: USB3.0</div>
+        </button><button class="Hotspot" slot="hotspot-12" data-position="10.696717846984356m 5.826193332672105m -27.598932814076583m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">USB6: USB3.0</div>
+        </button><button class="Hotspot" slot="hotspot-13" data-position="15.803400994499944m 2.4700503349304057m -28.144615304835803m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">CONN4: Audio IN/OUT</div>
+        </button><button class="Hotspot" slot="hotspot-14" data-position="19.29923746366795m 2.264529852302843m -26.473412474884782m" data-normal="0m 0.9999999999999952m -9.86920929079463e-8m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">CONN3: Audio IN</div>
+        </button><button class="Hotspot" slot="hotspot-15" data-position="48.97005198198751m 1.2474282408338695m -21.576397745484726m" data-normal="5.5511151231257815e-17m 0.49999580483027384m 0.8660278258532614m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">CN7: HAT</div>
+        </button><button class="Hotspot" slot="hotspot-16" data-position="40.69739727658738m 1.8878157138824463m -1.8208439267447432m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">J4: DSI</div>
+        </button><button class="Hotspot" slot="hotspot-17" data-position="45.86432905210559m 1.7399631504105884m -5.407563686370844m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">J1: CSI 4lane</div>
+        </button><button class="Hotspot" slot="hotspot-18" data-position="45.75577924237839m 1.8878157138824463m -1.889273866426921m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">J2: CSI 4lane</div>
+        </button><button class="Hotspot" slot="hotspot-19" data-position="40.93604157343206m 1.2371690273285054m -8.362376214064575m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">SW2: Mode SW</div>
+        </button><button class="Hotspot" slot="hotspot-20" data-position="40.01638309308055m 1.5525399446487427m -5.615364888952422m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">CN3: JTAG</div>
+        </button><button class="Hotspot" slot="hotspot-21" data-position="27.453872216913986m 0.6891790628433228m -12.258164375050992m" data-normal="0m 1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">J3: FAN</div>
+        </button><button class="Hotspot" slot="hotspot-22" data-position="45.86432905210559m -1.7399631504105884m -5.407563686370844m" data-normal="0m -1m 0m" data-visibility-attribute="visible">
+            <div class="HotspotAnnotation">CN1: Micro SD card</div>
+        </button>
+        <div id="controls" class="control dim glass">
+            <label for="show-ifs">Show IF names</label>
+            <input id="show-ifs" type="checkbox" checked="true">
+        </div>
+        <div class="progress-bar hide" slot="progress-bar">
+            <div class="update-bar"></div>
+        </div>
+    </model-viewer>  
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+    <script type="module">
+        const modelViewer = document.querySelector('#SH-model');
+
+      const checkbox = modelViewer.querySelector('#show-ifs');
+
+      function setVisibility(visible) {
+                modelViewer.classList.toggle( 'hide-hotspot-labels', !visible);
+      }
+
+      checkbox.addEventListener('change', () => {
+        setVisibility(checkbox.checked);
+      });
+
+      setVisibility(checkbox.checked);
+
+    </script>
+</div>

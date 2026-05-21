@@ -36,10 +36,19 @@ This is the page for Sparrow Hawk board with R-Car V4H provided Retronix Technol
 [here.product]: <https://www.retronix.com.tw/en/product_sbc.html>
 [here.shimafuji]: <http://www.shimafuji.co.jp/en/products/2207>
 
-### Picture
+### Board Connector Assignment
 
+{%- capture contents_md -%}
 ![Sparrow_Hawk_assignment](../images/Sparrow_Hawk_assignment_top.png)
 ![Sparrow_Hawk_assignment](../images/Sparrow_Hawk_assignment_bottom.png)
+---
+{% include SHmodel/index.html %}
+{%- endcapture -%}
+{%- include multi-tabs.html
+    id="sparrow-hawk-assignment"
+    labels="Image|3D model"
+    contents=contents_md
+-%}
 
 ### Features
 
