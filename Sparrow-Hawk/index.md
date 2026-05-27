@@ -16,6 +16,22 @@ Contents
 
 This is the page for Sparrow Hawk board with R-Car V4H provided Retronix Technology Inc.
 
+&nbsp;
+
+Sparrow Hawk is an evaluation board targeting the industrial market.
+
+The supported software is only open source, with [Yocto BSP][Yocto] and [Debian based BSP][Debian].
+
+Please post any inquiries regarding Sparrow Hawk on GitHub Discussions ([Q&A][Q&A]).
+
+Note:
+   * The secure boot feature provided by the R-Car V4H cannot be used on Sparrow Hawk due to hardware specification.
+   * The Sparrow Hawk supports camera input via MIPI CSI only; therefore, automotive cameras such as GMSL cameras cannot be connected.
+
+[Yocto]: <BSP/yocto_bsp.html>
+[Debian]: <BSP/debian_based_bsp.html>
+[Q&A]: <https://github.com/orgs/rcar-community/discussions/categories/q-a>
+
 ## What's New
 
 2026-04-15 The Yocto BSP and the Debian based BSP are updated to Linux kernel v6.18 and U-Boot v2026.04.
@@ -107,8 +123,9 @@ Link : [https://ftdichip.com/drivers/](https://ftdichip.com/drivers/)
 
 ### Caution
 
-1. FAN must be installed. Do not remove FAN for cooling the R-Car V4H from the board, as doing so will lead to the R-Car V4H being overheated to destruction. It is recommended to use a heat sink and FAN together.
-2. Please use only a power supply and cable that comply with the USB Power Delivery (USB PD) standard. Using a non-USB PD power supply cause damage to the Sparrow Hawk.
+1. Hot! Do not touch R-Car V4H (main chip) directly. Fan must be installed to prevent R-Car V4H overheating and failure.
+2. Do not touch the board while USB-PD is connected. Touch bare board may cause short circuit and failure.
+3. Please use only a power supply and cable that comply with the USB Power Delivery (USB PD) standard. Using a non-USB PD power supply cause damage to the Sparrow Hawk.
 {: .caution}
 
 ## Software Version List

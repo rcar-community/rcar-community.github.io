@@ -30,20 +30,20 @@ This is the Debian based BSP page for Sparrow Hawk.
 
 ## How to Startup
 
-If you want to quickly start, please start [3.1.1. Quick preparation: download binary](#quick-preparation-download-binary).
+If you want to download OS image, please start [3.1.1. Downloading OS image](#downloading-os-image).
 
-If you want to normally start, please start [3.1.2. Normal preparation: build source code](#normal-preparation-build-source-code).
+If you want to build OS image, please start [3.1.2. Building OS image](#building-os-image).
 
 ### Preparation of the software
 
-#### Quick preparation: download binary
+#### Downloading OS image
 
-Download binary from GitHub
+Download OS image from GitHub
 * BSP: [sparrow-hawk-debian-13-based-bsp.img.gz](https://github.com/rcar-community/kernel-apt-repository/releases/download/v2026-04-13/sparrow-hawk-debian-13-based-bsp.img.gz)
 
 Next, jump to [3.2. How to flash](#how-to-flash).
 
-#### Normal preparation: build source code
+#### Building OS image
 
 ```bash
 # You need to prepare docker envrionment on your Host PC

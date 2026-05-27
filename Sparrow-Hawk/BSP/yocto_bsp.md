@@ -30,22 +30,22 @@ This is the Yocto BSP page for Sparrow Hawk.
 
 ## How to Startup
 
-If you want to quickly start, please start [3.1.1. Quick preparation: download binary](#quick-preparation-download-binary).
+If you want to download OS image, please start [3.1.1. Downloading OS image](#downloading-os-image).
 
-If you want to normally start, please start [3.1.2. Normal preparation: build source code](#normal-preparation-build-source-code).
+If you want to build OS image, please start [3.1.2. Building OS image](#building-os-image).
 
 ### Preparation of the software
 
-#### Quick preparation: download binary
+#### Downloading OS image
 
-Download binary from GitHub
+Download OS image from GitHub
 * BSP(either of the following BSP)
    * In case of BSP: [core-image-minimal-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-04-13/core-image-minimal-sparrow-hawk.rootfs.wic.gz)
    * In case of BSP + 3D Graphics: [core-image-weston-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-04-13/core-image-weston-sparrow-hawk.rootfs.wic.gz)
 
 Next, jump to [3.2. How to flash](#how-to-flash).
 
-#### Normal preparation: build source code
+#### Building OS image
 
 ```bash
 git clone https://github.com/rcar-community/meta-sparrow-hawk -b scarthgap

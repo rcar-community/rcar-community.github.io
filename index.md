@@ -5,7 +5,7 @@ title: R-Car Community
 
 ## Introduction
 
-This is the TOP page of [R-Car Community](https://github.com/rcar-community).
+This is the top page of the [R-Car Community](https://github.com/rcar-community), a developer-oriented ecosystem and community designed to support the evaluation, validation, and application development of Renesas R-Car SoCs using open-source software (OSS).
 
 ## What's New
 
