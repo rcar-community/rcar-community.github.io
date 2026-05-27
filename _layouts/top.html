@@ -5,6 +5,7 @@
   <title>{{ page.title }}</title>
   <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
 </head>
+{% if jekyll.environment == "production" %}
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EJTTXNBEBV"></script>
 <script>
@@ -13,6 +14,7 @@
       gtag('js', new Date());
       gtag('config', 'G-EJTTXNBEBV');
 </script>
+{% endif %}
 <body>
   <main>
     {% include breadcrumbs.html %}  <!-- breadcrumbs -->
