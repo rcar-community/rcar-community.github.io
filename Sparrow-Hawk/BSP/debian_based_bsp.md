@@ -66,6 +66,7 @@ Next, jump to [3.2. How to flash](#how-to-flash).
 ```bash
 gzip -cd sparrow-hawk-debian-13-based-bsp.img.gz | sudo dd of=<device file> bs=1M status=progress && sync
 ```
+ex) gzip -cd sparrow-hawk-debian-13-based-bsp.img.gz | sudo dd of=/dev/sdi bs=1M status=progress && sync
 
 **Windows case**
 1. Extract gzip image using 7zip or similer software.
@@ -86,19 +87,20 @@ Note:
 
 ### How to boot
 
-1. Insert the SD card into {% include hover-image.html text="CN1" img="/images/CN1.webp" %} which is bottom of the board.
-2. Open terminal application and open serial device.
-3. Press {% include hover-image.html text="SW1" img="/images/SW1.webp" %} to power on the board.
-4. After booting U-Boot, please press any key while showing "Hit any key to stop autoboot:" to enter U-Boot shell.
-5. Input the following command into U-Boot shell and press enter key. If you connect camera a
+1. Ensure that the fan is properly installed.
+2. Insert the SD card into {% include hover-image.html text="CN1" img="/images/CN1.webp" %} which is bottom of the board.
+3. Open terminal application and open serial device.
+4. Press {% include hover-image.html text="SW1" img="/images/SW1.webp" %} to power on the board.
+5. After booting U-Boot, please press any key while showing "Hit any key to stop autoboot:" to enter U-Boot shell.
+6. Input the following command into U-Boot shell and press enter key. If you connect camera a
 nd/or display, please choice the following button and input command.
 {% include selector.html config="camera_bootcmd" data-mode="normal" %}
-6. If command and environment is correct, Linux kernel log will output.
-{:start="6"}
-7. Log in using the following login ID and password.
+7. If command and environment is correct, Linux kernel log will output.
+{:start="7"}
+8. Log in using the following login ID and password.
    * sparrow-hawk login: rcar
    * Password: rcar
-{:start="7"}
+{:start="8"}
 
 &nbsp;
 
