@@ -5,33 +5,12 @@ title: R-Car Community
 
 ## Introduction
 
-This is the top page of the [R-Car Community](https://github.com/rcar-community), a developer-oriented ecosystem and community designed to support the evaluation, validation, and application development of Renesas R-Car SoCs using open-source software (OSS).
+{% include_relative top/introduction.md %}
 
 ## What's New
 
-2026-04-15 The Yocto BSP and the Debian based BSP are updated to Linux kernel v6.18 and U-Boot v2026.04.
-
-2025-12-04 We open the dedicated pages for Yocto BSP and Debian based BSP of Sparrow Hawk.
-
-2025-08-07 We open the Home Page for Sparrow Hawk.
+{% include_relative top/whatsnew.md %}
 
 ## Board List
 
-<div class="board-list" markdown="1">
-[![Sparrow Hawk](./images/Sparrow_Hawk.png)](./Sparrow-Hawk/index.html)<br>
-**Sparrow Hawk**<br>
-SoC: R-Car V4H
-{: .img-list}
-
-| Contents                                                            |
-|---------------------------------------------------------------------|
-| [Sparrow Hawk Product Page(Retronix Technology Inc.)][Retronix]     |
-| [Sparrow Hawk Board Page(GitHub Pages)][Sparrow Hawk GitHub Pages]  |
-| Where to buy([Shimafuji])                                           |
-{: .table-list}
-
- [Retronix]: https://www.retronix.com.tw/en/product_sbc.html
- [Sparrow Hawk GitHub Pages]: https://rcar-community.github.io/Sparrow-Hawk/index.html
- [Shimafuji]: http://www.shimafuji.co.jp/en/products/2207
-
-</div>
+{% include_relative top/boardlist.md %}
