@@ -1,0 +1,13 @@
+- type: Common
+  category: SW
+  function: PCIe
+  description: |
+    Unstable operation has been observed with some M.2 SSD, and the root cause is currently under investigation. For reference: Stable operation has been confirmed with the Raspberry Pi SSD 256GB (RPI-SC1439).
+  resolution_date: July 2026
+
+- type: Yocto
+  category: SW
+  function: Graphics
+  description: |
+    OpenCL and Vulkan are present in the GFX package but are not supported.
+  resolution_date: July 2026

@@ -1,6 +1,10 @@
 ---
-layout: top
-title: R-Car Community 
+layout: home
+title: R-Car Community
+breadcrumbs:
+  - name: TOP
+    url: /index.html
+left_nav: top_left_nav
 ---
 
 ## Introduction
@@ -9,8 +13,4 @@ title: R-Car Community
 
 ## What's New
 
-{% include_relative top/whatsnew.md %}
-
-## Board List
-
-{% include_relative top/boardlist.md %}
+{% include whatsnew_all.html %}

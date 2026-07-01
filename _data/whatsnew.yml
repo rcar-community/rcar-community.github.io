@@ -1,0 +1,12 @@
+- date: 2026-04-15
+  category: Release
+  product: Sparrow Hawk
+  text: The <a href="/Sparrow-Hawk/BSP/yocto_bsp.html">Yocto BSP</a> and the <a href="/Sparrow-Hawk/BSP/debian_based_bsp.html">Debian based BSP</a> have been updated to Linux kernel v6.18 and U-Boot v2026.04.
+- date: 2025-12-04
+  category: Announce
+  product: Sparrow Hawk
+  text: Dedicated pages for the <a href="/Sparrow-Hawk/BSP/yocto_bsp.html">Yocto BSP</a> and the <a href="/Sparrow-Hawk/BSP/debian_based_bsp.html">Debian based BSP</a> of Sparrow Hawk are now available.
+- date: 2025-08-07
+  category: Announce
+  product: Sparrow Hawk
+  text: The Home Page for Sparrow Hawk is now live.

@@ -1,0 +1,14 @@
+<li class="whatsnew-item" data-category="{{ item.category }}" data-product="{{ item.product }}">
+  <div class="wn-meta">
+    <span class="wn-date">{{ item.date }}</span>
+    <span class="wn-category wn-category-{{ item.category }}">{{ item.category }}</span>
+    <span class="wn-product wn-product-{{ item.product | replace: ' ', '-' }}">{{ item.product }}</span>
+    {% assign item_date = item.date | date: "%s" %}
+    {% assign today = site.time | date: "%s" %}
+    {% assign diff_days = today | minus: item_date | divided_by: 86400 %}
+    {% if diff_days <= 30 %}
+      <span class="wn-new">\New/</span>
+    {% endif %}
+  </div>
+  <div class="wn-text">{{ item.text }}</div>
+</li>

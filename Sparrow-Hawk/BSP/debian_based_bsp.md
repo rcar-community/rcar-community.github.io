@@ -1,19 +1,18 @@
 ---
-layout: default
+layout: home
 title: Sparrow Hawk - Debian based BSP | R-Car Community Board
 style: common
-breadcrumb_parent: Sparrow Hawk
-breadcrumb_parent_url: /Sparrow-Hawk/
- 
-breadcrumb_current: Debian based BSP
-breadcrumb_current_url: /Sparrow-Hawk/BSP/debian_based_bsp.html
+breadcrumbs:
+  - name: TOP
+    url: /index.html
+  - name: Sparrow Hawk
+    url: /Sparrow-Hawk/index.html
+  - name: Debian based BSP
+    url: /Sparrow-Hawk/BSP/debian_based_bsp.html
+right_links: sh_right_links
+page_type: Debian
+use_toc: true
 ---
-
-Contents
-{: .contents}
-0. Table of Content
-{:toc}
-{: .contents}
 
 ## Introduction
 
@@ -38,8 +37,12 @@ If you want to build OS image, please start [3.1.2. Building OS image](#building
 
 #### Downloading OS image
 
-Download OS image from GitHub
+Download OS the image from GitHub
 * BSP: [sparrow-hawk-debian-13-based-bsp.img.gz](https://github.com/rcar-community/kernel-apt-repository/releases/download/v2026-04-13/sparrow-hawk-debian-13-based-bsp.img.gz)
+   * For Linux users, you can download the OS image using the following command.
+   ```bash
+   wget -c https://github.com/rcar-community/kernel-apt-repository/releases/download/v2026-04-13/sparrow-hawk-debian-13-based-bsp.img.gz
+   ```
 
 Next, jump to [3.2. How to flash](#how-to-flash).
 
@@ -56,6 +59,12 @@ or
 sudo ./build_image/build_debian_13_for_sparrow-hawk.sh <DEBIAN_VERSION>
 ex.) sudo ./build_image/build_debian_13_for_sparrow-hawk.sh 13
 ```
+
+You can find sparrow-hawk-debian-13-based-bsp.img.gz in the following directory.
+```bash
+ls ./build_image/
+```
+
 Next, jump to [3.2. How to flash](#how-to-flash).
 
 ### How to flash
@@ -92,22 +101,20 @@ Note:
 3. Open terminal application and open serial device.
 4. Press {% include hover-image.html text="SW1" img="/images/SW1.webp" %} to power on the board.
 5. After booting U-Boot, please press any key while showing "Hit any key to stop autoboot:" to enter U-Boot shell.
-6. Input the following command into U-Boot shell and press enter key. If you connect camera a
-nd/or display, please choice the following button and input command.
-{% include selector.html config="camera_bootcmd" data-mode="normal" %}
+6. Input the following command into U-Boot shell and press enter key. If you connect camera and/or display, please choice the following button and input command.
+```bash
+setenv bootcmd "load mmc 0:1 0x58000000 /boot/fitImage && source ${loadaddr}:script"
+boot
+```
 7. If command and environment is correct, Linux kernel log will output.
-{:start="7"}
 8. Log in using the following login ID and password.
    * sparrow-hawk login: rcar
    * Password: rcar
-{:start="8"}
 
 &nbsp;
 
-To make the `bootcmd` set in 5 of [3.3. How to Boot](#how-to-boot) persistent across reboots,
- run `saveenv` as shown below.
-After saving the environment, reboot the system once. From the next boot onward, this `bootcm
-d` will be used automatically, and you can skip 4 and 5 in [3.3. How to Boot](#how-to-boot).
+To make the `bootcmd` set in 5 of [3.3. How to Boot](#how-to-boot) persistent across reboots, run `saveenv` as shown below.
+After saving the environment, reboot the system once. From the next boot onward, this `bootcmd` will be used automatically, and you can skip 4 and 5 in [3.3. How to Boot](#how-to-boot).
 ```bash
 saveenv
 reset  # Execute this only the first time
@@ -237,7 +244,8 @@ For more examples, please see also [https://github.com/brgl/libgpiod/raw/refs/he
    * I2C pin assignment
    * ![I2C pin]({{ '/images/I2C_pin.webp' | relative_url }})
 
-* As an example, output result using Argon FAN HAT
+* As an example, output result using Argon FAN HAT and setting 'setenv bootcmd "load mmc 0:1 0x58000000 /boot/fitImage && bootm 0x58000000#default"' when How to boot's step6
+   * i2cdetect: detect I2C devices on a bus
   ```bash
   rcar@sparrow-hawk:~# i2cdetect -y -r 3
        0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
@@ -260,8 +268,13 @@ For more examples, please see also [https://github.com/brgl/libgpiod/raw/refs/he
   60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
   70: -- -- -- -- -- -- -- --
   ```
-   * Argon FAN HAT: [https://argon40.com/en-jp/products/argon-fan-hat](https://argon40.com/en
--jp/products/argon-fan-hat)
+   * i2cset: control FAN speed
+     ```bash
+     rcar@sparrow-hawk:# i2cset -y 3 0x01a 0x00 # 0%
+     rcar@sparrow-hawk:# i2cset -y 3 0x01a 0x32 # 50%
+     rcar@sparrow-hawk:# i2cset -y 3 0x01a 0x64 # 100%
+     ```
+      * Argon FAN HAT: [https://argon40.com/en-jp/products/argon-fan-hat](https://argon40.com/en-jp/products/argon-fan-hat)
 
 * Please search i2c-tools to use other commands(i2cdump, i2cget, i2cset, i2ctransfer).
 
@@ -430,12 +443,6 @@ ucts/camera-cable/)
      sudo reboot
      ```
 
-## Known Issues & Restrictions
+## Known Issues
 
-Please see [here]({{ '/Sparrow-Hawk/index.html#debian-based-bsp' | relative_url }}).
-
-## Support
-
-FAQ: [https://github.com/orgs/rcar-community/discussions/categories/faq](https://github.com/orgs/rcar-community/discussions/categories/faq)
-
-Q&A Forum: [https://github.com/orgs/rcar-community/discussions/categories/q-a](https://github.com/orgs/rcar-community/discussions/categories/q-a)
+{% include issues_table.html %}

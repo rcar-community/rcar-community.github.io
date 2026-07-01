@@ -1,0 +1,13 @@
+<div class="whatsnew-filter">
+  Category:
+  <button class="wn-filter-btn active" data-filter="category" data-category="All">All</button>
+  <button class="wn-filter-btn" data-filter="category" data-category="Release">Release</button>
+  <button class="wn-filter-btn" data-filter="category" data-category="Announce">Announce</button>
+</div>
+{% unless page.product %}
+<div class="whatsnew-filter">
+  Product:
+  <button class="wn-filter-btn active" data-filter="product" data-category="All">All</button>
+  <button class="wn-filter-btn" data-filter="product" data-category="Sparrow Hawk">Sparrow Hawk</button>
+</div>
+{% endunless %}

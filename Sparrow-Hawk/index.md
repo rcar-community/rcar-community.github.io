@@ -1,16 +1,17 @@
 ---
-layout: default
+layout: home
 title: Sparrow Hawk | R-Car Community Board
 style: common
-breadcrumb_parent: Sparrow Hawk
-breadcrumb_parent_url: Sparrow-Hawk/index.html
+breadcrumbs:
+  - name: TOP
+    url: /index.html
+  - name: Sparrow Hawk
+    url: /Sparrow-Hawk/index.html
+right_links: sh_right_links
+use_toc: true
+page_type: all
+product: Sparrow Hawk
 ---
-
-Contents
-{: .contents}
-0. Table of Content
-{:toc}
-{: .contents}
 
 ## Introduction
 
@@ -27,6 +28,7 @@ Please post any inquiries regarding Sparrow Hawk on GitHub Discussions ([Q&A][Q&
 Note:
    * The secure boot feature provided by the R-Car V4H cannot be used on Sparrow Hawk due to hardware specification.
    * The Sparrow Hawk supports camera input via MIPI CSI only; therefore, automotive cameras such as GMSL cameras cannot be connected.
+   * USB Type-C port doesn’t support DP-alt mode so that Display output is not supported. Please use DisplayPort or Raspberry Pi touch Display 2 instead of Type-C.
 
 [Yocto]: <BSP/yocto_bsp.html>
 [Debian]: <BSP/debian_based_bsp.html>
@@ -34,19 +36,15 @@ Note:
 
 ## What's New
 
-2026-04-15 The Yocto BSP and the Debian based BSP are updated to Linux kernel v6.18 and U-Boot v2026.04.
-
-2025-12-04 We open the dedicated pages for Yocto BSP and Debian based BSP of Sparrow Hawk.
-
-2025-08-07 We open the Home Page for Sparrow Hawk.
+{% include whatsnew_all.html %}
 
 ## Hardware
 
 ### Information
 
-|Board Name                   |Kit              |R-Car V4h SoC version|SoC Information      |Board Information                                                   |Where to Buy               |
-|-----------------------------|-----------------|---------------------|---------------------|--------------------------------------------------------------------|---------------------------|
-|Sparrow Hawk<br>(DDR8GB/16GB)|Complete/Basic   |v3.0                 |[R-Car V4H][here.soc]|[Sparrow Hawk][here.product]<br>provided by Retronix Technology Inc.|[Shimafuji][here.shimafuji]|
+|Board Name                   |Kit              |R-Car V4h SoC version|SoC Information      |Board Information                                                   |
+|-----------------------------|-----------------|---------------------|---------------------|--------------------------------------------------------------------|
+|Sparrow Hawk<br>(DDR8GB/16GB)|Complete/Basic   |v3.0                 |[R-Car V4H][here.soc]|[Sparrow Hawk][here.product]<br>provided by Retronix Technology Inc.|
 
 [here.soc]: <https://www.renesas.com/en/products/r-car-v4h>
 [here.product]: <https://www.retronix.com.tw/en/product_sbc.html>
@@ -138,47 +136,14 @@ Link : [https://ftdichip.com/drivers/](https://ftdichip.com/drivers/)
 |U-Boot                     |2026.04|
 |Arm Trusted Firmware       |2.14.0 |
 
-## How to Startup
+## Select Software Platform
 
-|BSP                       |
-|--------------------------|
-|[Yocto BSP][Yocto]        |
-|[Debian based BSP][Debian]|
+### [Yocto BSP][Yocto]
+
+### [Debian based BSP][Debian]
 
 [Yocto]: <BSP/yocto_bsp.html>
 [Debian]: <BSP/debian_based_bsp.html>
-
-## Documentation
-
-### Board documentation
-
-* [Sparrow Hawk User Manual](https://drive.google.com/file/d/1lqiRE7t8C6GWOmuj0PKMItuj-R3VaYD1/view?usp=sharing)
-* [Sparrow Hawk Reference Schematic (incl. Disclaimer)](https://drive.google.com/file/d/1OzI_YYMbFYORcGitnolBVX4tchs7aExl/view?usp=sharing)
-* [Sparrow Hawk Reference Layout (incl. Disclaimer)](https://drive.google.com/file/d/1ibnc5i8p9aNQMsp3-bW_LGb2acKI_HZc/view?usp=sharing?usp=sharing)
-* [Sparrow Hawk Reference Component Position (incl. Disclaimer)](https://drive.google.com/file/d/1cHHBGMqAhHamrVqxjL0-B5xJi5fUkgMB/view?usp=sharing?usp=sharing)
-* [Sparrow Hawk Reference 3D Model CAD (incl. Disclaimer)](https://drive.google.com/file/d/1fTosN8wgIxM2Z-pyUIgn9LCyzCahfGcC/view?usp=sharing?usp=sharing)
-
-### Leaflet
-
-* [Sparrow Hawk Leaflet](../../files/V4H_SH_Leaflet.pdf) (2026/04/15)
-   * Benefits for Sparrow Hawk
-   * Hardware spec
-   * Support software version
-   * Board variants
-   * Website links(Sparrow Hawk Official website, Retronix website, Where to buy(Shimafuji))
-
-### Outline
-
-* [Sparrow Hawk Golden Material](../../files/V4H_SH_GoldenMaterial.pdf) (2026/05/12)
-   * Key items include:
-      * Concept
-      * Target
-      * Hardware spec
-      * Software spec
-
-## Event Information
-
-Please see [here](BSP/event_information.html) for information on Sparrow Hawk's past and upcoming events.
 
 ## Tips
 
@@ -213,24 +178,6 @@ Please see [here](BSP/event_information.html) for information on Sparrow Hawk's 
    * Note:
       * Please change the Mode Switch(=SW2) according to the instructions displayed by the ipl-burning(run.sh or run.bat).
 
-## Known Issues & Restrictions
+## Known Issues
 
-### Common
-
-1. USB Type-C port doesn’t support DP-alt mode so that Display output is not supported. Please use DisplayPort or Raspberry Pi touch Display 2 instead of type-c.
-2. FAN/Heat sink less doesn’t work well due to high temperature in some case. Please attach the Heatsink and FAN to use the board.
-3. Unstable operation has been observed with some M.2 SSD, and the root cause is currently under investigation. For reference: Stable operation has been confirmed with the Raspberry Pi SSD 256GB (RPI-SC1439).
-
-### Debian based BSP
-
-None.
-
-### Yocto BSP
-
-1. As a current limitation, OpenCL and Vulkan are present in the GFX package but are not supported. They are planned to be officially supported in a future release.
-
-## Support
-
-FAQ: [https://github.com/orgs/rcar-community/discussions/categories/faq](https://github.com/orgs/rcar-community/discussions/categories/faq)
-
-Q&A Forum: [https://github.com/orgs/rcar-community/discussions/categories/q-a](https://github.com/orgs/rcar-community/discussions/categories/q-a)
+{% include issues_table.html %}

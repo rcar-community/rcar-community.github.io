@@ -1,0 +1,22 @@
+- title: ♦Links♦
+- title: 🛒 Where to buy
+  children:
+    - title: Shimafuji
+      url: http://www.shimafuji.co.jp/en/products/2207
+- title: 💬 Support
+  children:
+    - title: FAQ
+      url: https://github.com/orgs/rcar-community/discussions/categories/faq
+    - title: Q&A
+      url: https://github.com/orgs/rcar-community/discussions/categories/q-a
+- title: 📄 Document
+  children:
+    - title: Leaflet
+      url: /files/V4H_SH_Leaflet.pdf
+    - title: Outline
+      url: /files/V4H_SH_GoldenMaterial.pdf
+    - title: Board Documentation
+      url: https://www.retronix.com.tw/en/product_sbc.html#:~:text=Sparrow%20Hawk%20Hardware%20Download
+    - title: Device Documentation [coming soon...]
+- title: 📅 Event Info.
+  url: /Sparrow-Hawk/event_information.html

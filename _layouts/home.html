@@ -1,0 +1,82 @@
+---
+layout: default
+---
+<link rel="stylesheet" href="{{ '/css/home.css' | relative_url }}">
+{% if page.use_toc %}
+<script src="{{ '/assets/js/toc.js' | relative_url }}" defer></script>
+{% endif %}
+<script src="{{ '/assets/js/header.js' | relative_url }}" defer></script>
+
+<header class="site-header">
+  <div class="site-header-title">R-Car Community</div>
+  {% include breadcrumbs.html %}
+</header>
+
+<div class="home-wrapper {% unless page.right_links %}no-right{% endunless %}">
+  <nav class="left-nav">
+    <div class="left-nav-content">
+    {% assign left_nav = site.data[page.left_nav] %}
+    {% for item in left_nav %}
+      {% if item.url %}
+        <div class="nav-item"><a href="{{ item.url }}">{{ item.title }}</a></div>
+      {% else %}
+        <div class="nav-section">{{ item.title }}</div>
+      {% endif %}
+      {% if item.children %}
+        {% for child in item.children %}
+          <div class="nav-child">
+            {% if child.url %}
+              <a href="{{ child.url }}">{{ child.title }}</a>
+            {% else %}
+              {{ child.title }}
+            {% endif %}
+          </div>
+          {% if child.children %}
+            {% for grandchild in child.children %}
+              <div class="nav-grandchild">
+                {% if grandchild.url %}
+                  <a href="{{ grandchild.url }}">{{ grandchild.title }}</a>
+                {% else %}
+                  {{ grandchild.title }}
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    </div>
+  </nav>
+
+  <main class="main-content">
+    {{ content }}
+  </main>
+
+  {% if page.right_links %}
+  <aside class="right-links">
+    <div class="right-links-content">
+    {% assign right_links = site.data[page.right_links] %}
+    {% for item in right_links %}
+      {% if item.url %}
+        <div class="link-item">
+          <a href="{{ item.url }}">{{ item.title }}</a>
+        </div>
+      {% else %}
+        <div class="link-section">{{ item.title }}</div>
+      {% endif %}
+      {% if item.children %}
+        {% for child in item.children %}
+          <div class="link-child">
+            {% if child.url %}
+              <a href="{{ child.url }}">{{ child.title }}</a>
+            {% else %}
+              {{ child.title }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    </div>
+  </aside>
+  {% endif %}
+</div>
