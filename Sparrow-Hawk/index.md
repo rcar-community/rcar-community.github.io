@@ -15,23 +15,24 @@ product: Sparrow Hawk
 
 ## Introduction
 
-This is the page for Sparrow Hawk board with R-Car V4H provided Retronix Technology Inc.
+This is the page for Sparrow Hawk board with R-Car V4H provided by Retronix Technology Inc.
 
 &nbsp;
 
 Sparrow Hawk is an evaluation board targeting the industrial market.
 
-The supported software is only open source, with [Yocto BSP][Yocto] and [Debian based BSP][Debian].
+The supported software is only open source, with [Yocto BSP][Yocto], [Debian based BSP][Debian] and [Zephyr][Zephyr].
 
 Please post any inquiries regarding Sparrow Hawk on GitHub Discussions ([Q&A][Q&A]).
 
 Note:
    * The secure boot feature provided by the R-Car V4H cannot be used on Sparrow Hawk due to hardware specification.
    * The Sparrow Hawk supports camera input via MIPI CSI only; therefore, automotive cameras such as GMSL cameras cannot be connected.
-   * USB Type-C port doesn’t support DP-alt mode so that Display output is not supported. Please use DisplayPort or Raspberry Pi touch Display 2 instead of Type-C.
+   * USB Type-C port doesn’t support DP-alt mode, so display output is not supported. Please use DisplayPort (CN6) or a DSI display (J4) instead of Type-C.
 
 [Yocto]: <BSP/yocto_bsp.html>
 [Debian]: <BSP/debian_based_bsp.html>
+[Zephyr]: <BSP/zephyr.html>
 [Q&A]: <https://github.com/orgs/rcar-community/discussions/categories/q-a>
 
 ## What's New
@@ -122,19 +123,20 @@ Link : [https://ftdichip.com/drivers/](https://ftdichip.com/drivers/)
 ### Caution
 
 1. Hot! Do not touch R-Car V4H (main chip) directly. Fan must be installed to prevent R-Car V4H overheating and failure.
-2. Do not touch the board while USB-PD is connected. Touch bare board may cause short circuit and failure.
-3. Please use only a power supply and cable that comply with the USB Power Delivery (USB PD) standard. Using a non-USB PD power supply cause damage to the Sparrow Hawk.
+2. Do not touch the board while USB-PD is connected. Touching the bare board may cause short circuit and failure.
+3. Please use only a power supply and cable that comply with the USB Power Delivery (USB PD) standard. Using a non-USB PD power supply causes damage to the Sparrow Hawk.
 {: .caution}
 
 ## Software Version List
 
 |Software                   |Version|
 |---------------------------|-------|
-|Yocto Project              |5.0.16 |
+|Yocto Project              |5.0.20 |
 |Debian                     |13     |
-|Linux kernel               |6.18.20|
-|U-Boot                     |2026.04|
-|Arm Trusted Firmware       |2.14.0 |
+|Linux kernel               |6.18.54|
+|U-Boot                     |2026.10|
+|Arm Trusted Firmware       |2.15.0 |
+|Zephyr                     |v4.4.0 |
 
 ## Select Software Platform
 
@@ -142,41 +144,46 @@ Link : [https://ftdichip.com/drivers/](https://ftdichip.com/drivers/)
 
 ### [Debian based BSP][Debian]
 
-[Yocto]: <BSP/yocto_bsp.html>
-[Debian]: <BSP/debian_based_bsp.html>
+### [Zephyr][Zephyr]
 
 ## Tips
 
-1. There is no output on serial console when power on the board.
-   * You can check following list to confirm board is broken or not.
-      * Do you write the loaders into the board?
-      * Do you change DIP-SW as correct settings?
-      * Do you use correct serial device? This board has two serial devices and lower number is used for mainly.
-      * Do you use correct USB-PD power supply? This board needs 20V3.25A(65W) output at least.
+### There is no output on serial console when power on the board
 
-2. How to use HDMI display instead of DP display.
-   * This board doesn’t support passive adaptor so that please use active adaptor.
+You can check following list to confirm board is broken or not.
+* Do you write the loaders into the board?
+* Do you change DIP-SW as correct settings?
+* Do you use correct serial device? This board has two serial devices and lower number is used for mainly.
+* Do you use correct USB-PD power supply? This board needs 20V3.25A(65W) output at least.
 
-3. Why my Headset Mic is not working?
-   * There are two types of 4pin Headset. one is CIST which is default of sparrow-hawk. the other is MIST. The only deference is pin assign of MIC and GND. If you use MIST type of headset, please modify the board as follows:
-      * Mount :R631 , R632
-      * Unmount :R630 , R633
+### How to use HDMI display instead of DP display
 
-4. Loader recovery procedure
-   * If flashing fails and U-Boot no longer boots, please try the recovery procedure.
-   * Download [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-04-13/ipl-burning.zip) and unzip ipl-burning.zip. Then, run script in ipl-burning directory(Linux: run.sh, Windows: run.bat). If using Linux host PC, please install python3 and pip command on your system before running the script and close other console which uses serial port of the board before executing the script.
-   1. Turn off the power and change SW2 according to the console instructions.
-   2. Press Enter to continue.
-   3. Turn on the power.
-   4. Wait for the writing process to complete.
-   5. Turn off the power and change SW2 again according to the console instructions.
-   6. Press Enter to close the program.
+This board doesn’t support passive adaptor so that please use active adaptor.
 
-   * Note:
-      * This script use serial device /dev/ttyUSB* in Linux. But, it cannot be accessed from user without previledged right by default settings. Please use sudo command or add current user into dialout group.
+### Why my Headset Mic is not working
 
-   * Note:
-      * Please change the Mode Switch(=SW2) according to the instructions displayed by the ipl-burning(run.sh or run.bat).
+There are two types of 4pin Headset. One is CIST which is default of Sparrow Hawk. The other is MIST. The only difference is pin assign of MIC and GND. If you use MIST type of headset, please modify the board as follows:
+* Mount :R631 , R632
+* Unmount :R630 , R633
+
+### Loader recovery procedure
+
+If flashing fails and U-Boot no longer boots, please try the recovery procedure.
+
+Download [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-16/ipl-burning.zip) and unzip ipl-burning.zip. Then, run script in ipl-burning directory(Linux: run.sh, Windows: run.bat). If using Linux host PC, please install python3 and pip command on your system before running the script and close other console which uses serial port of the board before executing the script.
+
+1. Turn off the power and change SW2 according to the console instructions.
+2. Press Enter to continue.
+3. Turn on the power.
+4. Wait for the writing process to complete.
+5. Turn off the power and change SW2 again according to the console instructions.
+6. Press Enter to close the program.
+
+**Note:**
+* This script uses serial device /dev/ttyUSB* in Linux. But, it cannot be accessed from user without privileged right by default settings. Please use sudo command or add current user into dialout group.
+
+**Note:**
+* Please change the Mode Switch(=SW2) according to the instructions displayed by the ipl-burning(run.sh or run.bat).
 
 ## Known Issues
 

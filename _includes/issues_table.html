@@ -12,25 +12,29 @@
   {% assign items = common_items | concat: bsp_items %}
 {% endif %}
 
-<table>
-  <thead>
-    <tr>
-      {% if page_type == "all" %}<th>Platform</th>{% endif %}
-      <th>Category</th>
-      <th>Function</th>
-      <th>Description</th>
-      <th>Resolution Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for item in items %}
-    <tr>
-      {% if page_type == "all" %}<td>{{ item.type }}</td>{% endif %}
-      <td>{{ item.category }}</td>
-      <td>{{ item.function }}</td>
-      <td>{{ item.description }}</td>
-      <td>{{ item.resolution_date }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+{% if items.size > 0 %}
+  <table>
+    <thead>
+      <tr>
+        {% if page_type == "all" %}<th>Platform</th>{% endif %}
+        <th>Category</th>
+        <th>Function</th>
+        <th>Description</th>
+        <th>Resolution Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        {% if page_type == "all" %}<td>{{ item.type }}</td>{% endif %}
+        <td>{{ item.category }}</td>
+        <td>{{ item.function }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.resolution_date }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+Nothing
+{% endif %}

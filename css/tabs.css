@@ -1,0 +1,82 @@
+.rc-tabs {
+  --rc-tabs-active-bg: #1a1a6e;      /* アクティブタブの背景色 */
+  --rc-tabs-active-fg: #ffffff;      /* アクティブタブの文字色 */
+  --rc-tabs-inactive-bg: #e2e2e2;    /* 非アクティブタブの背景色 */
+  --rc-tabs-inactive-fg: #6b6b76;    /* 非アクティブタブの文字色 */
+  --rc-tabs-inactive-hover: #d3d3d3; /* 非アクティブタブのhover背景色 */
+  --rc-tabs-line: #d9d9df;           /* タブ下の区切り線色 */
+  --rc-tabs-panel-bg: #ffffff;       /* パネル背景色 */
+  --rc-tabs-radius: 6px;             /* タブ上部の角丸 */
+
+  margin: 1.25em 0;
+  font-family: inherit;
+}
+
+.rc-tabs__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-bottom: 1px solid var(--rc-tabs-line);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rc-tabs__btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 600;
+  line-height: 1.4;
+  padding: 0.55em 1.2em;
+  border-radius: var(--rc-tabs-radius) var(--rc-tabs-radius) 0 0;
+  background: var(--rc-tabs-inactive-bg);
+  color: var(--rc-tabs-inactive-fg);
+  transition: background-color 0.15s ease, color 0.15s ease;
+  position: relative;
+  top: 1px; 
+}
+
+.rc-tabs__btn:hover {
+  background: var(--rc-tabs-inactive-hover);
+}
+
+.rc-tabs__btn[aria-selected="true"] {
+  background: var(--rc-tabs-active-bg);
+  color: var(--rc-tabs-active-fg);
+}
+
+.rc-tabs__btn[aria-selected="true"]:hover {
+  background: var(--rc-tabs-active-bg);
+}
+
+.rc-tabs__btn:focus-visible {
+  outline: 2px solid var(--rc-tabs-active-bg);
+  outline-offset: 2px;
+}
+
+.rc-tabs__panels {
+  background: var(--rc-tabs-panel-bg);
+  padding: 1.25em 0;
+}
+
+.rc-tabs__panel {
+  display: none;
+}
+
+.rc-tabs__panel[data-active="true"] {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .rc-tabs__nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .rc-tabs__btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}

@@ -23,101 +23,248 @@ This is the Debian based BSP page for Sparrow Hawk.
 |Software                   |Version|
 |---------------------------|-------|
 |Debian                     |13     |
-|Linux kernel               |6.18.20|
-|U-Boot                     |2026.04|
-|Arm Trusted Firmware       |2.14.0 |
+|Linux kernel               |6.18.54|
+|U-Boot                     |2026.10|
+|Arm Trusted Firmware       |2.15.0 |
 
 ## How to Startup
 
-If you want to download OS image, please start [3.1.1. Downloading OS image](#downloading-os-image).
-
-If you want to build OS image, please start [3.1.2. Building OS image](#building-os-image).
+Prepare the OS image by downloading it or by building it by yourself, then flash it to the boot device.
 
 ### Preparation of the software
 
-#### Downloading OS image
+{%- capture prepare_md -%}
+<!-- variant 0 -->
+Download the OS image from GitHub
+* BSP(either of the following BSP)
+   * In case of BSP: [sparrow-hawk-debian-13-based-bsp.img.gz](https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-16/sparrow-hawk-debian-13-based-bsp.img.gz)
+      * For Linux users, you can download the OS image using the following command.
+      ```bash
+      wget -c https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-16/sparrow-hawk-debian-13-based-bsp.img.gz
+      ```
+   * In case of BSP + Xfce desktop: [sparrow-hawk-debian-13-based-bsp-xfce.img.gz](https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-16/sparrow-hawk-debian-13-based-bsp-xfce.img.gz)
+      * For Linux users, you can download the OS image using the following command.
+      ```bash
+      wget -c https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-16/sparrow-hawk-debian-13-based-bsp-xfce.img.gz
+      ```
 
-Download OS the image from GitHub
-* BSP: [sparrow-hawk-debian-13-based-bsp.img.gz](https://github.com/rcar-community/kernel-apt-repository/releases/download/v2026-04-13/sparrow-hawk-debian-13-based-bsp.img.gz)
-   * For Linux users, you can download the OS image using the following command.
-   ```bash
-   wget -c https://github.com/rcar-community/kernel-apt-repository/releases/download/v2026-04-13/sparrow-hawk-debian-13-based-bsp.img.gz
-   ```
+---
 
-Next, jump to [3.2. How to flash](#how-to-flash).
-
-#### Building OS image
-
+<!-- variant 1 -->
 ```bash
-# You need to prepare docker envrionment on your Host PC
-./build_image/build_with_docker_sparrow-hawk.sh <DEBIAN_VERSION>
-ex.) ./build_image/build_with_docker_sparrow-hawk.sh 13
+git clone https://github.com/rcar-community/sparrow-hawk-debian
+cd sparrow-hawk-debian
+```
+
+**In case of BSP:**
+```bash
+# You need to prepare docker environment on your Host PC
+./setup_docker_image.sh
+./build_image/build_debian_image/build_with_docker_sparrow-hawk.sh 13
 ```
 or
 ```bash
-# Note: Build requirements can be confirmed from build_image/Dockerfile.
-sudo ./build_image/build_debian_13_for_sparrow-hawk.sh <DEBIAN_VERSION>
-ex.) sudo ./build_image/build_debian_13_for_sparrow-hawk.sh 13
+# Note: Build requirements can be confirmed from the dockerfiles in _dev.
+sudo ./build_image/build_debian_image/build_debian_for_sparrow-hawk.sh 13
 ```
 
-You can find sparrow-hawk-debian-13-based-bsp.img.gz in the following directory.
+**In case of BSP + Xfce desktop:**
 ```bash
-ls ./build_image/
+./setup_docker_image.sh
+./build_image/build_debian_image/build_with_docker_sparrow-hawk.sh 13 --desktop xfce
 ```
-
-Next, jump to [3.2. How to flash](#how-to-flash).
-
-### How to flash
-
-#### Flashing OS image into microSD card
-
-**Linux case**
+or
 ```bash
-gzip -cd sparrow-hawk-debian-13-based-bsp.img.gz | sudo dd of=<device file> bs=1M status=progress && sync
+sudo ./build_image/build_debian_image/build_debian_for_sparrow-hawk.sh 13 --desktop xfce
 ```
-ex) gzip -cd sparrow-hawk-debian-13-based-bsp.img.gz | sudo dd of=/dev/sdi bs=1M status=progress && sync
 
-**Windows case**
-1. Extract gzip image using 7zip or similer software.
-2. Flash extracted image into microSD card using Etcher, win disk imager, and so on.
+The OS image is created in the following directory.
+* In case of BSP: sparrow-hawk-debian-13-based-bsp.img.gz
+* In case of BSP + Xfce desktop: sparrow-hawk-debian-13-based-bsp-xfce.img.gz
 
-#### Flashing loader
+```bash
+ls ./build_image/build_debian_image/
+```
+
+---
+
+<!-- variant 2 -->
+Nothing to prepare. Raspberry Pi Imager downloads the OS image by itself.
+Please go to [Flashing OS image](#flashing-os-image) and select the "Raspberry Pi Imager (experimental)" tab.
+{%- endcapture -%}
+{% include multi-tabs.html id="prepare-os-image"
+                           labels="Download OS image|Build OS image|Raspberry Pi Imager (experimental)"
+                           contents=prepare_md %}
+
+### Flashing OS image
+
+Select the boot device.
+
+{%- capture flash_md -%}
+<!-- variant 0 -->
+* Linux case
+   * **In case of BSP:**
+     ```bash
+     gzip -cd sparrow-hawk-debian-13-based-bsp.img.gz | sudo dd of=<device file> bs=1M status=progress && sync
+     ```
+     ex) gzip -cd sparrow-hawk-debian-13-based-bsp.img.gz | sudo dd of=/dev/sdi bs=1M status=progress && sync
+   * **In case of BSP + Xfce desktop**
+     ```bash
+     gzip -cd sparrow-hawk-debian-13-based-bsp-xfce.img.gz | sudo dd of=<device file> bs=1M status=progress && sync
+     ```
+     ex) gzip -cd sparrow-hawk-debian-13-based-bsp-xfce.img.gz | sudo dd of=/dev/sdi bs=1M status=progress && sync
+
+* Windows case
+   1. Extract gzip image using 7zip or similar software.
+   2. Flash extracted image into microSD card using Etcher, win disk imager, and so on.
+
+---
+
+<!-- variant 1 -->
+The image is written from a Linux host PC in the same way as the microSD card.
+
+**Note:**
+* **All data on the target device is erased. Please check the device file carefully before running the command.**
+* **SATA M.2 SSD is not supported.**
+
+&nbsp;
+
+1. Connect the USB storage device or the NVMe M.2 SSD to the Linux host PC.
+   * For the NVMe M.2 SSD, a USB-NVMe enclosure or an M.2 adapter is required.
+2. Check the device file of the target device.
+   ```bash
+   lsblk
+   ```
+3. Write the OS image to the device.
+   * **In case of BSP:**
+     ```bash
+     gzip -cd sparrow-hawk-debian-13-based-bsp.img.gz | sudo dd of=<device file> bs=1M status=progress && sync
+     ```
+   * **In case of BSP + Xfce desktop**
+     ```bash
+     gzip -cd sparrow-hawk-debian-13-based-bsp-xfce.img.gz | sudo dd of=<device file> bs=1M status=progress && sync
+     ```
+4. Connect the device to Sparrow Hawk.
+   * USB storage device: {% include hover-image.html text="USB6" img="/images/USB6.webp" %}
+   * NVMe M.2 SSD: {% include hover-image.html text="CN5" img="/images/CN5.webp" %} (insert it before powering on)
+
+
+---
+
+<!-- variant 2 -->
+**Note:**
+* **This method is experimental.**
+* **All data on the target device is erased. Please check the target device carefully.**
+
+&nbsp;
+
+1. Download the latest Raspberry Pi Imager for Linux (AppImage) from [https://github.com/raspberrypi/rpi-imager/releases](https://github.com/raspberrypi/rpi-imager/releases).
+2. Start Raspberry Pi Imager with the Sparrow Hawk repository as follows.
+   ```bash
+   sudo ./Raspberry_Pi_Imager-<version>-desktop-x86_64.AppImage --repo https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-16/repo.json
+   ```
+3. Select the Sparrow Hawk image in the list and the target device (microSD card, USB storage device or NVMe M.2 SSD), then write the image.
+4. Connect the device to Sparrow Hawk. Please see [How to boot](#how-to-boot) for the connectors.
+{%- endcapture -%}
+{% include multi-tabs.html id="flash-os-image"
+                           labels="microSD card|USB storage / NVMe M.2 SSD|Raspberry Pi Imager (experimental)"
+                           contents=flash_md %}
+
+To boot from the device, please see [How to boot](#how-to-boot).
+
+### Update loader
 
 Please update the loader (u-boot) using the loader file (flash.bin) included in the Debian OS image (rootfs).
+This is needed only if the U-Boot version displayed at boot is older than the one in [Software Version List](#software-version-list).
 
-1. Insert microSD card prepared in Section 3.2.1 into microSD card slot ({% include hover-image.html text="CN1" img="/images/CN1.webp" %}), then power on the Sparrow Hawk board
-2. Update the QSPI memory from U-Boot as shown below, then reboot the system.
-```plaintext
-load mmc 0:1 ${loadaddr} flash.bin && sf probe && sf update ${loadaddr} 0 ${filesize} && reset
-```
+1. Insert the boot device prepared in [Flashing OS image](#flashing-os-image) into Sparrow Hawk, then power on the board and enter the U-Boot shell referring to steps 1 to 5 of [How to boot](#how-to-boot).
+2. Update the QSPI memory by running the command corresponding to the boot device. The system is reset after the update.
+   * microSD card
+     ```bash
+     run update_loader_from_mmc
+     ```
+   * USB storage device
+     ```bash
+     run update_loader_from_usb
+     ```
+   * NVMe M.2 SSD
+     ```bash
+     run update_loader_from_nvme
+     ```
+3. Enter the U-Boot shell again and reset the environment to default as shown below. The environment saved by `saveenv` before overrides the default environment of the new loader and hides the commands such as `autoconf_xxx`.
+   ```bash
+   env default -a
+   saveenv
+   reset
+   ```
 
 Note:
-* If flashing fails and U-Boot no longer boots, please try the recovery procedure. Please see 4 of [Tips](/Sparrow-Hawk/index.html#tips) in Sparrow Hawk page.
+* `env default -a` resets all U-Boot environment variables, including your own settings such as `bootcmd` and `ethaddr`. Please set them again if necessary.
+* `update_loader_from_usb` and `update_loader_from_nvme` use PCIe. If the device is not found, please see [Troubleshooting of USB/NVMe M.2 SSD boot](#troubleshooting-of-usb-nvme-boot) in [Tips](#tips).
+* If `update_loader_from_xxx` is not defined (the loader is older than the v2026-04-13 release), insert the microSD card and use the following command instead of step 2.
+  ```plaintext
+  load mmc 0:1 ${loadaddr} flash.bin && sf probe && sf update ${loadaddr} 0 ${filesize} && reset
+  ```
+* If flashing fails and U-Boot no longer boots, please try the recovery procedure. Please see [Loader recovery procedure in Sparrow Hawk page](/Sparrow-Hawk/index.html#loader-recovery-procedure).
 
 ### How to boot
 
 1. Ensure that the fan is properly installed.
-2. Insert the SD card into {% include hover-image.html text="CN1" img="/images/CN1.webp" %} which is bottom of the board.
+2. Insert the boot device into Sparrow Hawk.
+   * microSD card: insert it into {% include hover-image.html text="CN1" img="/images/CN1.webp" %} which is bottom of the board.
+   * USB storage device: connect it to {% include hover-image.html text="USB6" img="/images/USB6.webp" %}.
+   * NVMe M.2 SSD: insert it into {% include hover-image.html text="CN5" img="/images/CN5.webp" %}.
 3. Open terminal application and open serial device.
 4. Press {% include hover-image.html text="SW1" img="/images/SW1.webp" %} to power on the board.
 5. After booting U-Boot, please press any key while showing "Hit any key to stop autoboot:" to enter U-Boot shell.
-6. Input the following command into U-Boot shell and press enter key. If you connect camera and/or display, please choice the following button and input command.
-```bash
-setenv bootcmd "load mmc 0:1 0x58000000 /boot/fitImage && source ${loadaddr}:script"
-boot
-```
+6. Input the command corresponding to the boot device into U-Boot shell and press enter key.
+   * microSD card
+     ```bash
+     run autoconf_mmc
+     ```
+   * USB storage device
+     ```bash
+     run autoconf_usb
+     ```
+   * NVMe M.2 SSD
+     ```bash
+     run autoconf_nvme
+     ```
 7. If command and environment is correct, Linux kernel log will output.
 8. Log in using the following login ID and password.
    * sparrow-hawk login: rcar
    * Password: rcar
 
+Note:
+* `autoconf_xxx` sets `bootargs` for the boot device, loads `/boot/fitImage` from the first partition of the device, and runs the boot script in it.
+* The boot script detects the connected Pi Camera(J1/J2) and DSI display(J4) automatically and selects the corresponding configuration. You don't need to specify them manually.
+* When booting from USB storage device or NVMe M.2 SSD, the initramfs is used to load the PCIe firmware at an early stage.
+
 &nbsp;
 
-To make the `bootcmd` set in 5 of [3.3. How to Boot](#how-to-boot) persistent across reboots, run `saveenv` as shown below.
-After saving the environment, reboot the system once. From the next boot onward, this `bootcmd` will be used automatically, and you can skip 4 and 5 in [3.3. How to Boot](#how-to-boot).
+To make the command executed in step 6 of [How to boot](#how-to-boot) persistent across reboots, set it to `bootcmd` and run `saveenv` as shown below.
+After saving the environment, reboot the system once. From the next boot onward, the command will be executed automatically, and you can skip steps 5 and 6 in [How to boot](#how-to-boot).
 ```bash
+setenv bootcmd "run autoconf_mmc"  # Replace with autoconf_usb or autoconf_nvme according to the boot device
 saveenv
 reset  # Execute this only the first time
+```
+
+#### Boot options
+
+The boot script changes its behavior according to the following U-Boot environment variables. Set them before running `autoconf_xxx` (use `saveenv` to keep them).
+
+| Variable        | Value     | Description                                                       |
+|-----------------|-----------|-------------------------------------------------------------------|
+| `fan`           | `pwm`     | Apply the PWM fan settings for J3 (ex. Pi Active Cooler). The fan also works without this setting. |
+| `fan`           | `argon40` | Enable the configuration for Argon FAN HAT (if it is detected).   |
+| `disable_uio`   | `1`       | Disable the UIO devicetree overlay (enabled by default).          |
+| `conf_append`   | string    | Append the string to the FIT configuration name. For advanced use.|
+
+ex) Use Argon FAN HAT
+```bash
+setenv fan argon40
+run autoconf_mmc
 ```
 
 ## How to Check Functions
@@ -138,12 +285,12 @@ reset  # Execute this only the first time
 | [Thermal](#thermal)                   | Supported                  |
 | [NVMe M.2 SSD](#nvme-m2-ssd)          | Supported                  |
 | [Pi Camera](#pi-camera)               | Supported                  |
-| [Pi Display](#pi-display)             | Supported                  |
+| [DSI Display](#dsi-display)           | Supported                  |
 | PCIe Endpoint                         | Support planned (2026)     |
 | [Pi Active Cooler](#pi-active-cooler) | Supported                  |
-| GPU                                   | Support planned (Jul 2026) |
+| [GPU](#gpu)                           | Supported                  |
 | AI Accelerator(CNN-IP)                | Support planned (2026)     |
-| Desktop(GUI)                          | Support planned (Jul 2026) |
+| Desktop(GUI)                          | Supported                  |
 
 Note:
 * "Supported": Function succeeded in the simple test as below.<br>
@@ -157,7 +304,6 @@ Loop back
 * ![CAN]({{ '/images/CAN.webp' | relative_url }})
 
 2. Execute following commands on Linux:
-{:start="2"}
 ```bash
 sudo ip link set can0 up type can restart-ms 100 bitrate 1000000 dbitrate 5000000 fd on
 sudo ip link set can1 up type can restart-ms 100 bitrate 1000000 dbitrate 5000000 fd on
@@ -166,6 +312,7 @@ cangen can1 -I i -L i -D i -f -n 16
 candump can1 -n 16 &
 cangen can0 -I i -L i -D i -f -n 16
 ```
+{:start="2"}
 
 ### Audio
 
@@ -178,24 +325,25 @@ cangen can0 -I i -L i -D i -f -n 16
       * Even if you don't connect an audio output to {% include hover-image.html text="CONN4" img="/images/CONN4.webp" %}, you can test.
 * Software setup
    * Setup(Mix Aux in and Headset mic and setup audio output via {% include hover-image.html text="CONN3" img="/images/CONN3.webp" %})
-   ```bash
-   amixer set "Headphone" 40%
-   amixer set "Headphone" on
-   amixer set "Mixout Left DAC Left" on
-   amixer set "Mixout Right DAC Right" on
-   amixer set "Aux" on
-   amixer set "Aux" 80%
-   amixer set "Mixin PGA" on
-   amixer set "Mixin PGA" 50%
-   amixer set "ADC" on
-   amixer set "ADC" 80%
-   amixer set "Mixin Left Aux Left" on
-   amixer set "Mixin Right Aux Right" on
-   amixer set "Mic 1" on
-   amixer set "Mic 1" 80%
-   amixer set "Mixin Left Mic 1" on
-   amixer set "Mixin Right Mic 1" on
-   ```
+
+     ```bash
+     amixer set "Headphone" 40%
+     amixer set "Headphone" on
+     amixer set "Mixout Left DAC Left" on
+     amixer set "Mixout Right DAC Right" on
+     amixer set "Aux" on
+     amixer set "Aux" 80%
+     amixer set "Mixin PGA" on
+     amixer set "Mixin PGA" 50%
+     amixer set "ADC" on
+     amixer set "ADC" 80%
+     amixer set "Mixin Left Aux Left" on
+     amixer set "Mixin Right Aux Right" on
+     amixer set "Mic 1" on
+     amixer set "Mic 1" 80%
+     amixer set "Mixin Left Mic 1" on
+     amixer set "Mixin Right Mic 1" on
+     ```
 * Test function
    1. Only Playback test (3 times) [{% include hover-image.html text="CONN3" img="/images/CONN3.webp" %}]
       ```bash
@@ -223,8 +371,7 @@ Toggle GP2\_12(Pin11 on Pin Header)
 1. Connect LED or Oscilloscope to the board
    * ex) LED
    * ![LED]({{ '/images/LED.webp' | relative_url }})
-      * Please install a resistor to prevent damage to the LED. In the Connection image, it i
-s used a 1kΩ resistor.
+      * Please install a resistor to prevent damage to the LED. In the Connection image, it is used a 1kΩ resistor.
 2. Execute following command
    ```bash
    python3 /usr/bin/example-apps/toggle_gpio_GP2_12.py
@@ -244,30 +391,31 @@ For more examples, please see also [https://github.com/brgl/libgpiod/raw/refs/he
    * I2C pin assignment
    * ![I2C pin]({{ '/images/I2C_pin.webp' | relative_url }})
 
-* As an example, output result using Argon FAN HAT and setting 'setenv bootcmd "load mmc 0:1 0x58000000 /boot/fitImage && bootm 0x58000000#default"' when How to boot's step6
+* As an example, output result using Argon FAN HAT and setting `setenv fan argon40` before booting (please see [Boot options](#boot-options))
    * i2cdetect: detect I2C devices on a bus
-  ```bash
-  rcar@sparrow-hawk:~# i2cdetect -y -r 3
-       0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
-  00:                         -- -- -- -- -- -- -- --
-  10: -- -- -- -- -- -- -- -- -- -- 1a -- -- -- -- --
-  20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  70: -- -- -- -- -- -- -- --
-  rcar@sparrow-hawk:~# i2cdetect -y -r 4
-       0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
-  00:                         -- -- -- -- -- -- -- --
-  10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  50: 50 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  70: -- -- -- -- -- -- -- --
-  ```
+
+     ```bash
+     rcar@sparrow-hawk:~# i2cdetect -y -r 3
+          0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+     00:                         -- -- -- -- -- -- -- --
+     10: -- -- -- -- -- -- -- -- -- -- 1a -- -- -- -- --
+     20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     70: -- -- -- -- -- -- -- --
+     rcar@sparrow-hawk:~# i2cdetect -y -r 4
+          0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+     00:                         -- -- -- -- -- -- -- --
+     10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     50: 50 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     70: -- -- -- -- -- -- -- --
+     ```
    * i2cset: control FAN speed
      ```bash
      rcar@sparrow-hawk:# i2cset -y 3 0x01a 0x00 # 0%
@@ -280,8 +428,7 @@ For more examples, please see also [https://github.com/brgl/libgpiod/raw/refs/he
 
 ### USB3.0
 
-* With the power on, connect a USB flash drive to the {% include hover-image.html text="USB6"
- img="/images/USB6.webp" %} port on the board. If “SuperSpeed” is displayed, the test is successful.
+* With the power on, connect a USB flash drive to the {% include hover-image.html text="USB6" img="/images/USB6.webp" %} port on the board. If “SuperSpeed” is displayed, the test is successful.
 
    * Output example(the upper {% include hover-image.html text="USB6" img="/images/USB6.webp" %} port)
      ```plaintext
@@ -338,7 +485,7 @@ killall cat
   |----------------|----------------------------|
   | ~ 68°C         | Normal operation           |
   | 68 ~ 100 °C    | CPU clock is limited       |
-  | 100 °C         | System is shutdown forcely |
+  | 100 °C         | Forced system shutdown     |
 
 * Measurement point
 
@@ -376,27 +523,35 @@ killall cat
 ### Pi Camera
 
 **Note:**
-* **Currently, Raspberry Pi Camera V2 and Raspberry Pi Camera V3 is only supported.**
+* **Currently, only Raspberry Pi Camera V2 and Raspberry Pi Camera V3 are supported.**
 
 Note:
-* The Raspberry Pi Camera v3 is currently under development on mainline Linux and libcamera,
+* The Raspberry Pi Camera V3 is currently under development on mainline Linux and libcamera,
 so at this stage the image may appear dark and features such as auto-focus are not yet supported. In addition, recognition may occasionally fail.
 
 &nbsp;
 
 1. Connect Raspberry Pi Camera V2 and/or Raspberry Pi Camera V3 to {% include hover-image.html text="J1" img="/images/J1.webp" %} and/or {% include hover-image.html text="J2" img="/images/J2.webp" %} connector.
-   * The board connector has 22 pin so that you need to prepare pitch convert cable.
+   * The board connector has 22 pins, so you need to prepare a pitch conversion cable.
    * When using the Raspberry Pi Camera V2, the following cable is required.
-      * [https://www.raspberrypi.com/products/camera-cable/](https://www.raspberrypi.com/prod
-ucts/camera-cable/)
+      * [https://www.raspberrypi.com/products/camera-cable/](https://www.raspberrypi.com/products/camera-cable/)
    * ![Camera cable]({{ '/images/camera_cable.webp' | relative_url }})
-2. Change bootcmd variable on U-Boot shell referring 5 of [3.3. How to boot](#how-to-boot).
+2. Boot Linux referring to step 6 of [How to boot](#how-to-boot). The connected device is detected automatically.
 3. Test camera
-   * On-board test(Need to connect Display)
+   * On-board test (a display is required)
+      * For the Xfce desktop, install it referring to [GPU](#gpu) and execute the command on the terminal of the Xfce desktop.
 
-{% include selector.html config="camera_debian" data-mode="debian" %}
+{% include selector.html title="Command for BSP" config="camera_debian" data-mode="debian" %}
 
-### Pi Display
+{% include selector.html title="Command for Xfce desktop" config="camera_xfce" data-mode="weston" %}
+
+### DSI Display
+
+The following displays can be connected to the {% include hover-image.html text="J4" img="/images/J4.webp" %} connector. The connected device is detected automatically when you boot Linux referring to step 6 of [How to boot](#how-to-boot), so you don't need to specify it.
+
+#### Raspberry Pi Touch Display 2
+
+Raspberry Pi Touch Display 2: [https://www.raspberrypi.com/products/touch-display-2/](https://www.raspberrypi.com/products/touch-display-2/)
 
 **Note:**
 * **Please perform the following "1. Setup" without connecting the AC adapter to the board ({% include hover-image.html text="USB1" img="/images/USB1.webp" %}).**
@@ -410,8 +565,15 @@ ucts/camera-cable/)
    * Connect Raspberry Pi Touch Display 2 cable to the {% include hover-image.html text="J4" img="/images/J4.webp" %} connector.
    * Connect the Power (red wire) to pin 2 of {% include hover-image.html text="CN7" img="/images/CN7.webp" %} and the Ground (black wire) to pin 6 of {% include hover-image.html text="CN7" img="/images/CN7.webp" %}.
    * ![Pi Display]({{ '/images/PiDisplay.jpg' | relative_url }})
-2. Change bootcmd variable on U-Boot shell referring 5 of [3.3. How to boot](#how-to-boot).
-3. Display will work correctly after changing above.
+2. Boot Linux referring to step 6 of [How to boot](#how-to-boot). The connected device is detected automatically.
+3. Display will work correctly after booting.
+
+#### Others
+
+* [Olimex MIPI-HDMI adapter](https://www.olimex.com/Products/IoT/ESP32-P4/MIPI-HDMI/): Connect the adapter to the {% include hover-image.html text="J4" img="/images/J4.webp" %} connector, and connect an HDMI display to the adapter. The official Raspberry Pi FPC cable can be used to connect the adapter.
+* [Waveshare 13.3inch DSI LCD](https://www.waveshare.com/wiki/13.3inch_DSI_LCD): Connect the panel to the {% include hover-image.html text="J4" img="/images/J4.webp" %} connector.
+
+For the details of the connection, refer to the manual of each product.
 
 ### Pi Active Cooler
 
@@ -434,14 +596,154 @@ ucts/camera-cable/)
   ```
   \#1 ~ 255 is acceptable but low speeds are not recommended from thermal perspective.
 
+### GPU
+
+**Note:**
+* **The OpenGL ES benchmark (glmark2) and the Vulkan sample (vkcube) render on the display. Execute the commands on the terminal of the Xfce desktop.**
+
+&nbsp;
+
+If you use the BSP image, install the Xfce desktop first. A network connection is required. The desktop does not start automatically right after the installation, so start it with the second command.
+```bash
+sudo apt install task-xfce-desktop
+sudo systemctl restart lightdm
+```
+
+1. Connect a display to Sparrow Hawk and boot Linux referring to [How to boot](#how-to-boot). In case of the BSP + Xfce desktop image, the Xfce desktop starts automatically.
+2. Open the terminal on the Xfce desktop and execute the following commands. Each application renders on the display.
+   * OpenGL ES benchmark (glmark2)
+     ```bash
+     glmark2
+     ```
+   * Vulkan (vkcube)
+     ```bash
+     vkcube
+     ```
+3. Close the window of each application to stop it.
+4. To check OpenCL, execute `clinfo`. The GPU is available if the platform and the device are listed as follows.
+   ```bash
+   clinfo
+   ```
+   ```text
+   Number of platforms                               1
+     Platform Name                                   PowerVR
+   ...
+   Number of devices                                 1
+     Device Name                                     PowerVR A-Series AXM-8-256
+   ```
+
 ## Tips
 
-1. How to expand the rootfs
-   * Please run the following command on your board. Rootfs is expanded to use whole storage.
+### How to flash OS image without removing the device from the board
+
+Preparation:
+* TFTP server on your host PC and network connection between board and your host PC.
+* Copy the gzipped image file into tftp server root.
+   * ex.) /tftp/sparrow-hawk-debian-13-based-bsp.img.gz
+
+**Note:**
+* **After this operation, all data is erased on the device which is selected below.**
+
+&nbsp;
+
+Execute following command on u-boot shell:
+```bash
+setenv ethaddr
+setenv serverip
+setenv ipaddr
+```
+
+Then, select the device to flash and execute the command.
+
+{%- capture tftp_flash_md -%}
+<!-- variant 0 -->
+```bash
+tftp ${loadaddr} <image file with gzipped> && gzwrite mmc 0 ${loadaddr} ${filesize}
+```
+ex.) tftp ${loadaddr} sparrow-hawk-debian-13-based-bsp.img.gz && gzwrite mmc 0 ${loadaddr} ${filesize}
+
+---
+
+<!-- variant 1 -->
+```bash
+pci e
+usb start
+tftp ${loadaddr} <image file with gzipped> && gzwrite usb 0 ${loadaddr} ${filesize}
+```
+ex.) tftp ${loadaddr} sparrow-hawk-debian-13-based-bsp.img.gz && gzwrite usb 0 ${loadaddr} ${filesize}
+
+**Note:**
+* **The PCIe firmware is required to use USB storage device on U-Boot. If the device is not found, please see [Troubleshooting of USB/NVMe M.2 SSD boot](#troubleshooting-of-usb-nvme-boot).**
+
+---
+
+<!-- variant 2 -->
+```bash
+pci e
+nvme scan
+tftp ${loadaddr} <image file with gzipped> && gzwrite nvme 0 ${loadaddr} ${filesize}
+```
+ex.) tftp ${loadaddr} sparrow-hawk-debian-13-based-bsp.img.gz && gzwrite nvme 0 ${loadaddr} ${filesize}
+
+**Note:**
+* **The PCIe firmware is required to use NVMe M.2 SSD on U-Boot. If the device is not found, please see [Troubleshooting of USB/NVMe M.2 SSD boot](#troubleshooting-of-usb-nvme-boot).**
+{%- endcapture -%}
+{% include multi-tabs.html id="tftp-flash-os-image"
+                           labels="microSD card|USB storage|NVMe M.2 SSD"
+                           contents=tftp_flash_md %}
+
+### How to expand the rootfs
+
+Please run the following command on your board. Rootfs is expanded to use whole storage.
+```bash
+sudo expand-rootfs.sh
+sudo reboot
+```
+
+### Troubleshooting of USB/NVMe M.2 SSD boot {#troubleshooting-of-usb-nvme-boot}
+
+Booting from USB storage device or NVMe M.2 SSD (`autoconf_usb` / `autoconf_nvme`) and `update_loader_from_usb` / `update_loader_from_nvme` initialize PCIe in U-Boot, which needs the PCIe firmware.
+If the device is not found, please check the two conditions below.
+
+**Condition 1: The PCIe firmware is written to the SPI flash.**
+
+If the PCIe firmware is not written, dummy data is loaded as the firmware and PCIe does not work correctly. No error message is displayed in this case.
+Updating the loader by the procedure in [Update loader](#update-loader) updates only U-Boot and does not write the PCIe firmware.
+Write the PCIe firmware by either of the following methods.
+
+* Method A: Recovery procedure (ipl-burning)
+   * Run ipl-burning at least once, referring to [Loader recovery procedure in Sparrow Hawk page](/Sparrow-Hawk/index.html#loader-recovery-procedure). It writes both the loader and the PCIe firmware.
+* Method B: Write from the microSD card on U-Boot shell
+   * Boot U-Boot with the microSD card which has the Debian OS image (rootfs), then run the following command. It writes `lib/firmware/rcar_gen4_pcie.bin` in the rootfs to the SPI flash.
+
      ```bash
-     sudo expand-rootfs.sh
-     sudo reboot
+     run flash_pcie_fw_to_qspi_from_mmc
      ```
+
+**Condition 2: The environment variables for loading the PCIe firmware are set in U-Boot.**
+
+If they are not set, the following message is displayed.
+```plaintext
+Define 'renesas_rcar_gen4_load_firmware' script which loads the R-Car
+Gen4 PCIe controller firmware from storage into memory and sets these
+two environment variables:
+  ...
+```
+
+Check them on U-Boot shell. If they are not displayed, they are not set.
+```bash
+printenv renesas_rcar_gen4_load_firmware set_pcie_firmware_info
+```
+
+The environment saved by `saveenv` in the previous version overrides the default environment, so the variables may be missing even after the loader is updated. Reset the environment to default as shown below.
+```bash
+env default -a
+saveenv
+reset
+```
+
+**Note:**
+* **`env default -a` resets all U-Boot environment variables, including your own settings such as `bootcmd` and `ethaddr`. Please set them again if necessary.**
 
 ## Known Issues
 

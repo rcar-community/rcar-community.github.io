@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', function () {
   let h3Counter = 0;
   let h4Counter = 0;
 
+  // Section number of each heading (id -> "3.2.1."). Used by the TOC and
+  // by the in-page links so that both always show the same number.
+  const sectionNumbers = {};
+
   const headingArray = Array.from(headings);
 
   function hasChildren(index, parentTag) {
@@ -52,7 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const link = document.createElement('a');
       link.href = '#' + heading.id;
-      link.textContent = h2Counter + '. ' + heading.textContent.replace(/^\d+\.\s*/, '');
+      sectionNumbers[heading.id] = h2Counter + '.';
+      link.textContent = sectionNumbers[heading.id] + ' ' + heading.textContent.replace(/^\d+\.\s*/, '');
 
       item.appendChild(link);
 
@@ -90,7 +95,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const link = document.createElement('a');
       link.href = '#' + heading.id;
-      link.textContent = h2Counter + '.' + h3Counter + '. ' + heading.textContent.replace(/^\d+\.\d+\s*/, '');
+      sectionNumbers[heading.id] = h2Counter + '.' + h3Counter + '.';
+      link.textContent = sectionNumbers[heading.id] + ' ' + heading.textContent.replace(/^\d+\.\d+\s*/, '');
 
       item.appendChild(link);
 
@@ -122,7 +128,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const link = document.createElement('a');
       link.href = '#' + heading.id;
-      link.textContent = h2Counter + '.' + h3Counter + '.' + h4Counter + '. ' + heading.textContent.replace(/^\d+\.\d+\.\d+\s*/, '');
+      sectionNumbers[heading.id] = h2Counter + '.' + h3Counter + '.' + h4Counter + '.';
+      link.textContent = sectionNumbers[heading.id] + ' ' + heading.textContent.replace(/^\d+\.\d+\.\d+\s*/, '');
 
       child.appendChild(link);
       currentH3Children.appendChild(child);
@@ -138,4 +145,28 @@ document.addEventListener('DOMContentLoaded', function () {
   navWrapper.appendChild(title);
   navWrapper.appendChild(nav);
   leftNav.appendChild(navWrapper);
+
+  // Prefix the section number to the in-page links to a heading, so that
+  // "[How to boot](#how-to-boot)" is displayed as "3.3. How to boot".
+  // Skipped: links in tables (ex. the function list), links which already
+  // start with a number, and links with the "nonum" class.
+  content.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    if (a.closest('table') || a.classList.contains('nonum')) return;
+    if (/^\d+(\.\d+)*\.?\s/.test(a.textContent.trim())) return;
+
+    let id;
+    try {
+      id = decodeURIComponent(a.getAttribute('href').slice(1));
+    } catch (e) {
+      return;
+    }
+    if (!Object.prototype.hasOwnProperty.call(sectionNumbers, id)) return;
+
+    // translate="no": the number must be kept as it is by the page translation
+    const num = document.createElement('span');
+    num.className = 'secnum notranslate';
+    num.setAttribute('translate', 'no');
+    num.textContent = sectionNumbers[id] + ' ';
+    a.insertBefore(num, a.firstChild);
+  });
 });

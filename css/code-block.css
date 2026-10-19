@@ -1,0 +1,94 @@
+/* ===== 調整用の数値はここだけ変えればOK ===== */
+:root {
+  --code-label-color: #1a1aff;       /* ラベルの背景色 */
+  --code-top-padding: 0px;          /* ラベルの上の余白 */
+  --code-bottom-gap: 0px;            /* ラベルとコードの間の余白 */
+  --code-side-padding: 0px;         /* 左右の余白 */
+  --code-bottom-padding: 0px;       /* コード下部の余白 */
+}
+
+/* ===== ラベル付きカード ===== */
+div[data-filename] {
+  background: #1e1e1e !important;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1em 0;
+}
+
+div[data-filename] .code-header {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--code-top-padding) var(--code-side-padding) var(--code-bottom-gap) var(--code-side-padding) !important;
+  background: transparent !important;
+  margin: 0 !important;
+}
+
+div[data-filename] .code-label {
+  background: var(--code-label-color) !important;
+  color: #ffffff !important;
+  font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.78em;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 6px;
+  line-height: 1.4;
+}
+
+/* 内部要素の背景・余白をすべてリセット(テーマの上書きを防ぐ) */
+div[data-filename] div.highlighter-rouge,
+div[data-filename] .highlight,
+div[data-filename] pre,
+div[data-filename] pre.highlight,
+div[data-filename] code {
+  background: transparent !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+div[data-filename] pre {
+  padding: 0 var(--code-side-padding) var(--code-bottom-padding) var(--code-side-padding) !important;
+}
+
+/* ===== ラベル無しの単独コードブロック ===== */
+div.highlighter-rouge {
+  position: relative;
+  background: #1e1e1e !important;
+  border-radius: 12px;
+  margin: 1em 0;
+  overflow: hidden;
+}
+
+div.highlighter-rouge pre {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 16px !important;
+}
+
+/* ===== コピーボタン共通 ===== */
+.copy-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.copy-btn svg {
+  width: 15px;
+  height: 15px;
+  stroke: #9a9a9a;
+  fill: none;
+}
+
+.copy-btn:hover svg {
+  stroke: #ffffff;
+}
+
+.copy-btn.standalone {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}

@@ -1,25 +1,3 @@
-camera_bootcmd:
-  base: "setenv bootcmd \"load mmc 0:1 0x58000000 /boot/fitImage && bootm 0x58000000#default"
-  options:
-    j1:
-      label: "J1(Pi Camera)"
-      choices:
-        none: null
-        V2: "#j1-imx219"
-        V3: "#j1-imx708"
-    j2:
-      label: "J2(Pi Camera)"
-      choices:
-        none: null
-        V2: "#j2-imx219"
-        V3: "#j2-imx708"
-    j4:
-      label: "J4(Pi Touch Display)"
-      choices:
-        none: null
-        5 inch: "#rpi-display-2-5in"
-        7 inch: "#rpi-display-2-7in"
-
 camera_minimal:
   options:
     j1:
@@ -37,8 +15,8 @@ camera_minimal:
     connector:
       label: "Connector(Display)"
       choices:
-        J4(Pi Disp) or CN6(DP): ""
-        J4(Pi Disp) and CN6(DP): ""
+        J4(DSI Display) or CN6(DP): ""
+        J4(DSI Display) and CN6(DP): ""
 
 camera_weston:
   base: ""
@@ -58,7 +36,27 @@ camera_weston:
     connector:
       label: "Connector(Display)"
       choices:
-        J4(Pi Disp) or CN6(DP) or 'J4(Pi Disp) and CN6(DP)':
+        J4(DSI Display) or CN6(DP) or 'J4(DSI Display) and CN6(DP)':
+
+camera_xfce:
+  base: ""
+  options:
+    j1:
+      label: "J1(Pi Camera)"
+      choices:
+        none: null
+        V2: "Connect to J1: gst-launch-1.0 libcamerasrc camera-name=/base/soc/i2c@e6508000/cam@10 ! videoconvert ! ximagesink"
+        V3: "Connect to J1: gst-launch-1.0 libcamerasrc camera-name=/base/soc/i2c@e6508000/sensor@1a ! videoconvert ! ximagesink"
+    j2:
+      label: "J2(Pi Camera)"
+      choices:
+        none: null
+        V2: "Connect to J2: gst-launch-1.0 libcamerasrc camera-name=/base/soc/i2c@e6510000/cam@10 ! videoconvert ! ximagesink"
+        V3: "Connect to J2: gst-launch-1.0 libcamerasrc camera-name=/base/soc/i2c@e6510000/sensor@1a ! videoconvert ! ximagesink"
+    connector:
+      label: "Connector(Display)"
+      choices:
+        J4(DSI Display) or CN6(DP) or 'J4(DSI Display) and CN6(DP)':
 
 camera_debian:
   options:
@@ -77,5 +75,5 @@ camera_debian:
     connector:
       label: "Connector(Display)"
       choices:
-        J4(Pi Disp) or CN6(DP): ""
-        J4(Pi Disp) and CN6(DP): ""
+        J4(DSI Display) or CN6(DP): ""
+        J4(DSI Display) and CN6(DP): ""

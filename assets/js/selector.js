@@ -9,12 +9,11 @@
     if (!data) return;
 
     const state = {};
-    const base = data.base;
 
     const DEFAULTS = {
-      minimal: { j1: "none", j2: "none", connector: "J4(Pi Disp) or CN6(DP)" },
-      weston:  { j1: "none", j2: "none", connector: "J4(Pi Disp) or CN6(DP) or 'J4(Pi Disp) and CN6(DP)'" },
-      debian:  { j1: "none", j2: "none", connector: "J4(Pi Disp) or CN6(DP)" }
+      minimal: { j1: "none", j2: "none", connector: "J4(DSI Display) or CN6(DP)" },
+      weston:  { j1: "none", j2: "none", connector: "J4(DSI Display) or CN6(DP) or 'J4(DSI Display) and CN6(DP)'" },
+      debian:  { j1: "none", j2: "none", connector: "J4(DSI Display) or CN6(DP)" }
     };
 
     for (const key in data.options) {
@@ -88,14 +87,14 @@
           return;
         }
 
-        if (state.connector === "J4(Pi Disp) or CN6(DP)") {
+        if (state.connector === "J4(DSI Display) or CN6(DP)") {
           cameras.forEach((cam, index) => {
             const camIndex = index + 1;
             outputLines.push(`Connect camera to ${cam.port}: cam -c ${camIndex} -C -D`);
           });
-        } else if (state.connector === "J4(Pi Disp) and CN6(DP)") {
+        } else if (state.connector === "J4(DSI Display) and CN6(DP)") {
 
-          outputLines.push("(You want to display J4(Pi Disp))");
+          outputLines.push("(You want to display J4(DSI Display))");
           cameras.forEach((cam, index) => {
             const camIndex = index + 1;
             outputLines.push(`Connect camera to ${cam.port}: cam -c ${camIndex} -C -D`);
@@ -124,34 +123,9 @@
         resultText.textContent = "command:";
 	code.textContent = output;
       }
-    } else {
-      updateResult = function () {
-
-        resultText.textContent = "command:";
-        code.textContent = "";
-
-        const hasAnyOption = Object.keys(state).some(
-          key => state[key] !== "none"
-        );
-
-        let output = base;
-
-        for (const key in state) {
-          const append = data.options[key].choices[state[key]];
-          if (append) {
-            output += append;
-          }
-        }
-
-        if (!hasAnyOption) {
-          code.textContent = output + "\"\nboot";
-          return;
-        }
-
-        resultText.textContent = "command:";
-	code.textContent = output + "\"\nboot";
-      }
     }
+
+    if (!updateResult) return;
 
     updateResult();
   });
