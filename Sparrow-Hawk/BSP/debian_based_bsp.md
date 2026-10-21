@@ -65,7 +65,8 @@ cd sparrow-hawk-debian
 or
 ```bash
 # Note: Build requirements can be confirmed from the dockerfiles in _dev.
-sudo ./build_image/build_debian_image/build_debian_for_sparrow-hawk.sh 13
+cd build_image/build_debian_image
+sudo ./build_debian_for_sparrow-hawk.sh 13
 ```
 
 **In case of BSP + Xfce desktop:**
@@ -75,7 +76,8 @@ sudo ./build_image/build_debian_image/build_debian_for_sparrow-hawk.sh 13
 ```
 or
 ```bash
-sudo ./build_image/build_debian_image/build_debian_for_sparrow-hawk.sh 13 --desktop xfce
+cd build_image/build_debian_image
+sudo ./build_debian_for_sparrow-hawk.sh 13 --desktop xfce
 ```
 
 The OS image is created in the following directory.
