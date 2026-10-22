@@ -1,11 +1,15 @@
-- date: 2026-10-16
+- date: 2026-10-22
+  category: Announce
+  product: Sparrow Hawk
+  text: The Zephyr page of Sparrow Hawk is temporarily unpublished because a problem was found in testing.
+- date: 2026-10-19
   category: Release
   product: Sparrow Hawk
   text: The <a href="/Sparrow-Hawk/BSP/yocto_bsp.html">Yocto BSP</a> and the <a href="/Sparrow-Hawk/BSP/debian_based_bsp.html">Debian based BSP</a> have been updated to Linux kernel v6.18.54 and U-Boot v2026.10. The procedures for booting from USB/NVMe and for checking the GPU have been added.
-- date: 2026-10-16
+- date: 2026-10-19
   category: Announce
   product: Sparrow Hawk
-  text: The <a href="/Sparrow-Hawk/BSP/zephyr.html">Zephyr</a> page of Sparrow Hawk is now available.
+  text: The Zephyr page of Sparrow Hawk is now available.
 - date: 2026-04-15
   category: Release
   product: Sparrow Hawk
