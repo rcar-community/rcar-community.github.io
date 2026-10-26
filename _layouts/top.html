@@ -5,16 +5,7 @@
   <title>{{ page.title }}</title>
   <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
 </head>
-{% if jekyll.environment == "production" %}
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EJTTXNBEBV"></script>
-<script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-EJTTXNBEBV');
-</script>
-{% endif %}
+{% include gtag.html %}
 <body>
   <main>
     {% include breadcrumbs.html %}  <!-- breadcrumbs -->
