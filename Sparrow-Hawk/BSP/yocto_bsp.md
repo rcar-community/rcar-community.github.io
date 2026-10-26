@@ -155,7 +155,7 @@ This is needed only if the U-Boot version displayed at boot is older than the on
      ```bash
      run update_loader_from_nvme
      ```
-3. Enter the U-Boot shell again and reset the environment to default as shown below. The environment saved by `saveenv` before overrides the default environment of the new loader and hides the commands such as `autoconf_xxx`.
+3. Enter the U-Boot shell again and reset the environment to default as shown below. The environment saved by `saveenv` before overrides the default environment of the new loader and hides the commands such as `bootcmd_xxx`.
    ```bash
    env default -a
    saveenv
@@ -184,22 +184,22 @@ Note:
 6. Input the command corresponding to the boot device into U-Boot shell and press enter key.
    * microSD card
      ```bash
-     run autoconf_mmc
+     run bootcmd_mmc0
      ```
    * USB storage device
      ```bash
-     run autoconf_usb
+     run bootcmd_usb0
      ```
    * NVMe M.2 SSD
      ```bash
-     run autoconf_nvme
+     run bootcmd_nvme0
      ```
 7. If command and environment is correct, Linux kernel log will output.
 8. Log in using the following login ID.
    * sparrow-hawk login: root
 
 Note:
-* `autoconf_xxx` sets `bootargs` for the boot device, loads `/boot/fitImage` from the first partition of the device, and runs the boot script in it.
+* `bootcmd_xxx` is the boot command of the boot device. It searches the device for the boot files, runs the boot script in the fitImage, and sets `root=` for the device automatically.
 * The boot script detects the connected Pi Camera(J1/J2) and DSI display(J4) automatically and selects the corresponding configuration. You don't need to specify them manually.
 * When booting from USB storage device or NVMe M.2 SSD, the initramfs is used to load the PCIe firmware at an early stage.
 
@@ -208,14 +208,14 @@ Note:
 To make the command executed in step 6 of [How to boot](#how-to-boot) persistent across reboots, set it to `bootcmd` and run `saveenv` as shown below.
 After saving the environment, reboot the system once. From the next boot onward, the command will be executed automatically, and you can skip steps 5 and 6 in [How to boot](#how-to-boot).
 ```bash
-setenv bootcmd "run autoconf_mmc"  # Replace with autoconf_usb or autoconf_nvme according to the boot device
+setenv bootcmd "run bootcmd_mmc0"  # Replace with bootcmd_usb0 or bootcmd_nvme0 according to the boot device
 saveenv
 reset  # Execute this only the first time
 ```
 
 #### Boot options
 
-The boot script changes its behavior according to the following U-Boot environment variables. Set them before running `autoconf_xxx` (use `saveenv` to keep them).
+The boot script changes its behavior according to the following U-Boot environment variables. Set them before running `bootcmd_xxx` (use `saveenv` to keep them).
 
 | Variable        | Value     | Description                                                       |
 |-----------------|-----------|-------------------------------------------------------------------|
@@ -227,7 +227,7 @@ The boot script changes its behavior according to the following U-Boot environme
 ex) Use Argon FAN HAT
 ```bash
 setenv fan argon40
-run autoconf_mmc
+run bootcmd_mmc0
 ```
 
 ## How to Check Functions
@@ -694,7 +694,7 @@ reboot
 
 ### Troubleshooting of USB/NVMe M.2 SSD boot {#troubleshooting-of-usb-nvme-boot}
 
-Booting from USB storage device or NVMe M.2 SSD (`autoconf_usb` / `autoconf_nvme`) and `update_loader_from_usb` / `update_loader_from_nvme` initialize PCIe in U-Boot, which needs the PCIe firmware.
+Booting from USB storage device or NVMe M.2 SSD (`bootcmd_usb0` / `bootcmd_nvme0`) and `update_loader_from_usb` / `update_loader_from_nvme` initialize PCIe in U-Boot, which needs the PCIe firmware.
 If the device is not found, please check the two conditions below.
 
 **Condition 1: The PCIe firmware is written to the SPI flash.**
@@ -724,7 +724,7 @@ two environment variables:
 
 Check them on U-Boot shell. If they are not displayed, they are not set.
 ```bash
-printenv renesas_rcar_gen4_load_firmware set_pcie_firmware_info
+printenv renesas_rcar_gen4_load_firmware
 ```
 
 The environment saved by `saveenv` in the previous version overrides the default environment, so the variables may be missing even after the loader is updated. Reset the environment to default as shown below.
