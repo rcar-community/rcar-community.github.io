@@ -37,15 +37,15 @@ Prepare the OS image by downloading it or by building it by yourself, then flash
 <!-- variant 0 -->
 Download the OS image from GitHub
 * BSP(either of the following BSP)
-   * In case of BSP: [sparrow-hawk-debian-13-based-bsp.img.gz](https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-16/sparrow-hawk-debian-13-based-bsp.img.gz)
+   * In case of BSP: [sparrow-hawk-debian-13-based-bsp.img.gz](https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-23/sparrow-hawk-debian-13-based-bsp.img.gz)
       * For Linux users, you can download the OS image using the following command.
       ```bash
-      wget -c https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-16/sparrow-hawk-debian-13-based-bsp.img.gz
+      wget -c https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-23/sparrow-hawk-debian-13-based-bsp.img.gz
       ```
-   * In case of BSP + Xfce desktop: [sparrow-hawk-debian-13-based-bsp-xfce.img.gz](https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-16/sparrow-hawk-debian-13-based-bsp-xfce.img.gz)
+   * In case of BSP + Xfce desktop: [sparrow-hawk-debian-13-based-bsp-xfce.img.gz](https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-23/sparrow-hawk-debian-13-based-bsp-xfce.img.gz)
       * For Linux users, you can download the OS image using the following command.
       ```bash
-      wget -c https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-16/sparrow-hawk-debian-13-based-bsp-xfce.img.gz
+      wget -c https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-23/sparrow-hawk-debian-13-based-bsp-xfce.img.gz
       ```
 
 ---
@@ -163,7 +163,7 @@ The image is written from a Linux host PC in the same way as the microSD card.
 1. Download the latest Raspberry Pi Imager for Linux (AppImage) from [https://github.com/raspberrypi/rpi-imager/releases](https://github.com/raspberrypi/rpi-imager/releases).
 2. Start Raspberry Pi Imager with the Sparrow Hawk repository as follows.
    ```bash
-   sudo ./Raspberry_Pi_Imager-<version>-desktop-x86_64.AppImage --repo https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-16/repo.json
+   sudo ./Raspberry_Pi_Imager-<version>-desktop-x86_64.AppImage --repo https://github.com/rcar-community/sparrow-hawk-debian/releases/download/v2026-10-23/repo.json
    ```
 3. Select the Sparrow Hawk image in the list and the target device (microSD card, USB storage device or NVMe M.2 SSD), then write the image.
 4. Connect the device to Sparrow Hawk. Please see [How to boot](#how-to-boot) for the connectors.

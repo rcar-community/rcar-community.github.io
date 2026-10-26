@@ -1,3 +1,11 @@
+- date: 2026-10-23
+  category: Release
+  product: Sparrow Hawk
+  text: The <a href="/Sparrow-Hawk/BSP/yocto_bsp.html">Yocto BSP</a> and the <a href="/Sparrow-Hawk/BSP/debian_based_bsp.html">Debian based BSP</a> have been updated. U-Boot has been updated to fix the problem that Zephyr does not run.
+- date: 2026-10-23
+  category: Announce
+  product: Sparrow Hawk
+  text: The <a href="/Sparrow-Hawk/BSP/zephyr.html">Zephyr</a> page of Sparrow Hawk is available again.
 - date: 2026-10-22
   category: Announce
   product: Sparrow Hawk
@@ -9,7 +17,7 @@
 - date: 2026-10-19
   category: Announce
   product: Sparrow Hawk
-  text: The Zephyr page of Sparrow Hawk is now available.
+  text: The <a href="/Sparrow-Hawk/BSP/zephyr.html">Zephyr</a> page of Sparrow Hawk is now available.
 - date: 2026-04-15
   category: Release
   product: Sparrow Hawk

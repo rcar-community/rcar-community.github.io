@@ -21,7 +21,7 @@ This is the page for Sparrow Hawk board with R-Car V4H provided by Retronix Tech
 
 Sparrow Hawk is an evaluation board targeting the industrial market.
 
-The supported software is only open source, with [Yocto BSP][Yocto] and [Debian based BSP][Debian].
+The supported software is only open source, with [Yocto BSP][Yocto], [Debian based BSP][Debian] and [Zephyr][Zephyr].
 
 Please post any inquiries regarding Sparrow Hawk on GitHub Discussions ([Q&A][Q&A]).
 
@@ -32,6 +32,7 @@ Note:
 
 [Yocto]: <BSP/yocto_bsp.html>
 [Debian]: <BSP/debian_based_bsp.html>
+[Zephyr]: <BSP/zephyr.html>
 [Q&A]: <https://github.com/orgs/rcar-community/discussions/categories/q-a>
 
 ## What's New
@@ -135,12 +136,15 @@ Link : [https://ftdichip.com/drivers/](https://ftdichip.com/drivers/)
 |Linux kernel               |6.18.54|
 |U-Boot                     |2026.10|
 |Arm Trusted Firmware       |2.15.0 |
+|Zephyr                     |v4.4.0 |
 
 ## Select Software Platform
 
 ### [Yocto BSP][Yocto]
 
 ### [Debian based BSP][Debian]
+
+### [Zephyr][Zephyr]
 
 ## Tips
 
@@ -166,7 +170,7 @@ There are two types of 4pin Headset. One is CIST which is default of Sparrow Haw
 
 If flashing fails and U-Boot no longer boots, please try the recovery procedure.
 
-Download [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-16/ipl-burning.zip) and unzip ipl-burning.zip. Then, run script in ipl-burning directory(Linux: run.sh, Windows: run.bat). If using Linux host PC, please install python3 and pip command on your system before running the script and close other console which uses serial port of the board before executing the script.
+Download [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-23/ipl-burning.zip) and unzip ipl-burning.zip. Then, run script in ipl-burning directory(Linux: run.sh, Windows: run.bat). If using Linux host PC, please install python3 and pip command on your system before running the script and close other console which uses serial port of the board before executing the script.
 
 1. Turn off the power and change SW2 according to the console instructions.
 2. Press Enter to continue.

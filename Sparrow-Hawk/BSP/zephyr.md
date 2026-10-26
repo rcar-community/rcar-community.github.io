@@ -1,5 +1,4 @@
 ---
-published: false
 layout: home
 title: Sparrow Hawk - Zephyr | R-Car Community Board
 style: common
@@ -77,10 +76,14 @@ This guide covers Ubuntu version 24.04 LTS and later.
    pip install west
 
    echo "=== Fetching Zephyr source (v4.4.0) ==="
-   west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.4.0 zephyrproject
+   mkdir -p zephyrproject
+   git clone --depth=1 --branch v4.4.0 https://github.com/zephyrproject-rtos/zephyr zephyrproject/zephyr
+   west init -l zephyrproject/zephyr
 
    cd zephyrproject
-   west update
+   # Fetch only the modules required for this board (cmsis*, Cortex-R headers)
+   west config manifest.project-filter -- -.*,+cmsis.*
+   west update --narrow -o=--depth=1
    west zephyr-export
    west packages pip --install
 
@@ -88,7 +91,7 @@ This guide covers Ubuntu version 24.04 LTS and later.
    pip install -r zephyr/scripts/requirements.txt
 
    echo "=== Installing Zephyr SDK ==="
-   west sdk install
+   west sdk install -t arm-zephyr-eabi
 
    echo "=== Building sample application ==="
    cd zephyr
@@ -99,6 +102,7 @@ This guide covers Ubuntu version 24.04 LTS and later.
    ```
 2. Execute the following command
    ```bash
+   chmod +x build-zephyr.sh
    ./build-zephyr.sh
    ```
    {: data-filename="Host PC"}
@@ -112,8 +116,8 @@ This guide covers Windows 11.
 1. Build script(build-zephyr.ps1)
    ```powershell
    echo "=== Install dependencies ==="
+   winget install --scope user Kitware.CMake
    winget install `
-     Kitware.CMake `
      Ninja-build.Ninja `
      oss-winget.gperf `
      Python.Python.3.12 `
@@ -122,24 +126,30 @@ This guide covers Windows 11.
      wget `
      7zip.7zip
 
+   echo "=== Reload PATH to use the installed tools ==="
+   $env:Path = [Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [Environment]::GetEnvironmentVariable("Path", "User")
+   $env:Path += ";C:\Program Files\7-Zip"
+
    echo "=== Create a new virtual environment ==="
-   mkdir "$HOME\work\zephyr"
+   mkdir -Force "$HOME\work\zephyr"
    cd "$HOME\work\zephyr"
    py -3.12 -m venv zephyrproject\.venv
-   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
    zephyrproject\.venv\Scripts\Activate.ps1
    pip install west
 
    echo "=== Get Zephyr and install Python dependencies ==="
-   west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.4.0 zephyrproject
+   git clone --depth=1 --branch v4.4.0 https://github.com/zephyrproject-rtos/zephyr zephyrproject\zephyr
+   west init -l zephyrproject\zephyr
    cd zephyrproject
-   west update
+   # Fetch only the modules required for this board (cmsis*, Cortex-R headers)
+   west config manifest.project-filter -- '-.*,+cmsis.*'
+   west update --narrow -o=--depth=1
    west zephyr-export
 
    echo "=== Install required Python packages ==="
    python -m pip install @((west packages pip) -split ' ')
    cd zephyr
-   west sdk install
+   west sdk install -t arm-zephyr-eabi
 
    echo "=== Building sample application ==="
    west build -b sparrowhawk_rcar_v4h/r8a779g0/r52 samples/hello_world -p always
@@ -149,6 +159,7 @@ This guide covers Windows 11.
    * If prompted by Windows during the installation, enter administrator credentials if required, then click "Yes" to continue.
 2. Execute the following command
    ```powershell
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
    .\build-zephyr.ps1
    ```
    {: data-filename="Host PC (PowerShell)"}
