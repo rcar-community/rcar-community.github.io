@@ -64,7 +64,7 @@ layout: default
       {% else %}
         <div class="link-section">{{ item.title }}</div>
       {% endif %}
-      {% if item.children %}
+            {% if item.children %}
         {% for child in item.children %}
           <div class="link-child">
             {% if child.url %}
@@ -73,6 +73,19 @@ layout: default
               {{ child.title }}
             {% endif %}
           </div>
+
+          {% if child.children %}
+            {% for grandchild in child.children %}
+              <div class="link-grandchild">
+                {% if grandchild.url %}
+                  <a href="{{ grandchild.url }}">{{ grandchild.title }}</a>
+                {% else %}
+                  {{ grandchild.title }}
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% endif %}
+
         {% endfor %}
       {% endif %}
     {% endfor %}

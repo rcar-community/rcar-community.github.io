@@ -16,7 +16,17 @@
     - title: Outline
       url: /files/V4H_SH_GoldenMaterial.pdf
     - title: Board Documentation
-      url: https://www.retronix.com.tw/en/product_sbc.html#:~:text=Sparrow%20Hawk%20Hardware%20Download
+      children:
+        - title: User's Manual
+          url: /files/SparrowHawk-Hardware_users_manual_v015.pdf
+        - title: Reference Schematic (incl. Disclaimer)
+          url: /files/SparrowHawk_Schematic_v1.3.zip
+        - title: Reference Layout (incl. Disclaimer)
+          url: /files/SparrowHawk_Layout_v1.3.zip
+        - title: Reference Component Position (incl. Disclaimer)
+          url: /files/SparrowHawk_ComponentPosition_v1.3.zip
+        - title: Reference 3D Model CAD (incl. Disclaimer)
+          url: /files/SparrowHawk_3DModelCAD.zip
     - title: Device Documentation [coming soon...]
 - title: 📅 Event Info.
   url: /Sparrow-Hawk/event_information.html
