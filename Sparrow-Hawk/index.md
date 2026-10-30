@@ -170,7 +170,7 @@ There are two types of 4pin Headset. One is CIST which is default of Sparrow Haw
 
 If flashing fails and U-Boot no longer boots, please try the recovery procedure.
 
-Download [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-23/ipl-burning.zip) and unzip ipl-burning.zip. Then, run script in ipl-burning directory(Linux: run.sh, Windows: run.bat). If using Linux host PC, please install python3 and pip command on your system before running the script and close other console which uses serial port of the board before executing the script.
+Download [ipl-burning.zip](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-30/ipl-burning.zip) and unzip ipl-burning.zip. Then, run script in ipl-burning directory(Linux: run.sh, Windows: run.bat). If using Linux host PC, please install python3 and pip command on your system before running the script and close other console which uses serial port of the board before executing the script.
 
 1. Turn off the power and change SW2 according to the console instructions.
 2. Press Enter to continue.

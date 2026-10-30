@@ -37,15 +37,15 @@ Prepare the OS image by downloading it or by building it by yourself, then flash
 <!-- variant 0 -->
 Download the OS image from GitHub
 * BSP(either of the following BSP)
-   * In case of BSP: [core-image-minimal-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-23/core-image-minimal-sparrow-hawk.rootfs.wic.gz)
+   * In case of BSP: [core-image-minimal-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-30/core-image-minimal-sparrow-hawk.rootfs.wic.gz)
       * For Linux users, you can download the OS image using the following command.
       ```bash
-      wget -c https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-23/core-image-minimal-sparrow-hawk.rootfs.wic.gz
+      wget -c https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-30/core-image-minimal-sparrow-hawk.rootfs.wic.gz
       ```
-   * In case of BSP + 3D Graphics: [core-image-weston-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-23/core-image-weston-sparrow-hawk.rootfs.wic.gz)
+   * In case of BSP + 3D Graphics: [core-image-weston-sparrow-hawk.rootfs.wic.gz](https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-30/core-image-weston-sparrow-hawk.rootfs.wic.gz)
       * For Linux users, you can download the OS image using the following command.
       ```bash
-      wget -c https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-23/core-image-weston-sparrow-hawk.rootfs.wic.gz
+      wget -c https://github.com/rcar-community/meta-sparrow-hawk/releases/download/v2026-10-30/core-image-weston-sparrow-hawk.rootfs.wic.gz
       ```
 
 ---

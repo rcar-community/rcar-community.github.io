@@ -17,7 +17,9 @@ Usage:
 
 {%- assign default_index = include.default | default: 0 | plus: 0 -%}
 {%- assign labels = include.labels | split: '|' -%}
-{%- assign contents = include.contents | split: "---" -%}
+{%- assign contents = include.contents | split: "
+---
+" -%}
 {%- assign count = contents | size | minus: 1 %}
 
 <div class="rc-tabs" id="{{ include.id | escape }}">
