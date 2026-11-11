@@ -72,7 +72,7 @@ Note:
 | CPU           | -                | 4x Arm® Cortex®-A76, 3x Arm® Cortex®-R52 |
 | GPU           | -                | IMG A-Series AXM-8-256                   |
 | DRAM          | -                | 8GB/16GB LPDDR5                          |
-| Flash Memory  | -                | 64MB QSPI                                |
+| Flash Memory  | -                | 64MB Security QSPI                                |
 | Camera I/F    | J1, J2           | 2x MIPI CSI Camera                       |
 | Display       | CN6, J4          | 1x DP, 1x DSI                            |
 | Ethernet AVB  | CN2              | 1 Port (1Gbps)                           |
