@@ -572,17 +572,11 @@ For the details of the connection, refer to the manual of each product.
 ### Pi Active Cooler
 
 * Connect Raspberry Pi Active Cooler to the {% include hover-image.html text="J3" img="/images/J3.webp" %}connector.
-
 * ![Pi Active Cooler]({{ '/images/PiActiveCooler.webp' | relative_url }})
-
    * Raspberry Pi Active Cooler: [https://www.raspberrypi.com/products/active-cooler/](https://www.raspberrypi.com/products/active-cooler/)
-
 * The thermal pad is not aligned with the R-Car V4H Chip. Please reposition the thermal pad to match the location of the R-Car V4H Chip.
-
 * ![thermal pad]({{ '/images/thermal_pad.webp' | relative_url }})
-
    * The thermal pad application method is one example, ensure it is applied to adhere to at least the R-Car V4H chip and DRAM.
-
 * Manual control of fan speed<br>
   ```bash
   echo 2 > /sys/class/hwmon/hwmon4/pwm1_enable
