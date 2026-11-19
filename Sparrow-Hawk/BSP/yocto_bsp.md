@@ -20,12 +20,17 @@ This is the Yocto BSP page for Sparrow Hawk.
 
 ## Software Version List
 
-|Software                   |Version|
-|---------------------------|-------|
-|Yocto Project              |5.0.20 |
-|Linux kernel               |6.18.54|
-|U-Boot                     |2026.10|
-|Arm Trusted Firmware       |2.15.0 |
+| Software           |Version| Release Note      |
+|--------------------|-------|:-----------------:|
+| Yocto Project      |5.0.20 | [Link][Yocto_RN]  |
+| Linux kernel       |6.18.54| [Link][Linux_RN]  |
+| U-Boot             |2026.10| [Link][U-Boot_RN] |
+| Trusted Firmware-A |2.15.0 | [Link][TFA_RN]    |
+
+[Yocto_RN]: <https://docs.yoctoproject.org/next/migration-guides/release-notes-5.0.20.html>
+[Linux_RN]: <https://lwn.net/Articles/1096821/>
+[U-Boot_RN]: <https://git.u-boot-project.org/u-boot/u-boot/-/releases/v2026.10>
+[TFA_RN]: <https://tf-a.docs.trustedfirmware.org/en/v2.15.0/change-log.html#id1>
 
 ## How to Startup
 
@@ -178,7 +183,7 @@ Note:
    * microSD card: insert it into {% include hover-image.html text="CN1" img="/images/CN1.webp" %} which is bottom of the board.
    * USB storage device: connect it to {% include hover-image.html text="USB6" img="/images/USB6.webp" %}.
    * NVMe M.2 SSD: insert it into {% include hover-image.html text="CN5" img="/images/CN5.webp" %}.
-3. Open terminal application and open serial device.
+3. Open terminal application and open serial device. For opening serial device, please see [3.5. Debug Serial](../index.html#debug-serial).
 4. Press {% include hover-image.html text="SW1" img="/images/SW1.webp" %} to power on the board.
 5. After booting U-Boot, please press any key while showing "Hit any key to stop autoboot:" to enter U-Boot shell.
 6. Input the command corresponding to the boot device into U-Boot shell and press enter key.
@@ -466,8 +471,8 @@ killall cat
 
 &nbsp;
 
-* Insert the NVMe into {% include hover-image.html text="CN5" img="/images/CN5.webp" %} before powering on.
-* The NVMe used for this test is the Samsung 970 EVO Plus.
+* Insert the NVMe M.2 SSD into {% include hover-image.html text="CN5" img="/images/CN5.webp" %} before powering on.
+* The NVMe M.2 SSD used for this test is the Samsung 970 EVO Plus.
   ```bash
   dmesg | grep nvme
   ```

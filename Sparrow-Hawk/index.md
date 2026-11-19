@@ -120,23 +120,50 @@ For Windows users, if the console does not connect, please install the appropria
 
 Link : [https://ftdichip.com/drivers/](https://ftdichip.com/drivers/)
 
+* Linux case
+```bash
+sudo picocom -b 921600 <device>
+```
+ex) sudo picocom -b 921600 /dev/ttyUSB0
+
+* Windows case
+```plaintext
+Port: COM<N> (check in Device Manager)
+Speed: 921600
+Data: 8 bits
+Parity: None
+Stop bits: 1
+Flow control: None
+```
+
 ### Caution
 
 1. Hot! Do not touch R-Car V4H (main chip) directly. Fan must be installed to prevent R-Car V4H overheating and failure.
+   * Correct Installation
+   * ![FAN OK](../images/FAN_OK.webp)
+   * Incorrect Installation
+   * ![FAN NG](../images/FAN_NG.webp)
 2. Do not touch the board while USB-PD is connected. Touching the bare board may cause short circuit and failure.
 3. Please use only a power supply and cable that comply with the USB Power Delivery (USB PD) standard. Using a non-USB PD power supply causes damage to the Sparrow Hawk.
 {: .caution}
 
 ## Software Version List
 
-|Software                   |Version|
-|---------------------------|-------|
-|Yocto Project              |5.0.20 |
-|Debian                     |13     |
-|Linux kernel               |6.18.54|
-|U-Boot                     |2026.10|
-|Arm Trusted Firmware       |2.15.0 |
-|Zephyr                     |v4.4.0 |
+| Software           |Version| Release Note      |
+|--------------------|-------|:-----------------:|
+| Yocto Project      |5.0.20 | [Link][Yocto_RN]  |
+| Debian             |13.7   | [Link][Debian_RN] |
+| Linux kernel       |6.18.54| [Link][Linux_RN]  |
+| U-Boot             |2026.10| [Link][U-Boot_RN] |
+| Trusted Firmware-A |2.15.0 | [Link][TFA_RN]    |
+| Zephyr             |v4.4.0 | [Link][Zephyr_RN] |
+
+[Yocto_RN]: <https://docs.yoctoproject.org/next/migration-guides/release-notes-5.0.20.html>
+[Debian_RN]: <https://www.debian.org/releases/trixie/release-notes/index.html>
+[Linux_RN]: <https://lwn.net/Articles/1096821/>
+[U-Boot_RN]: <https://git.u-boot-project.org/u-boot/u-boot/-/releases/v2026.10>
+[TFA_RN]: <https://tf-a.docs.trustedfirmware.org/en/v2.15.0/change-log.html#id1>
+[Zephyr_RN]: <https://docs.zephyrproject.org/latest/releases/release-notes-4.4.html>
 
 ## Select Software Platform
 

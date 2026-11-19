@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ page.title }}</title>
+
+    <!-- favicon -->
+  {% if page.url contains '/Sparrow-Hawk/' %}
+  <link rel="icon" href="{{ '/images/favicon.png' | relative_url }}" type="image/png" />
+  {% endif %}
+
   <link rel="stylesheet" href="{{ 'css/style.css' | relative_url }}" />
   <link rel="stylesheet" href="{{ 'css/syntax.css' | relative_url }}" />
   <link rel="stylesheet" href="{{ 'css/selector.css' | relative_url }}" />
