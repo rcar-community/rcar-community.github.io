@@ -20,7 +20,12 @@ if [[ "${DEV_BRANCH}" != "main" ]]; then
 fi
 
 # Copy from Dev environment
-cp -rf ${DEV_DIR}/* -t ${SCRIPT_DIR}
+# Use only the committed files of the current branch (HEAD), so that
+# uncommitted/untracked files in the working tree are not released.
+EXPORT_DIR=$(mktemp -d)
+trap 'rm -rf "${EXPORT_DIR}"' EXIT
+git -C ${DEV_DIR} archive HEAD | tar -x -C ${EXPORT_DIR}
+cp -rf ${EXPORT_DIR}/* -t ${SCRIPT_DIR}
 # Remove/Resotre files
 rm -rf Gemfile* local_debug.sh setup_ruby_ubuntu.sh _site _dev
 git restore README.md
