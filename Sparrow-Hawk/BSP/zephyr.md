@@ -178,7 +178,7 @@ Both devices are used during the boot process.
 * Lower-numbered /dev/ttyUSBx or COM port (HSCIF0): U-Boot console. Use it to load zephyr.bin and to run it.
 * Higher-numbered /dev/ttyUSBx or COM port (HSCIF1): Zephyr console. Zephyr outputs logs on it.
 
-For connection instructions, please see [3.5. Debug Serial](../index.html#debug-serial).
+For connection instructions, please see [Debug Serial in Sparrow Hawk page](../index.html#debug-serial).
 
 ## How to Load zephyr.bin to Sparrow Hawk
 

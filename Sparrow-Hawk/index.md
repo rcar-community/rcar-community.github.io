@@ -141,8 +141,6 @@ Flow control: None
 1. Hot! Do not touch R-Car V4H (main chip) directly. Fan must be installed to prevent R-Car V4H overheating and failure.
    * Correct Installation
    * ![FAN OK](../images/FAN_OK.webp)
-   * Incorrect Installation
-   * ![FAN NG](../images/FAN_NG.webp)
 2. Do not touch the board while USB-PD is connected. Touching the bare board may cause short circuit and failure.
 3. Please use only a power supply and cable that comply with the USB Power Delivery (USB PD) standard. Using a non-USB PD power supply causes damage to the Sparrow Hawk.
 {: .caution}

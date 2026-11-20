@@ -183,7 +183,7 @@ Note:
    * microSD card: insert it into {% include hover-image.html text="CN1" img="/images/CN1.webp" %} which is bottom of the board.
    * USB storage device: connect it to {% include hover-image.html text="USB6" img="/images/USB6.webp" %}.
    * NVMe M.2 SSD: insert it into {% include hover-image.html text="CN5" img="/images/CN5.webp" %}.
-3. Open terminal application and open serial device. For opening serial device, please see [3.5. Debug Serial](../index.html#debug-serial).
+3. Open terminal application and open serial device. For opening serial device, please see [Debug Serial in Sparrow Hawk page](../index.html#debug-serial).
 4. Press {% include hover-image.html text="SW1" img="/images/SW1.webp" %} to power on the board.
 5. After booting U-Boot, please press any key while showing "Hit any key to stop autoboot:" to enter U-Boot shell.
 6. Input the command corresponding to the boot device into U-Boot shell and press enter key.
